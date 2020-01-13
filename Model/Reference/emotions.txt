@@ -1,0 +1,5 @@
+emotions
+
+cat: happy anxious fearful frustrated angry neutral
+
+dog: happy anxious fearful frustrated angry neutral
