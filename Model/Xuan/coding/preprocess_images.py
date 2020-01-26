@@ -1,3 +1,5 @@
+import csv
+
 from keras.models import load_model
 from helper import No_Preprocessing
 import dlib
@@ -7,6 +9,9 @@ import imutils
 import numpy as np
 import math
 import os
+from PIL import Image
+import tensorflow as tf
+import pandas as pd
 import shutil
 
 # image size for prediction
@@ -17,15 +22,16 @@ picSize = 200
 rotation = True
 
 # image input and output
-path = '../../Data for project'
-pathResult = '../results'
+path = '..\\Data for project'
+testpath = '..\\Data for project\\dog\\dog_neutral\\dog_neutral_0.jpg'
+pathResult = '..\\results'
 
 # face detector
-pathDet = '../faceDetectors/dogHeadDetector.dat'
+pathDet = '..\\faceDetectors/dogHeadDetector.dat'
 detector = dlib.cnn_face_detection_model_v1(pathDet)
 
 # landmarks detector
-pathPred = '../faceDetectors/landmarkDetector.dat'
+pathPred = '..\\faceDetectors/landmarkDetector.dat'
 predictor = dlib.shape_predictor(pathPred)
 
 # helper class
@@ -43,9 +49,24 @@ def renameFile(path):
     print("done")
 
 
+def find_label(path):
+    label = -1
+    if 'angry' in path:
+        label = 0
+    elif 'fear' in path:
+        label = 1
+    elif 'happy' in path:
+        label = 2
+    elif 'sadness' in path:
+        label = 3
+    elif 'neutral' in path:
+        label = 4
+    return str(label)
+
+
 def preprocess(path):
-    if os.path.exists(path):
-        print("find path " + path)
+    # if os.path.exists(path):
+    #     print("find path " + path)
 
     # read image from path
     orig = cv2.imread(path)
@@ -102,11 +123,54 @@ def preprocess(path):
             # prepare for prediction
             little = cv2.resize((rotated[y1:y2, x1:x2]), (img_width, img_height))  # crop and resize
             pixel = cv2.cvtColor(little, cv2.COLOR_BGR2GRAY)
+            to_csv_data = ' '.join(map(str, pixel.flatten()))
             x = np.expand_dims(pixel, axis=0)
             x = x.reshape((-1, 100, 100, 1))
             imageList.append(x)
-            return imageList  # order: marked picture, input for classifier
+            return imageList, to_csv_data  # order: marked picture, input for classifier
     return None
+
+
+# ---------------------------------------
+def getSingleFilePixels(image_path):
+    pixels = ""
+    image = Image.open(image_path)
+    matrix = np.asarray(image)
+    for row in matrix:
+        for pixel in row:
+            pixels += str(pixel) + " "
+    return pixels
+
+
+def getAllFiles(path):
+    all_file_paths = []
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            if os.path.splitext(file)[1] == '.jpg':
+                all_file_paths.append(root + "\\" + file)
+    return all_file_paths
+
+
+def writeImage2csv(folderPath, csvPath):
+    with open(csvPath, 'w', newline="") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["emotion", "pixels"])
+        all_file_paths = getAllFiles(folderPath)
+        for path in all_file_paths:
+            (filepath, tempfilename) = os.path.split(path)
+            (shotname, extension) = os.path.splitext(tempfilename)
+            emotion = shotname.split("_")[1].split('_')[0]
+            print(emotion)
+            # usage = shotname.split("_")[1]
+            pixels = getSingleFilePixels(path)
+            writer.writerow([emotion, pixels])
+
+        csvfile.close()
+# ---------------------------------------
+
+
+# writeImage2csv("..\\Data for project\\cat\\cat_angry", "..\\test.csv")
+
 
 # ----------------- rename files --------------------#
 # for folders in os.listdir(path):
@@ -118,8 +182,55 @@ def preprocess(path):
 # ---------------------------------------------------#
 
 
+# for folders in os.listdir(path):
+#     folderPath = path + os.sep + folders
+#     # print(folderPath)
+#     for folders in os.listdir(folderPath):
+#         imagespath = folderPath + os.sep + folders
+#         # print(imagespath)
+#         for image in os.listdir(imagespath):
+#             # print(image)
+#             ipath = imagespath + os.sep + image
+#             # print(ipath)
+#             print(preprocess(ipath))
 
-# renameFile(path)
-# for filepath in os.listdir(path):
-#     print(filepath)
-#     print(preprocess(path + os.sep + filepath))
+# imageList, csv_data = preprocess(testpath)
+# images = [['emotion', 'pixel'], ["1", csv_data]]
+# images = [find_label(testpath), preprocess(testpath)[0][1]]
+# print(len(preprocess(testpath)[0][1]))
+
+
+# data = pd.read_csv('../prep_images_rotated.csv')
+# # data = data.sample(frac=1).reset_index(drop=True)
+# print(data)
+
+
+images = []
+images.append(['emotion', 'pixel'])
+folderPath = '..\\Data for project\\cat'
+imagespath = '..\\Data for project\\test'
+# for folders in os.listdir(folderPath):
+#     imagespath = folderPath + os.sep + folders
+    # print(imagespath)
+for image in os.listdir(imagespath):
+    print(image)
+    ipath = imagespath + os.sep + image
+    # print(ipath)
+    label = find_label(ipath)
+    pixels = preprocess(ipath)
+    if pixels is not None:
+        pixel = pixels[1]
+        images.append([label, pixel])
+
+
+# csvPath = '..\\'
+csvPath = '..\\result.csv'
+if images is not None and images != []:  # found face on image
+    images = pd.DataFrame(images)
+    # with open(csvPath + 'result.csv', 'w') as csvfile:
+    #     writer = csv.writer(csvfile)
+    #     writer.writerow(['emotion', 'pixels'])
+    images.to_csv(csvPath,header=False,index=False)
+        # for image in images:
+        #     print(image)
+        #     writer.writerow(image)

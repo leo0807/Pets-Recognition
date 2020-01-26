@@ -44,7 +44,7 @@ def preprocess(path):
   orig = cv2.imread(path)
   print(orig)
 
-  if orig.any() == True:
+  if not orig is None:
     # resize
     height, width, channels = orig.shape  # read size
     ratio = picSize / height
@@ -135,7 +135,7 @@ for filename in sorted(os.listdir(path)):
       emotion = df['emotion'].values[0]
       prob = str(round((df['prob'].values[0])*100, 2))
 
-      newPath = pathResult + '/' + str("{:03d}".format(counter)) + emotion + '.' + fileType
+      newPath = pathResult + os.sep + str("{:03d}".format(counter)) + emotion + '.' + fileType
 
       height, width, channels = marked.shape  # read size
       overlay = marked.copy() # save orig
