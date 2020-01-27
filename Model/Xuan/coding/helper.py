@@ -42,10 +42,13 @@ class No_Preprocessing:
 
             # Loop through rows
             for i in range(0, img_size_row):
-                # (0 = 0), (1 = 47), (2 = 94), ...
-                pixel_index = i * img_size_col
-                # (0 = [0:47]), (1 = [47: 94]), (2 = [94, 141]), ...
-                data[i] = pixel_data[pixel_index:pixel_index + img_size_col]
+                try:
+                    # (0 = 0), (1 = 47), (2 = 94), ...
+                    pixel_index = i * img_size_col
+                    # (0 = [0:47]), (1 = [47: 94]), (2 = [94, 141]), ...
+                    data[i] = pixel_data[pixel_index:pixel_index + img_size_col]
+                except:
+                    pass
 
             np_image_array.append(np.array(data))
         np_image_array = np.array(np_image_array)
