@@ -275,7 +275,7 @@ def writeImage2csv(folderPath, csvPath):
 
 
 images = []
-images.append(['emotion', 'pixel'])
+images.append(['emotion', 'pixels'])
 folderPath = '../Data for project/cat'
 imagespath = '../Data for project/dog/dog_neutral'
 # for folders in os.listdir(folderPath):
