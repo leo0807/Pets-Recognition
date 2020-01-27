@@ -122,7 +122,7 @@ model.save(model_path + 'classifier.h5')
 
 # summarize history for accuracy
 plt.close()
-plt.plot(history.history['acc'])
+plt.plot(history.history['accuracy'])
 plt.plot(history.history['val_acc'])
 plt.title('model accuracy')
 plt.ylabel('accuracy')
