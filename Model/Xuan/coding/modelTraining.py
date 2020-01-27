@@ -14,7 +14,7 @@ from keras.optimizers import SGD
 img_width = 100
 img_height = 100
 # path for results
-model_path="../models/"
+model_path="..\\models\\"
 
 # ---------------------------------------------------------------------------------------
 
@@ -54,10 +54,10 @@ def create_model():
   model.add(Dropout(.5))
 
   model.add(Flatten())
-  model.add(Dense(128, activation='relu', kernel_regularizer=l2(0.1)))
-  model.add(Dense(64, activation='relu'))
-  model.add(Dense(32, activation='relu'))
-  model.add(Dense(4, activation='softmax'))
+  model.add(Dense(160, activation='relu', kernel_regularizer=l2(0.1)))
+  model.add(Dense(80, activation='relu'))
+  model.add(Dense(40, activation='relu'))
+  model.add(Dense(5, activation='softmax'))
 
   sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
   model.compile(optimizer=sgd, loss='categorical_crossentropy', metrics=["accuracy"])
@@ -67,7 +67,7 @@ def create_model():
 # ---------------------------------------------------------------------------------------
 
 # read image csv
-data = pd.read_csv('../prep_images_rotated.csv')
+data = pd.read_csv('../dog_training.csv')
 data = data.sample(frac=1).reset_index(drop=True)
 
 # print some information
@@ -109,7 +109,7 @@ plt.savefig(model_path + 'exampleInput.png', dpi=300)
 model = create_model()
 model.summary()
 
-history = model.fit(x_train, y_train, validation_split=0.2, epochs=100, batch_size=16)
+history = model.fit(x_train, y_train, validation_split=0.2, epochs=40, batch_size=16)
 
 scores = model.evaluate(x_test, y_test)
 print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
@@ -123,7 +123,7 @@ model.save(model_path + 'classifier.h5')
 # summarize history for accuracy
 plt.close()
 plt.plot(history.history['accuracy'])
-plt.plot(history.history['val_acc'])
+plt.plot(history.history['val_accuracy'])
 plt.title('model accuracy')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
