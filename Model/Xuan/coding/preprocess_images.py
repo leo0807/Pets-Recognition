@@ -286,10 +286,11 @@ for image in os.listdir(imagespath):
     ipath = imagespath + os.sep + image
     # print(ipath)
     label = find_label(ipath)
-    pixels = preprocess(ipath)
-    if pixels is not None:
-        pixel = pixels[1]
-        images.append([label, pixel])
+    if label != -1:
+        pixels = preprocess(ipath)
+        if pixels is not None:
+            pixel = pixels[1]
+            images.append([label, pixel])
 
 
 # csvPath = '../'
