@@ -1,5 +1,5 @@
 import csv
-
+import datetime
 from keras.models import load_model
 from helper import No_Preprocessing
 import dlib
@@ -86,7 +86,6 @@ def preprocess(path):
 
         # detect face(s)
         dets = detector(gray, upsample_num_times=1)
-
         imageList = []  # for return
         for i, d in enumerate(dets):
             # save coordinates
@@ -150,54 +149,65 @@ def cat_preprocess(path):
         # detect face(s)
         faces = faceCascade.detectMultiScale(
             gray,
+            scaleFactor=1.02,
+            minNeighbors=3,
+            minSize=(50, 50),
             flags=cv2.CASCADE_SCALE_IMAGE
         )
-
         imageList = []  # for return
-        for i, d in enumerate(faces):
-            # save coordinates
-            x1 = max(int(d.rect.left() / ratio), 1)
-            y1 = max(int(d.rect.top() / ratio), 1)
-            x2 = min(int(d.rect.right() / ratio), width - 1)
-            y2 = min(int(d.rect.bottom() / ratio), height - 1)
-
-            # detect landmarks
-            shape = face_utils.shape_to_np(predictor(gray, d.rect))
-            points = []
-            index = 0
-            for (x, y) in shape:
-                x = int(round(x / ratio))
-                y = int(round(y / ratio))
-                index = index + 1
-                if index == 3 or index == 4 or index == 6:
-                    points.append([x, y])
-            points = np.array(points)  # right eye, nose, left eye
+        t = datetime.datetime.now()
+        for (i, (x, y, w, h)) in enumerate(faces):
+            # 在猫脸区域画出方框
+            cv2.rectangle(gray, (x, y), (x + w, y + h), (255, 255, 255), thickness=2)
+            # 使用ROI获取猫脸区域图像
+            roiImg = gray[y:y + h, x:x + w]
+            # 将猫脸区域图像保存成文件
+            cv2.imwrite('save/' + str(t) + '-' + str(i) + '.jpg', roiImg)
+        # for i, d in enumerate(faces):
+        #     # save coordinates
+        #     x1 = max(int(d.rect.left() / ratio), 1)
+        #     y1 = max(int(d.rect.top() / ratio), 1)
+        #     x2 = min(int(d.rect.right() / ratio), width - 1)
+        #     y2 = min(int(d.rect.bottom() / ratio), height - 1)
+        #
+        #     # detect landmarks
+        #     shape = face_utils.shape_to_np(predictor(gray, d.rect))
+        #     points = []
+        #     index = 0
+        #     for (x, y) in shape:
+        #         x = int(round(x / ratio))
+        #         y = int(round(y / ratio))
+        #         index = index + 1
+        #         if index == 3 or index == 4 or index == 6:
+        #             points.append([x, y])
+        #     points = np.array(points)  # right eye, nose, left eye
 
             # rotate
-            if rotation == True:
-                xLine = points[0][0] - points[2][0]
-                if points[2][1] < points[0][1]:
-                    yLine = points[0][1] - points[2][1]
-                    angle = math.degrees(math.atan(yLine / xLine))
-                else:
-                    yLine = points[2][1] - points[0][1]
-                    angle = 360 - math.degrees(math.atan(yLine / xLine))
-                rotated = imutils.rotate(orig, angle)
-                # detectFace(rotated, picSize)
+            # if rotation == True:
+            #     xLine = points[0][0] - points[2][0]
+            #     if points[2][1] < points[0][1]:
+            #         yLine = points[0][1] - points[2][1]
+            #         angle = math.degrees(math.atan(yLine / xLine))
+            #     else:
+            #         yLine = points[2][1] - points[0][1]
+            #         angle = 360 - math.degrees(math.atan(yLine / xLine))
+            #     rotated = imutils.rotate(orig, angle)
+            #     # detectFace(rotated, picSize)
 
             # highlight face and landmarks
-            cv2.polylines(orig, [points], True, (0, 255, 0), 1)
-            cv2.rectangle(orig, (x1, y1), (x2, y2), (255, 0, 0), 1)
-            imageList.append(orig)
+            # cv2.polylines(orig, [points], True, (0, 255, 0), 1)
+            # cv2.rectangle(orig, (x1, y1), (x2, y2), (255, 0, 0), 1)
+            # imageList.append(orig)
 
             # prepare for prediction
-            little = cv2.resize((rotated[y1:y2, x1:x2]), (img_width, img_height))  # crop and resize
-            pixel = cv2.cvtColor(little, cv2.COLOR_BGR2GRAY)
-            to_csv_data = ' '.join(map(str, pixel.flatten()))
-            x = np.expand_dims(pixel, axis=0)
-            x = x.reshape((-1, 100, 100, 1))
-            imageList.append(x)
-            return imageList, to_csv_data  # order: marked picture, input for classifier
+            # little = cv2.resize((rotated[y1:y2, x1:x2]), (img_width, img_height))  # crop and resize
+            little = cv2.resize((image[y:y + h, x:x + w]), (img_width, img_height))
+            pi = cv2.cvtColor(little, cv2.COLOR_BGR2GRAY)
+            to_csv_data = ' '.join(map(str, pi.flatten()))
+            # x = np.expand_dims(pixel, axis=0)
+            # x = x.reshape((-1, 100, 100, 1))
+            # imageList.append(x)
+            return to_csv_data  # order: marked picture, input for classifier
     return None
 
 # ---------------------------------------
@@ -229,7 +239,7 @@ def writeImage2csv(folderPath, csvPath):
             (filepath, tempfilename) = os.path.split(path)
             (shotname, extension) = os.path.splitext(tempfilename)
             emotion = shotname.split("_")[1].split('_')[0]
-            print(emotion)
+            # print(emotion)
             # usage = shotname.split("_")[1]
             pixels = getSingleFilePixels(path)
             writer.writerow([emotion, pixels])
@@ -251,18 +261,6 @@ def writeImage2csv(folderPath, csvPath):
 # ---------------------------------------------------#
 
 
-# for folders in os.listdir(path):
-#     folderPath = path + os.sep + folders
-#     # print(folderPath)
-#     for folders in os.listdir(folderPath):
-#         imagespath = folderPath + os.sep + folders
-#         # print(imagespath)
-#         for image in os.listdir(imagespath):
-#             # print(image)
-#             ipath = imagespath + os.sep + image
-#             # print(ipath)
-#             print(preprocess(ipath))
-
 # imageList, csv_data = preprocess(testpath)
 # images = [['emotion', 'pixel'], ["1", csv_data]]
 # images = [find_label(testpath), preprocess(testpath)[0][1]]
@@ -277,30 +275,27 @@ def writeImage2csv(folderPath, csvPath):
 images = []
 images.append(['emotion', 'pixels'])
 folderPath = '../Data for project/cat'
-imagespath = '../Data for project/dog/dog_neutral'
-# for folders in os.listdir(folderPath):
-#     imagespath = folderPath + os.sep + folders
-    # print(imagespath)
-for image in os.listdir(imagespath):
-    print(image)
-    ipath = imagespath + os.sep + image
-    # print(ipath)
-    label = find_label(ipath)
-    if label != -1:
-        pixels = preprocess(ipath)
-        if pixels is not None:
-            pixel = pixels[1]
-            images.append([label, pixel])
+# imagespath = '../Data for project/dog/dog_neutral'
+# imagespath = '../Data for project/cat'
+for folders in os.listdir(folderPath):
+    folder = folderPath + os.sep + folders
+    for image in os.listdir(folder):
+        print(image)
+        ipath = folder + os.sep + image
+        label = find_label(ipath)
+        if label != -1:
+            # pixels = preprocess(ipath)
+            pixels = cat_preprocess(ipath)
+            if pixels is not None:
+                pixel = pixels
+                images.append([label, pixel])
 
 
 # csvPath = '../'
-csvPath = '../result.csv'
+csvPath = '../result_cat.csv'
 if images is not None and images != []:  # found face on image
     images = pd.DataFrame(images)
     # with open(csvPath + 'result.csv', 'w') as csvfile:
     #     writer = csv.writer(csvfile)
     #     writer.writerow(['emotion', 'pixels'])
     images.to_csv(csvPath, header=False, index=False)
-        # for image in images:
-        #     print(image)
-        #     writer.writerow(image)

@@ -67,7 +67,7 @@ def create_model():
 # ---------------------------------------------------------------------------------------
 
 # read image csv
-data = pd.read_csv('../dog_training.csv')
+data = pd.read_csv('../cat_training.csv')
 data = data.sample(frac=1).reset_index(drop=True)
 
 # print some information
@@ -109,13 +109,13 @@ plt.savefig(model_path + 'exampleInput.png', dpi=300)
 model = create_model()
 model.summary()
 
-history = model.fit(x_train, y_train, validation_split=0.2, epochs=40, batch_size=16)
+history = model.fit(x_train, y_train, validation_split=0.2, epochs=100, batch_size=16)
 
 scores = model.evaluate(x_test, y_test)
 print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 
 # save trained classifier
-model.save(model_path + 'classifier.h5')
+model.save(model_path + 'Cat_classifier.h5')
 
 # ---------------------------------------------------------------------------------------
 # plotting
