@@ -33,7 +33,6 @@ pathCat = "haarcascade_frontalcatface.xml"
 faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + pathCat)
 detector = dlib.cnn_face_detection_model_v1(pathDet)
 
-
 # landmarks detector
 pathPred = '../faceDetectors/landmarkDetector.dat'
 predictor = dlib.shape_predictor(pathPred)
@@ -53,6 +52,46 @@ def renameFile(path):
     print("done")
 
 
+# ---------------------------------------
+def getSingleFilePixels(image_path):
+    pixels = ""
+    image = Image.open(image_path)
+    matrix = np.asarray(image)
+    for row in matrix:
+        for pixel in row:
+            pixels += str(pixel) + " "
+    return pixels
+
+
+def getAllFiles(path):
+    all_file_paths = []
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            if os.path.splitext(file)[1] == '.jpg':
+                all_file_paths.append(root + os.sep + file)
+    return all_file_paths
+
+
+def writeImage2csv(folderPath, csvPath):
+    with open(csvPath, 'w', newline="") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["emotion", "pixels"])
+        all_file_paths = getAllFiles(folderPath)
+        for path in all_file_paths:
+            (filepath, tempfilename) = os.path.split(path)
+            (shotname, extension) = os.path.splitext(tempfilename)
+            emotion = shotname.split("_")[1].split('_')[0]
+            # print(emotion)
+            # usage = shotname.split("_")[1]
+            pixels = getSingleFilePixels(path)
+            writer.writerow([emotion, pixels])
+
+        csvfile.close()
+
+
+# ---------------------------------------
+
+# ------------ find the label ------------
 def find_label(path):
     label = -1
     if 'angry' in path:
@@ -68,7 +107,9 @@ def find_label(path):
     return str(label)
 
 
-def preprocess(path):
+# ----------------------------------------
+
+def dog_preprocess(path):
     # if os.path.exists(path):
     #     print("find path " + path)
 
@@ -136,6 +177,9 @@ def preprocess(path):
 
 def cat_preprocess(path):
     orig = cv2.imread(path)
+    dirpath, filedir = os.path.split(path)
+    print(filedir)
+    filename, extend = os.path.splitext(filedir)
 
     if not orig is None:
         # resize
@@ -155,32 +199,34 @@ def cat_preprocess(path):
             flags=cv2.CASCADE_SCALE_IMAGE
         )
         imageList = []  # for return
-        t = datetime.datetime.now()
+        # t = datetime.datetime.now()
         for (i, (x, y, w, h)) in enumerate(faces):
+            print(x,y,w,h)
             # 在猫脸区域画出方框
-            cv2.rectangle(gray, (x, y), (x + w, y + h), (255, 255, 255), thickness=2)
+            # cv2.rectangle(gray, (x, y), (x + w, y + h), (255, 255, 255), thickness=2)
             # 使用ROI获取猫脸区域图像
-            roiImg = gray[y:y + h, x:x + w]
+            roiImg = gray[int(y*0.8):y + int(h*1.2), int(x*0.8):x + int(w*1.2)]
+            # roiImg = gray[y-int(h*0.8):y + int(h*1.3), x-int(h*0.8):x + int(w*1.3)]
             # 将猫脸区域图像保存成文件
-            cv2.imwrite('save/' + str(t) + '-' + str(i) + '.jpg', roiImg)
-        # for i, d in enumerate(faces):
-        #     # save coordinates
-        #     x1 = max(int(d.rect.left() / ratio), 1)
-        #     y1 = max(int(d.rect.top() / ratio), 1)
-        #     x2 = min(int(d.rect.right() / ratio), width - 1)
-        #     y2 = min(int(d.rect.bottom() / ratio), height - 1)
-        #
-        #     # detect landmarks
-        #     shape = face_utils.shape_to_np(predictor(gray, d.rect))
-        #     points = []
-        #     index = 0
-        #     for (x, y) in shape:
-        #         x = int(round(x / ratio))
-        #         y = int(round(y / ratio))
-        #         index = index + 1
-        #         if index == 3 or index == 4 or index == 6:
-        #             points.append([x, y])
-        #     points = np.array(points)  # right eye, nose, left eye
+            cv2.imwrite('../Data for project/test/test_save' + os.sep + filename + '.jpg', roiImg)
+            # for i, d in enumerate(faces):
+            #     # save coordinates
+            #     x1 = max(int(d.rect.left() / ratio), 1)
+            #     y1 = max(int(d.rect.top() / ratio), 1)
+            #     x2 = min(int(d.rect.right() / ratio), width - 1)
+            #     y2 = min(int(d.rect.bottom() / ratio), height - 1)
+            #
+            #     # detect landmarks
+            #     shape = face_utils.shape_to_np(predictor(gray, d.rect))
+            #     points = []
+            #     index = 0
+            #     for (x, y) in shape:
+            #         x = int(round(x / ratio))
+            #         y = int(round(y / ratio))
+            #         index = index + 1
+            #         if index == 3 or index == 4 or index == 6:
+            #             points.append([x, y])
+            #     points = np.array(points)  # right eye, nose, left eye
 
             # rotate
             # if rotation == True:
@@ -209,43 +255,6 @@ def cat_preprocess(path):
             # imageList.append(x)
             return to_csv_data  # order: marked picture, input for classifier
     return None
-
-# ---------------------------------------
-def getSingleFilePixels(image_path):
-    pixels = ""
-    image = Image.open(image_path)
-    matrix = np.asarray(image)
-    for row in matrix:
-        for pixel in row:
-            pixels += str(pixel) + " "
-    return pixels
-
-
-def getAllFiles(path):
-    all_file_paths = []
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            if os.path.splitext(file)[1] == '.jpg':
-                all_file_paths.append(root + os.sep + file)
-    return all_file_paths
-
-
-def writeImage2csv(folderPath, csvPath):
-    with open(csvPath, 'w', newline="") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(["emotion", "pixels"])
-        all_file_paths = getAllFiles(folderPath)
-        for path in all_file_paths:
-            (filepath, tempfilename) = os.path.split(path)
-            (shotname, extension) = os.path.splitext(tempfilename)
-            emotion = shotname.split("_")[1].split('_')[0]
-            # print(emotion)
-            # usage = shotname.split("_")[1]
-            pixels = getSingleFilePixels(path)
-            writer.writerow([emotion, pixels])
-
-        csvfile.close()
-# ---------------------------------------
 
 
 # writeImage2csv("..\\Data for project\\cat\\cat_angry", "..\\test.csv")
@@ -276,7 +285,7 @@ images = []
 images.append(['emotion', 'pixels'])
 folderPath = '../Data for project/cat'
 # imagespath = '../Data for project/dog/dog_neutral'
-# imagespath = '../Data for project/cat'
+imagespath = '../Data for project/test'
 for folders in os.listdir(folderPath):
     folder = folderPath + os.sep + folders
     for image in os.listdir(folder):
@@ -290,9 +299,19 @@ for folders in os.listdir(folderPath):
                 pixel = pixels
                 images.append([label, pixel])
 
+# for image in os.listdir(imagespath):
+#     print(image)
+#     ipath = imagespath + os.sep + image
+#     label = find_label(ipath)
+#     if label != -1:
+#         # pixels = preprocess(ipath)
+#         pixels = cat_preprocess(ipath)
+#         if pixels is not None:
+#             pixel = pixels
+#             images.append([label, pixel])
 
 # csvPath = '../'
-csvPath = '../result_cat.csv'
+csvPath = '../result_cat_v2.csv'
 if images is not None and images != []:  # found face on image
     images = pd.DataFrame(images)
     # with open(csvPath + 'result.csv', 'w') as csvfile:
