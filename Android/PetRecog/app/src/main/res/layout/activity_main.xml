@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    tools:context=".MainActivity">
+
+
+
+
+    <LinearLayout
+        android:id="@+id/llBottom"
+        android:clipChildren="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#f9f9f9"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/tab1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/ivTab1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/selector_tab1_state"/>
+            <TextView
+                android:id="@+id/tvTab1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Brand"
+                android:textSize="12sp"
+                android:layout_marginBottom="3dp"
+                android:textColor="@drawable/selector_text_state"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab2"
+            android:clipChildren="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/ivTab2"
+                android:clipChildren="false"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:visibility="gone"
+                android:background="@drawable/selector_tab1_state" />
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:paddingBottom="15dp"
+                android:scaleY="1.2"
+                android:scaleX="1.2"
+                android:src="@drawable/ic_camera_white"
+                app:fab_colorNormal="?attr/colorPrimary"
+                app:fab_colorPressed="?attr/colorPrimaryDark"
+                app:fab_colorRipple="?attr/colorPrimary" />
+
+            <TextView
+                android:id="@+id/tvTab2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发布"
+                android:textSize="12sp"
+                android:visibility="gone"
+                android:layout_marginBottom="3dp"
+                android:textColor="@drawable/selector_text_state" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/ivTab3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/selector_tab3_state" />
+
+            <TextView
+                android:id="@+id/tvTab3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Body-language"
+                android:textSize="12sp"
+                android:layout_marginBottom="3dp"
+                android:textColor="@drawable/selector_text_state" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginBottom="19dp"-->
+<!--        android:background="@drawable/selector_tab1_state" />-->
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/llBottom" />
+
+
+</RelativeLayout>

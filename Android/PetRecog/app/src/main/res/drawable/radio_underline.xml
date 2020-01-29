@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_checked="true">
+        <layer-list>
+            <!--底层使用下划线的颜色填充-->
+            <item android:left="20dp"
+                android:right="20dp">
+                <shape>
+                    <solid android:color="@color/blue"/>
+                </shape>
+            </item>
+            <!--上面覆盖一层距离底层的底部3dp,填充白色。两层叠加一起就形成了一条下划线效果，原理自行脑补-->
+            <item android:bottom="3dp">
+                <shape>
+                    <solid android:color="#ffffff"/>
+                </shape>
+            </item>
+
+        </layer-list>
+    </item>
+
+    <item android:state_pressed="true">
+        <layer-list>
+            <item android:left="20dp"
+        android:right="20dp">
+                <shape>
+                    <solid android:color="@color/gray"/>
+                </shape>
+            </item>
+            <item android:bottom="3dp">
+                <shape>
+                    <solid android:color="#ffffff"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item
+        android:drawable="@android:color/transparent">
+    </item>
+
+</selector>
