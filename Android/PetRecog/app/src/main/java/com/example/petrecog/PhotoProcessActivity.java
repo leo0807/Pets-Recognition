@@ -8,6 +8,7 @@ import android.util.Base64;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -18,6 +19,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -91,10 +93,17 @@ public class PhotoProcessActivity extends AppCompatActivity {
     }
 
     private void post(String json){
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build();
+
         String url = "http://101.116.27.109/predict";
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder().url(url).post(body).build();
+
+
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -105,17 +114,21 @@ public class PhotoProcessActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 if(response.isSuccessful()){
                     String myResponse = response.body().string();
+                    Log.i("response", myResponse);
 
                     PhotoProcessActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             mbrand_text.setText(myResponse);
+                            Log.i("brand",mbrand_text.toString());
                         }
                     });
                 }
             }
         });
     }
+
+
 
     private void uploadImageUri(Uri uri){
         new Thread(){
@@ -170,39 +183,6 @@ public class PhotoProcessActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void debug(String json){
-        OkHttpClient client = new OkHttpClient();
-        String url = "http://www.roundsapp.com/post";
-        RequestBody body = RequestBody.create(JSON, json);
-        Request request = new Request.Builder().url(url).post(body).build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if(response.isSuccessful()){
-                    String myResponse = response.body().string();
-
-                    PhotoProcessActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mbrand_text.setText(myResponse);
-                        }
-                    });
-                }
-            }
-        });
-    }
-
-
-
-
-
-
 
 
 }
