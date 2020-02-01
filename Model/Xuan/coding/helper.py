@@ -79,3 +79,14 @@ class No_Preprocessing:
         df = pd.DataFrame(d, columns=['emotion', 'prob'])
 
         return df
+
+
+def renameFile(path):
+    print('come into path:' + path)
+    fileList = os.listdir(path)
+    for file in fileList:
+        oldfilename = path + os.sep + file
+        newfilename = path + os.sep + file[:-4] + '.jpg'
+        os.rename(oldfilename, newfilename)
+        print(oldfilename + ' -> ' + newfilename)
+    print("done")

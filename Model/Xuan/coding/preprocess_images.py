@@ -1,5 +1,7 @@
 import csv
 import datetime
+import time
+
 from keras.models import load_model
 from helper import No_Preprocessing
 import dlib
@@ -44,68 +46,32 @@ helper = No_Preprocessing(img_width, img_height)
 def renameFile(path):
     print('come into path:' + path)
     fileList = os.listdir(path)
+    folderPath, folderName = os.path.split(path)
+    i = 0
     for file in fileList:
         oldfilename = path + os.sep + file
-        newfilename = path + os.sep + file[:-4] + '.jpg'
+        newfilename = path + os.sep + folderName + '_' + str(i) + '.jpg'
         os.rename(oldfilename, newfilename)
         print(oldfilename + ' -> ' + newfilename)
+
+        i += 1
     print("done")
 
-
-# ---------------------------------------
-def getSingleFilePixels(image_path):
-    pixels = ""
-    image = Image.open(image_path)
-    matrix = np.asarray(image)
-    for row in matrix:
-        for pixel in row:
-            pixels += str(pixel) + " "
-    return pixels
-
-
-def getAllFiles(path):
-    all_file_paths = []
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            if os.path.splitext(file)[1] == '.jpg':
-                all_file_paths.append(root + os.sep + file)
-    return all_file_paths
-
-
-def writeImage2csv(folderPath, csvPath):
-    with open(csvPath, 'w', newline="") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(["emotion", "pixels"])
-        all_file_paths = getAllFiles(folderPath)
-        for path in all_file_paths:
-            (filepath, tempfilename) = os.path.split(path)
-            (shotname, extension) = os.path.splitext(tempfilename)
-            emotion = shotname.split("_")[1].split('_')[0]
-            # print(emotion)
-            # usage = shotname.split("_")[1]
-            pixels = getSingleFilePixels(path)
-            writer.writerow([emotion, pixels])
-
-        csvfile.close()
-
-
-# ---------------------------------------
 
 # ------------ find the label ------------
 def find_label(path):
     label = -1
-    if 'angry' in path:
+    if 'Angry' in path:
         label = 0
-    elif 'fear' in path:
+    elif 'Scared' in path:
         label = 1
-    elif 'happy' in path:
+    elif 'Happy' in path:
         label = 2
-    elif 'sadness' in path:
+    elif 'Sadness' in path:
         label = 3
-    elif 'neutral' in path:
+    elif 'Neutral' in path:
         label = 4
     return str(label)
-
 
 # ----------------------------------------
 
@@ -159,10 +125,11 @@ def dog_preprocess(path, savePath):
                 # detectFace(rotated, picSize)
 
             # highlight face and landmarks
-            cv2.imwrite(savePath + os.sep + filename + '.jpg', orig)
-            cv2.polylines(orig, [points], True, (0, 255, 0), 1)
-            cv2.rectangle(orig, (x1, y1), (x2, y2), (255, 0, 0), 1)
+            # cv2.imwrite(savePath + os.sep + filename + '.jpg', orig)
+            # cv2.polylines(orig, [points], True, (0, 255, 0), 1)
+            # cv2.rectangle(orig, (x1, y1), (x2, y2), (255, 0, 0), 1)
             imageList.append(orig)
+            print(x1, x2, y1, y2)
 
             # prepare for prediction
             little = cv2.resize((rotated[y1:y2, x1:x2]), (img_width, img_height))  # crop and resize
@@ -207,7 +174,7 @@ def cat_preprocess(path, savePath):
             roiImg = gray[int(y * 0.75):y + int(h * 1.25), int(x * 0.75):x + int(w * 1.25)]
             # roiImg = gray[y-int(h*0.8):y + int(h*1.3), x-int(h*0.8):x + int(w*1.3)]
 
-            cv2.imwrite(savePath + os.sep + filename + '.jpg', roiImg)
+            # cv2.imwrite(savePath + os.sep + filename + '.jpg', roiImg)
             # prepare for prediction
             # little = cv2.resize((rotated[y1:y2, x1:x2]), (img_width, img_height))  # crop and resize
             little = cv2.resize((image[y:y + h, x:x + w]), (img_width, img_height))
@@ -246,7 +213,7 @@ classify = 'dog'
 images = []
 images.append(['emotion', 'pixels'])
 folderPath = '..' + os.sep + 'Data for project' + os.sep + classify
-savePath = '..\\Data for project\\test\\' + os.sep + classify
+savePath = '..\\Data for project\\' + classify
 # imagespath = '../Data for project/dog/dog_neutral'
 imagespath = '../Data for project/test'
 
@@ -283,7 +250,7 @@ for folders in os.listdir(folderPath):
 #             images.append([label, pixel])
 
 # csvPath = '../'
-csvPath = '..\\result_' + os.sep + classify + '_v2.csv'
+csvPath = '..\\result_' + classify + '_V3' + '.csv'
 if images is not None and images != []:  # found face on image
     images = pd.DataFrame(images)
     # with open(csvPath + 'result.csv', 'w') as csvfile:
