@@ -2,21 +2,22 @@ import tensorflow as tf
 import sys
 
 # change this as you see fit
-image_path = '../testImages/'
+# image_path = sys.argv[1]
+image_path = '../testImages/cat_happy_8.jpg'
 
 # Read in the image_data
 image_data = tf.gfile.FastGFile(image_path, 'rb').read()
 
 # Loads label file, strips off carriage return
-label_lines = [line.rstrip() for line in tf.gfile.GFile("../Breed_Cat/retrained_labels.txt")]
+label_lines = [line.rstrip() for line in tf.io.gfile.GFile("../Breed_Cat/retrained_labels.txt")]
 
 # Unpersists graph from file
 with tf.gfile.FastGFile("../Breed_Cat/retrained_graph.pb", 'rb') as f:
-    graph_def = tf.GraphDef()
+    graph_def = tf.compat.v1.GraphDef()
     graph_def.ParseFromString(f.read())
-    _ = tf.imporaph_def(graph_def, name='')
+    _ = tf.import_graph_def(graph_def, name='')
 
-with tf.Session() as sess:
+with tf.compat.v1.Session() as sess:
     # Feed the image_data as input to the graph and get first prediction
     softmax_tensor = sess.graph.get_tensor_by_name('final_result:0')
 

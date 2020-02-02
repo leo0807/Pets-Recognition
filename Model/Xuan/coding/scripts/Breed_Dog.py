@@ -38,13 +38,13 @@ def classify(resource_type, path):
         response = urllib.request.urlopen(path)
         img_raw = response.read()
     else:
-        with open(path, 'r') as f:
+        with open(path, 'rb') as f:
             img_raw = f.read()
 
     return infer(consts.CURRENT_MODEL_NAME, img_raw)
 
 src = '../Breed_Dog/inference.py'
-path = '../testImages/'  # dog image to classify
+path = '../testImages/dog_neutral_2.jpg'  # dog image to classify
 probs = classify(src, path)
 
 print(probs.sort_values(['prob'], ascending=False).take(range(3)))

@@ -9,10 +9,10 @@ import numpy as np
 # ---------------------------------------------------------
 
 # image size for prediction
-img_width = 64
-img_height = 64
+img_width = 100
+img_height = 100
 # scale factor for preprocessing
-picSize = 128
+picSize = 200
 rotation = True
 
 # face detector

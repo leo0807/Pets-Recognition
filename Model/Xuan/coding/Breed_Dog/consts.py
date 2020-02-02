@@ -14,7 +14,7 @@ DEV_SET_SIZE = 3000
 TRAIN_SAMPLE_SIZE = 3000
 
 # name of the model being referenced by all other scripts
-CURRENT_MODEL_NAME = 'stanford_5_64_0001'
+CURRENT_MODEL_NAME = 'stanford_dog_breed_test'
 # sets up number of layers and number of units in each layer for
 # the "head" dense neural network stacked on top of the Inception
 # pre-trained model.
