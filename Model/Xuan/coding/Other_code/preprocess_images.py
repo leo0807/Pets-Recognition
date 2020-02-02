@@ -24,19 +24,19 @@ picSize = 200
 rotation = True
 
 # image input and output
-path = '../Data for project'
-testpath = '../Data for project/dog/dog_neutral/dog_neutral_0.jpg'
-pathResult = '../results'
+path = '../../Data for project'
+testpath = '../../Data for project/dog/dog_neutral/dog_neutral_0.jpg'
+pathResult = '../../results'
 
 # face detector
-pathDet = '../faceDetectors/dogHeadDetector.dat'
+pathDet = '../../faceDetectors/dogHeadDetector.dat'
 pathCat = "haarcascade_frontalcatface.xml"
 
 faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + pathCat)
 detector = dlib.cnn_face_detection_model_v1(pathDet)
 
 # landmarks detector
-pathPred = '../faceDetectors/landmarkDetector.dat'
+pathPred = '../../faceDetectors/landmarkDetector.dat'
 predictor = dlib.shape_predictor(pathPred)
 
 # helper class
@@ -138,7 +138,7 @@ def dog_preprocess(path, savePath):
             x = np.expand_dims(pixel, axis=0)
             x = x.reshape((-1, 100, 100, 1))
             imageList.append(x)
-            return imageList, to_csv_data  # order: marked picture, input for classifier
+            return to_csv_data  # order: marked picture, input for classifier
     return None
 
 
@@ -212,8 +212,8 @@ classify = 'dog'
 
 images = []
 images.append(['emotion', 'pixels'])
-folderPath = '..' + os.sep + 'Data for project' + os.sep + classify
-savePath = '..\\Data for project\\' + classify
+folderPath = '..\\..' + os.sep + 'Data for project' + os.sep + classify
+savePath = '..\\..\\Data for project\\' + classify
 # imagespath = '../Data for project/dog/dog_neutral'
 imagespath = '../Data for project/test'
 
