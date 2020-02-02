@@ -13,6 +13,12 @@ https://www.psychologytoday.com/intl/blog/canine-corner/201607/which-emotions-do
 https://www.purina.co.uk/cats/behaviour-and-training/understanding-cat-behaviour/cat-body-language 猫的肢体语言
 https://www.purina.co.uk/dogs/behaviour-and-training/understanding-dog-behaviours/understanding-dog-body-language 狗的肢体语言
 
+巨人的肩膀：
+狗-种类： https://github.com/stormy-ua/dog-breeds-classification
+https://zhuanlan.zhihu.com/p/29534841  数据增强
+
+
+
 
 
 
