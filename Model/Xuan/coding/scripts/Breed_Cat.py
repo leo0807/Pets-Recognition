@@ -2,16 +2,16 @@ import tensorflow as tf
 import sys
 
 # change this as you see fit
-image_path = sys.argv[1]
+image_path = '../testImages/'
 
 # Read in the image_data
 image_data = tf.gfile.FastGFile(image_path, 'rb').read()
 
 # Loads label file, strips off carriage return
-label_lines = [line.rstrip() for line in tf.gfile.GFile("retrained_labels.txt")]
+label_lines = [line.rstrip() for line in tf.gfile.GFile("../Breed_Cat/retrained_labels.txt")]
 
 # Unpersists graph from file
-with tf.gfile.FastGFile("retrained_graph.pb", 'rb') as f:
+with tf.gfile.FastGFile("../Breed_Cat/retrained_graph.pb", 'rb') as f:
     graph_def = tf.GraphDef()
     graph_def.ParseFromString(f.read())
     _ = tf.imporaph_def(graph_def, name='')

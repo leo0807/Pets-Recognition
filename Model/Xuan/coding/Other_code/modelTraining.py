@@ -1,5 +1,4 @@
 import os
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -16,7 +15,7 @@ from keras.optimizers import SGD
 img_width = 100
 img_height = 100
 # path for results
-model_path = "..\\models\\"
+model_path = "../models/"
 
 
 # ---------------------------------------------------------------------------------------

@@ -1,19 +1,6 @@
-from math import degrees
-import math
-
-import operator
-from functools import reduce
 import numpy as np
 import pandas as pd
-import face_recognition
-import warnings
-import matplotlib.pyplot as plt
 
-
-# from skimage.transform import resize
-# from skimage.exposure import equalize_adapthist, equalize_hist
-
-# import cv2
 
 class No_Preprocessing:
 
