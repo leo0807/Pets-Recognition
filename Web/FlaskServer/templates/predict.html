@@ -14,7 +14,9 @@
     <input id="image-selector" type="file">
     <button id="predict-button">Predict</button>
     <p style="font-weight:bold">Predictions</p>
-    <p>result:<span id="result"></span></p>
+    <p>pet:<span id="pet"></span></p>
+    <p>breed:<span id="breed"></span></p>
+    <p>emotion:<span id="emotion"></span></p>
     <img id="selected-image" src="" />
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -37,8 +39,10 @@
               image: base64Image
         }
         console.log(message);
-        $.post("http://127.0.0.1:5000/predict",JSON.stringify(message), function(response){
-            $("#result").text(response.prediction.emotion);
+        $.post("http://10.12.147.161:5000/predict",JSON.stringify(message), function(response){
+            $("#emotion").text(response.emotion);
+            $("#breed").text(response.breed);
+            $("#pet").text(response.pet);
             consule.log(response);
         });
         });
