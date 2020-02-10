@@ -14,8 +14,8 @@ picSize = 200
 rotation = True
 
 # face detector
-pathDet = '../Emotion_Dog/dogHeadDetector.dat'
-pathCat = "../Emotion_Cat/haarcascade_frontalcatface.xml"
+pathDet = 'Emotion_Dog/dogHeadDetector.dat'
+pathCat = "Emotion_Cat/haarcascade_frontalcatface.xml"
 
 faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + pathCat)
 detector = dlib.cnn_face_detection_model_v1(pathDet)

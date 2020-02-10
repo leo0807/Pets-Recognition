@@ -73,6 +73,7 @@ def create_model():
 
 # read image csv
 csvPath = '../../result_cat_V3.csv'
+
 pathdir, file = os.path.split(csvPath)
 filename = os.path.splitext(file)[0]
 data = pd.read_csv(csvPath)

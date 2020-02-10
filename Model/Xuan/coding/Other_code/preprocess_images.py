@@ -24,19 +24,19 @@ picSize = 320
 rotation = True
 
 # image input and output
-path = '../Data for project'
-testpath = '../Data for project/dog/dog_neutral/dog_neutral_0.jpg'
-pathResult = '../results'
+path = '../../Data for project'
+testpath = '../../Data for project/dog/dog_neutral/dog_neutral_0.jpg'
+pathResult = '../../results'
 
 # face detector
-pathDet = '../faceDetectors/dogHeadDetector.dat'
+pathDet = '../../faceDetectors/dogHeadDetector.dat'
 pathCat = "haarcascade_frontalcatface.xml"
 
 faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + pathCat)
 detector = dlib.cnn_face_detection_model_v1(pathDet)
 
 # landmarks detector
-pathPred = '../faceDetectors/landmarkDetector.dat'
+pathPred = '../../faceDetectors/landmarkDetector.dat'
 predictor = dlib.shape_predictor(pathPred)
 
 # helper class
@@ -86,29 +86,29 @@ def dog_preprocess(path, savePath):
             x2 = min(int(d.rect.right() / ratio), width - 1)
             y2 = min(int(d.rect.bottom() / ratio), height - 1)
 
-            # detect landmarks
-            shape = face_utils.shape_to_np(predictor(gray, d.rect))
-            points = []
-            index = 0
-            for (x, y) in shape:
-                x = int(round(x / ratio))
-                y = int(round(y / ratio))
-                index = index + 1
-                if index == 3 or index == 4 or index == 6:
-                    points.append([x, y])
-            points = np.array(points)  # right eye, nose, left eye
-
-            # rotate
-            if rotation == True:
-                xLine = points[0][0] - points[2][0]
-                if points[2][1] < points[0][1]:
-                    yLine = points[0][1] - points[2][1]
-                    angle = math.degrees(math.atan(yLine / xLine))
-                else:
-                    yLine = points[2][1] - points[0][1]
-                    angle = 360 - math.degrees(math.atan(yLine / xLine))
-                rotated = imutils.rotate(orig, angle)
-                # detectFace(rotated, picSize)
+            # # detect landmarks
+            # shape = face_utils.shape_to_np(predictor(gray, d.rect))
+            # points = []
+            # index = 0
+            # for (x, y) in shape:
+            #     x = int(round(x / ratio))
+            #     y = int(round(y / ratio))
+            #     index = index + 1
+            #     if index == 3 or index == 4 or index == 6:
+            #         points.append([x, y])
+            # points = np.array(points)  # right eye, nose, left eye
+            #
+            # # rotate
+            # if rotation == True:
+            #     xLine = points[0][0] - points[2][0]
+            #     if points[2][1] < points[0][1]:
+            #         yLine = points[0][1] - points[2][1]
+            #         angle = math.degrees(math.atan(yLine / xLine))
+            #     else:
+            #         yLine = points[2][1] - points[0][1]
+            #         angle = 360 - math.degrees(math.atan(yLine / xLine))
+            #     rotated = imutils.rotate(orig, angle)
+            #     # detectFace(rotated, picSize)
 
             # highlight face and landmarks
             # cv2.imwrite(savePath + os.sep + filename + '.jpg', orig)
@@ -118,13 +118,13 @@ def dog_preprocess(path, savePath):
             print(x1, x2, y1, y2)
 
             # prepare for prediction
-            little = cv2.resize((rotated[y1:y2, x1:x2]), (img_width, img_height))  # crop and resize
+            little = cv2.resize((orig[y1:y2, x1:x2]), (img_width, img_height))  # crop and resize
             pixel = cv2.cvtColor(little, cv2.COLOR_BGR2GRAY)
             to_csv_data = ' '.join(map(str, pixel.flatten()))
             x = np.expand_dims(pixel, axis=0)
             x = x.reshape((-1, 100, 100, 1))
             imageList.append(x)
-            return imageList, to_csv_data  # order: marked picture, input for classifier
+            return to_csv_data  # order: marked picturSe, input for classifier
     return None
 
 
@@ -189,8 +189,8 @@ classify = 'dog'
 
 images = []
 images.append(['emotion', 'pixels'])
-folderPath = '..' + os.sep + 'Data for project' + os.sep + classify
-savePath = '..\\Data for project\\' + classify
+folderPath = '..\\..' + os.sep + 'Data for project' + os.sep + classify
+savePath = '..\\..\\Data for project\\' + classify
 # imagespath = '../Data for project/dog/dog_neutral'
 imagespath = '../Data for project/test'
 
