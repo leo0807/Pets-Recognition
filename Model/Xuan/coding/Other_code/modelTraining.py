@@ -10,6 +10,8 @@ from keras import Sequential
 from keras.regularizers import l2
 from keras.layers import Dense, Dropout, Conv2D, Flatten, BatchNormalization, AveragePooling2D, Activation
 from keras.optimizers import SGD
+import tensorflow as tf
+keras = tf.keras
 
 # size of images
 img_width = 100
@@ -70,7 +72,8 @@ def create_model():
 # ---------------------------------------------------------------------------------------
 
 # read image csv
-csvPath = '../../result_cat_v2.csv'
+csvPath = '../../result_cat_V3.csv'
+
 pathdir, file = os.path.split(csvPath)
 filename = os.path.splitext(file)[0]
 data = pd.read_csv(csvPath)
@@ -113,16 +116,30 @@ for i in range(0, 25):
     k += 1
 plt.savefig(model_path + 'exampleInput.png', dpi=300)
 
-model = create_model()
-model.summary()
+# model = create_model()
+base_model = tf.keras.applications.MobileNetV2(input_shape=(img_height, img_width, 3),
+                                               include_top=False,
+                                               weights='imagenet')
+base_model.trainable = False
+base_model.summary()
+global_average_layer = keras.layers.GlobalAveragePooling2D()
+output_layer = keras.layers.Dense(1, activation='sigmoid')
+model = keras.Sequential([
+  base_model,
+  global_average_layer,
+  output_layer
+])
+model.compile(optimizer=tf.keras.optimizers.Adam(),
+              loss='binary_crossentropy',
+              metrics=['accuracy'])
 
-history = model.fit(x_train, y_train, validation_split=0.2, epochs=100, batch_size=16)
+history = model.fit(x_train, y_train, validation_split=0.2, epochs=2, batch_size=16)
 
 scores = model.evaluate(x_test, y_test)
 print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1] * 100))
 
 # save trained classifier
-model.save(model_path + 'Cat_classifier' + '_v2' + '.h5')
+# model.save(model_path + 'Cat_classifier_mobileNet' + '_v1' + '.h5')
 
 # ---------------------------------------------------------------------------------------
 # plotting
