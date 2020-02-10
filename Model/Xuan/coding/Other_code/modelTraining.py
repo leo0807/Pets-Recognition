@@ -70,7 +70,7 @@ def create_model():
 # ---------------------------------------------------------------------------------------
 
 # read image csv
-csvPath = '../../result_dog_V3.csv'
+csvPath = '../../result_cat_v2.csv'
 pathdir, file = os.path.split(csvPath)
 filename = os.path.splitext(file)[0]
 data = pd.read_csv(csvPath)
@@ -122,7 +122,7 @@ scores = model.evaluate(x_test, y_test)
 print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1] * 100))
 
 # save trained classifier
-model.save(model_path + 'Dog_classifier' + '_v3' + '.h5')
+model.save(model_path + 'Cat_classifier' + '_v2' + '.h5')
 
 # ---------------------------------------------------------------------------------------
 # plotting
