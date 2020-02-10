@@ -20,10 +20,10 @@ model = load_model('Cat_vs_Dog/Cat_Dog_model.h5')
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 # image size for prediction
-img_width = 64
-img_height = 64
+img_width = 128
+img_height = 128
 # scale factor for preprocessing
-picSize = 128
+picSize = 256
 rotation = True
 
 # helper class
@@ -34,10 +34,10 @@ def predict():
     with graph.as_default():
         set_session(sess)
         test_img = 'testImages/image.jpg'
-        if os.path.exists(test_img):
-            print("find test image", test_img)
-        else:
-            print("error, not find test image")
+        # if os.path.exists(test_img):
+        #     print("find test image", test_img)
+        # else:
+        #     print("error, not find test image")
 
         test_img = image.load_img(test_img, target_size=(img_width, img_height))
         # convert input image in input format that model accepts
@@ -46,14 +46,13 @@ def predict():
 
         start = time.time()
         prediction = model.predict(test_img)
-
-        # prediction_ = np.argmax(prediction)
-        print("time ", time.time() -start)
-        if prediction[0][0] == 0:
-            print('Cat')
+        prediction_ = np.argmax(prediction)
+        # print("time ", time.time() -start)
+        if prediction_ == 0:
+            print('Cat!!!')
             return "Cat"
         else:
-            print('Dog')
+            print('Dog!!!')
             return "Dog"
 
 

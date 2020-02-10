@@ -1,6 +1,8 @@
 import os
 
 import cv2
+import tensorflow as tf
+from tensorflow.keras import layers
 from keras.models import load_model
 from scripts.helper import No_Preprocessing
 from keras.preprocessing import image
@@ -8,7 +10,6 @@ import dlib
 from imutils import face_utils
 import imutils
 import numpy as np
-import tensorflow as tf
 from keras.backend import set_session
 
 # ---------------------------------------------------------
@@ -26,9 +27,9 @@ faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + pathCat)
 
 # load model
 graph = tf.get_default_graph()
-sess=tf.Session();
+sess = tf.Session()
 set_session(sess)
-model = load_model('Emotion_Cat/Cat_classifier_V3.h5')
+model = tf.keras.models.load_model('Emotion_Cat/Cat_classifier_v2.h5')
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 # helper class
