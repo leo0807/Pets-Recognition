@@ -1,6 +1,5 @@
 import os
-import sys
-import _thread
+
 from icrawler.builtin import FlickrImageCrawler
 from icrawler.builtin import GoogleImageCrawler
 
@@ -25,12 +24,4 @@ def search_image(pet, target, savePath):
 
 saveCatPath = image_path + 'cat' + os.sep
 saveDogPath = image_path + 'dog' + os.sep
-
-# print(saveCatPath)
-
-# download images from website
-# for nameList in EmotionList:
-#     search_image('cat', nameList, saveCatPath)
-#     search_image('dog', nameList, saveDogPath)
-# print("Collection is done")
 

@@ -1,20 +1,10 @@
-import csv
-import datetime
-import time
-
-from keras.models import load_model
-from helper import No_Preprocessing
-import dlib
-import cv2
-from imutils import face_utils
-import imutils
-import numpy as np
-import math
 import os
-from PIL import Image
-import tensorflow as tf
+
+import cv2
+import dlib
+import numpy as np
 import pandas as pd
-import shutil
+from helper import No_Preprocessing
 
 # image size for prediction
 img_width = 100
@@ -43,7 +33,6 @@ predictor = dlib.shape_predictor(pathPred)
 helper = No_Preprocessing(img_width, img_height)
 
 
-
 # ------------ find the label ------------
 def find_label(path):
     label = -1
@@ -58,6 +47,7 @@ def find_label(path):
     elif 'Neutral' in path:
         label = 4
     return str(label)
+
 
 # ----------------------------------------
 
@@ -171,7 +161,6 @@ def cat_preprocess(path, savePath):
 
 
 # writeImage2csv("..\\Data for project\\cat\\cat_angry", "..\\test.csv")
-
 
 
 # imageList, csv_data = preprocess(testpath)

@@ -1,5 +1,5 @@
 import glob
-import os
+
 import pandas as pd
 
 csv1Path = 'prep_images_rotated.csv'
@@ -17,7 +17,3 @@ for i in range(1, len(csv_list)):
     filepath = csv_list[i]
     df = pd.read_csv(filepath)
     df = df.to_csv(outputfile, index=False, header=False, mode='a+')
-
-
-
-
