@@ -1,0 +1,12 @@
+sphynx
+birman
+egyptian mau
+ragdoll
+abyssinian
+siamese
+maine coon
+bengal
+british shorthair
+bombay
+russian blue
+persian
