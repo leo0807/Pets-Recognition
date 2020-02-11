@@ -1,18 +1,5 @@
-import os
-
 import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
 import tensorflow as tf
-from helper import No_Preprocessing
-import helper
-from keras import Sequential
-from keras.layers import Dense, Dropout, Conv2D, Flatten, BatchNormalization, AveragePooling2D, Activation
-from keras.optimizers import SGD
-from keras.regularizers import l2
-from keras.utils import to_categorical
-from sklearn.model_selection import train_test_split
-from sklearn.utils import shuffle
 
 keras = tf.keras
 
@@ -21,9 +8,6 @@ img_width = 200
 img_height = 200
 # path for results
 model_path = "../../models/"
-
-
-
 
 # # read image csv
 # csvPath = '../../result_cat_V3.csv'
@@ -74,7 +58,13 @@ model_path = "../../models/"
 
 
 # model = helper.create_model()
-base_model = tf.keras.applications.MobileNetV2(input_shape=(img_height, img_width, 3),
+# base_model = tf.keras.applications.MobileNetV2(input_shape=(img_height, img_width, 3),
+#                                                include_top=False,
+#                                                weights='imagenet')
+# base_model = tf.keras.applications.Xception(input_shape=(img_height, img_width, 3),
+#                                                include_top=False,
+#                                                weights='imagenet')
+base_model = tf.keras.applications.InceptionResNetV2(input_shape=(img_height, img_width, 3),
                                                include_top=False,
                                                weights='imagenet')
 base_model.trainable = False
@@ -83,26 +73,29 @@ global_average_layer = keras.layers.GlobalAveragePooling2D()
 output_layer = keras.layers.Dense(5, activation='sigmoid')
 
 from keras.preprocessing.image import ImageDataGenerator
-train_datagen = ImageDataGenerator(
-        rescale=1./255,
-        shear_range=0.2,
-        zoom_range=0.2,
-        horizontal_flip=True)
 
-test_datagen = ImageDataGenerator(rescale=1./255)
+train_datagen = ImageDataGenerator(
+    rescale=1. / 255,
+    shear_range=0.2,
+    zoom_range=0.2,
+    horizontal_flip=True)
+
+test_datagen = ImageDataGenerator(rescale=1. / 255)
 
 train_generator = train_datagen.flow_from_directory(
-        '../../../../transfer learning/Data for project/cat/train',
-        target_size=(img_height, img_width),
-        batch_size=32,
-        # class_mode='binary'
+    '../../../../transfer learning/Data for project/cat/train',
+    target_size=(img_height, img_width),
+    batch_size=32,
+    class_mode='categorical',
+    classes=['Angry', 'Happy', 'Neutral', 'Sadness', 'Scared']
 )
 
 validation_generator = train_datagen.flow_from_directory(
-        '../../../../transfer learning/Data for project/cat/test',
-        target_size=(img_height, img_width),
-        batch_size=32,
-        # class_mode='binary'
+    '../../../../transfer learning/Data for project/cat/test',
+    target_size=(img_height, img_width),
+    batch_size=32,
+    class_mode='categorical',
+    classes=['Angry', 'Happy', 'Neutral', 'Sadness', 'Scared']
 )
 
 model = keras.Sequential([
@@ -111,21 +104,21 @@ model = keras.Sequential([
     output_layer
 ])
 model.compile(optimizer=tf.keras.optimizers.Adam(),
-              loss='binary_crossentropy',
+              loss='categorical_crossentropy',
               metrics=['accuracy'])
 
-
 import numpy as np
-steps_per_epoch = np.ceil(train_generator.samples/train_generator.batch_size)
-setp_per_vali = np.ceil(validation_generator.samples/validation_generator.batch_size)
+
+steps_per_epoch = np.ceil(train_generator.samples / train_generator.batch_size)
+setp_per_vali = np.ceil(validation_generator.samples / validation_generator.batch_size)
 history = model.fit_generator(
-        train_generator,
-        steps_per_epoch=steps_per_epoch,
-        epochs=5,
-        validation_data=validation_generator)
+    train_generator,
+    steps_per_epoch=steps_per_epoch,
+    epochs=30,
+    validation_data=validation_generator)
 
-model.save('../../models/' + 'cat' + 'mobileNetV2.h5')
-
+modelPath = 'cat ' + 'InceptionResV2.h5'
+model.save(model_path + modelPath)
 
 # origin code
 # history = model.fit(x_train, y_train, validation_split=0.2, epochs=2, batch_size=16)
@@ -147,7 +140,7 @@ plt.title('model accuracy')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper left')
-plt.savefig(model_path + os.sep + filename + 'accuracy.png', dpi=300)
+plt.savefig(model_path + modelPath + ' accuracy.png', dpi=300)
 
 # summarize history for loss
 plt.close()
@@ -157,4 +150,4 @@ plt.title('model loss')
 plt.ylabel('loss')
 plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper left')
-plt.savefig(model_path + os.sep + filename + 'loss.png', dpi=300)
+plt.savefig(model_path + modelPath + ' loss.png', dpi=300)
