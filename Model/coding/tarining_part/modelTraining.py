@@ -58,15 +58,18 @@ model_path = "../../models/"
 
 
 # model = helper.create_model()
-# base_model = tf.keras.applications.MobileNetV2(input_shape=(img_height, img_width, 3),
-#                                                include_top=False,
-#                                                weights='imagenet')
+base_model = tf.keras.applications.MobileNetV2(input_shape=(img_height, img_width, 3),
+                                               include_top=False,
+                                               weights='imagenet')
 # base_model = tf.keras.applications.Xception(input_shape=(img_height, img_width, 3),
 #                                                include_top=False,
 #                                                weights='imagenet')
-base_model = tf.keras.applications.InceptionResNetV2(input_shape=(img_height, img_width, 3),
-                                               include_top=False,
-                                               weights='imagenet')
+# base_model = tf.keras.applications.InceptionResNetV2(input_shape=(img_height, img_width, 3),
+#                                                include_top=False,
+#                                                weights='imagenet')
+# base_model = tf.keras.applications.InceptionV3(input_shape=(img_height, img_width, 3),
+#                                                include_top=False,
+#                                                weights='imagenet')
 base_model.trainable = False
 base_model.summary()
 global_average_layer = keras.layers.GlobalAveragePooling2D()
@@ -83,7 +86,7 @@ train_datagen = ImageDataGenerator(
 test_datagen = ImageDataGenerator(rescale=1. / 255)
 
 train_generator = train_datagen.flow_from_directory(
-    '../../../../transfer learning/Data for project/cat/train',
+    '../../../../transfer learning/Data for project/dog/train',
     target_size=(img_height, img_width),
     batch_size=32,
     class_mode='categorical',
@@ -91,7 +94,7 @@ train_generator = train_datagen.flow_from_directory(
 )
 
 validation_generator = train_datagen.flow_from_directory(
-    '../../../../transfer learning/Data for project/cat/test',
+    '../../../../transfer learning/Data for project/dog/test',
     target_size=(img_height, img_width),
     batch_size=32,
     class_mode='categorical',
@@ -117,8 +120,8 @@ history = model.fit_generator(
     epochs=30,
     validation_data=validation_generator)
 
-modelPath = 'cat ' + 'InceptionResV2.h5'
-model.save(model_path + modelPath)
+modelPath = 'dog ' + 'MobileNetV2'
+model.save(model_path + modelPath + '.h5')
 
 # origin code
 # history = model.fit(x_train, y_train, validation_split=0.2, epochs=2, batch_size=16)
