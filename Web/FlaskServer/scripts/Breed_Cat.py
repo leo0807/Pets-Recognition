@@ -49,10 +49,11 @@ def predict():
             result = []
             for node_id in top_k:
                 cat_string = label_lines[node_id].capitalize().replace(' ', '_')
-                score = predictions[0][node_id]
+                score = round(predictions[0][node_id] * 100, 2)
                 result.append([cat_string, score])
                 # print('%s (score = %.5f)' % (human_string, score))
             prediction_ = pd.DataFrame(result, columns=['Breed', 'Probability'])
+            prediction_.Probability = [str(x) + '%' for x in prediction_.Probability]
             print(prediction_)
             # print("3 ", time.time() -start)
             return prediction_

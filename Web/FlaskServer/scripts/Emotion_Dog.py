@@ -23,7 +23,7 @@ detector = dlib.cnn_face_detection_model_v1(pathDet)
 # load model
 # global graph, sess
 graph = tf.get_default_graph()
-sess=tf.Session();
+sess=tf.Session()
 set_session(sess)
 
 model = load_model('Emotion_Dog/Dog_classifier.h5')
@@ -48,7 +48,7 @@ def predict():
         prediction = helper.predict_emotion(model, test_img)
         print(prediction)
 
-        return prediction
+        return prediction[:3]
 
 
 

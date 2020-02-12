@@ -20,6 +20,7 @@ pathCat = "Emotion_Cat/haarcascade_frontalcatface.xml"
 faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + pathCat)
 detector = dlib.cnn_face_detection_model_v1(pathDet)
 
+
 class No_Preprocessing:
 
     def __init__(self, img_width, img_height):
@@ -66,7 +67,10 @@ class No_Preprocessing:
 
         emotion = 'None'
 
-        prediction = model.predict(img)
+        prediction = model.predict(img)[0]
+        # ->
+        prediction = [round(x * 100, 2) for x in prediction]
+        print(prediction)
         prediction_ = np.argmax(prediction)
 
         if prediction_ == 0:
@@ -80,9 +84,9 @@ class No_Preprocessing:
         elif prediction_ == 4:
             emotion = 'Neutral'
 
-        d = {'emotion': ['Angry', 'Scared', 'Happy', 'Sad', 'Neutral'], 'prob': prediction[0]}
+        d = {'emotion': ['Angry', 'Scared', 'Happy', 'Sad', 'Neutral'], 'prob': prediction}
         df = pd.DataFrame(d, columns=['emotion', 'prob']).sort_values(by=['prob'], ascending=False)
-
+        df.prob = [str(x) + '%' for x in df.prob]
         return df
 
 
@@ -181,7 +185,6 @@ def cat_preprocess(path):
             to_csv_data = ' '.join(map(str, pi.flatten()))
             return to_csv_data
     return None
-
 
 
 def renameFile(path):
