@@ -54,4 +54,4 @@ def train(classify, model, version, train_generator, validation_generator, steps
 
 # ------------------------------------------------------------------
 if __name__ == "__main__":
-    train('cat', 'MobileNetV2', '_v1', plot=False)
+    train('cat', 'MobileNetV2', '_v1', train_generator, validation_generator, steps_per_epoch, plot=False)
