@@ -128,7 +128,7 @@ def cat_preprocess(path, savePath):
             rmo = cv2.rectangle(gray, (x, y), (x + w, y + h), (255, 255, 255), thickness=2)
             # prepare for prediction
             little = cv2.resize(image[y:y + h, x:x + w], (img_width, img_height))
-            checkPath(savePath + folderName)
+            # checkPath(savePath + folderName)
             cv2.imwrite(savePath + folderName + os.sep + filename + '.jpg', little)
             return little.flatten()
     return None
