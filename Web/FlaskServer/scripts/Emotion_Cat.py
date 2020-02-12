@@ -47,12 +47,7 @@ def predict():
         test_img = np.expand_dims(test_img, axis=0)
 
         prediction = helper.predict_emotion(model, test_img)
-        # prediction = model.predict(test_img)
-        # prediction = np.argmax(prediction)
-        # predict 3 most likely results
-        # top_k = 3
-        # top_k_idx = prediction.argsort()[::-1][0:top_k]
         print(prediction)
-        return prediction
+        return prediction[:3]
 
 

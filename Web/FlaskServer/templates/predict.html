@@ -39,7 +39,7 @@
               image: base64Image
         }
         console.log(message);
-        $.post("http://101.116.69.213/predict",JSON.stringify(message), function(response){
+        $.post("http://10.12.134.155:5000/predict",JSON.stringify(message), function(response){
             $("#emotion").text(response.emotion);
             $("#breed").text(response.breed);
             $("#pet").text(response.pet);

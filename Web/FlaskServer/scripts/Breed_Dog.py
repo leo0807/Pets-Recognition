@@ -36,25 +36,21 @@ def infer(img_raw):
         # start = time.time()
         probs = sess.run(tensors[consts.OUTPUT_TENSOR_NAME],
                          feed_dict={tensors[consts.INCEPTION_INPUT_TENSOR]: img_raw})
-
+        probability = probs.reshape(-1)
+        # ->
+        probability = [round(x*100, 2) for x in probability]
         # print("time 1 ", time.time()-start)
         breeds = one_hot_decoder(np.identity(consts.CLASSES_COUNT)).reshape(-1)
-        new_breeds = []
-        # for breed in breeds:
-        #     if '_' in breed:
-        #         theBreed = [name.capitalize() for name in breed.split('_')]
-        #         new_breeds.append(' '.join(theBreed))
-        #     else:
-        #         new_breeds.append(breed.capitalize())
         new_breeds = [breed.capitalize() for breed in breeds]
 
         # print(breeds)
         # print("time 2 ", time.time()-start)
         df = pd.DataFrame(data={'Breed': new_breeds,
-                                'Probability': probs.reshape(-1)})
+                                'Probability': probability})
 
-
-        return df.sort_values(['Probability'], ascending=False)
+        df = df.sort_values(['Probability'], ascending=False)
+        df.Probability = [str(x) + '%' for x in df.Probability]
+        return df
 
 
 def classify(resource_type, path):
