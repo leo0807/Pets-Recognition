@@ -1,14 +1,21 @@
 import tensorflow as tf
-from coding.training_part import util
-from coding.training_part import const
+import util
+import const
+import pandas as pd
 
 keras = tf.keras
 
+train_generator, validation_generator, steps_per_epoch = util.get_Classify('cat')
 
-def train(classify, model, version, save=True, csv=True, plot=True):
+
+def train(classify, model, version, train_generator, validation_generator, steps_per_epoch,
+          save=True, csv=True, plot=True):
     """
     training code for pet(cat and dog) emotion
 
+    :param steps_per_epoch: step per epoch
+    :param validation_generator: test data iterator
+    :param train_generator: train data iterator
     :param classify: cat or dog
     :param model: the name of pre-trained model
     :param version: the current version
@@ -17,16 +24,13 @@ def train(classify, model, version, save=True, csv=True, plot=True):
     :param save: if save the model
     """
     # classify = 'cat'  # by now only support 'cat' or 'dog'
-    train_data, validation_data = util.get_Classify(classify)
-    # load training and validation data
-    train_generator, validation_generator, steps_per_epoch = util.load_data(train_data, validation_data)
+
     # load pre-trained model from keras.application
     model, modelName = util.create_model(model)
     # compile model
     model.compile(optimizer=const.MODEL_OPTI,
                   loss=const.MODEL_LOSS,
                   metrics=['accuracy'])
-
     # fit the model
     history = model.fit_generator(
         train_generator,
@@ -41,7 +45,7 @@ def train(classify, model, version, save=True, csv=True, plot=True):
 
     # save model history to csv for further analyse
     if csv:
-        history.history.to_csv(const.MODEL_PATH + modelPath + '.csv')
+        pd.DataFrame(history.history).to_csv(const.MODEL_PATH + modelPath + '.csv')
 
     # summarize history for accuracy & loss
     if plot:
@@ -50,4 +54,4 @@ def train(classify, model, version, save=True, csv=True, plot=True):
 
 # ------------------------------------------------------------------
 if __name__ == "__main__":
-    train('cat', 'MobileNetV2', '_v2', plot=False)
+    train('cat', 'MobileNetV2', '_v1', plot=False)

@@ -119,6 +119,7 @@ def cat_preprocess(path, savePath):
             scaleFactor=1.05,
             minNeighbors=3,
             minSize=(60, 60),
+            # flags=cv2.CASCADE_DO_ROUGH_SEARCH
         )
         for (i, (x, y, w, h)) in enumerate(faces):
             print(x, y, w, h)
@@ -147,7 +148,7 @@ imagespath = '../Data for project/test/'
 # print(os.path.exists(folderPath))
 
 # testImage = '../../../../Data for project/dog/dog_neutral/dog_neutral_287.jpg'
-testImage = '../../../../Data for project/cat/cat_happy/cat_happy_1050.jpg'
+testImage = '../../../../Data for project/cat/cat_happy/cat_happy_1049.jpg'
 # dirpath, filedir = os.path.split(testImage)
 # filename, extend = os.path.splitext(filedir)
 # folderName = dirpath.split(os.sep)[-1]

@@ -2,7 +2,7 @@ import os
 import matplotlib.pyplot as plt
 import pandas as pd
 import tensorflow as tf
-from coding.training_part import const
+import const
 from keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 keras = tf.keras
@@ -104,7 +104,11 @@ def get_Classify(classify):
         train_data = None
         validation_data = None
         print("by now, we only support dog and cat, please try 'cat' and 'dog' ")
-    return train_data, validation_data
+    if train_data != None:
+        return load_data(train_data, validation_data)
+    else:
+        return None
+
 
 
 def MobileNetV2():
