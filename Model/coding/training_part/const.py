@@ -1,3 +1,4 @@
+import tensorflow as tf
 # size of images
 IMG_WIDTH = 200
 IMG_HEIGHT = 200
@@ -9,3 +10,5 @@ DOG_VALID_DATA = '../../../../transfer learning/Data for project/dog/test'
 CAT_TRAIN_DATA = '../../../../transfer learning/Data for project/cat/train'
 CAT_VALID_DATA = '../../../../transfer learning/Data for project/dog/test'
 BATCH_SIZE = 32
+MODEL_LOSS = 'categorical_crossentropy'
+MODEL_OPTI = tf.keras.optimizers.Adam()

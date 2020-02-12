@@ -13,8 +13,8 @@ def train(classify, model):
     # load pre-trained model from keras.application
     model, modelName = util.create_model(model)
     # compile model
-    model.compile(optimizer=tf.keras.optimizers.Adam(),
-                  loss='categorical_crossentropy',
+    model.compile(optimizer=const.MODEL_OPTI,
+                  loss=const.MODEL_LOSS,
                   metrics=['accuracy'])
 
     # fit the model
