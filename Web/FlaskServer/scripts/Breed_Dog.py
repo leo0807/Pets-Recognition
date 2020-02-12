@@ -40,13 +40,13 @@ def infer(img_raw):
         # print("time 1 ", time.time()-start)
         breeds = one_hot_decoder(np.identity(consts.CLASSES_COUNT)).reshape(-1)
         new_breeds = []
-        for breed in breeds:
-            if '_' in breed:
-                theBreed = [name.capitalize() for name in breed.split('_')]
-                new_breeds.append(' '.join(theBreed))
-            else:
-                new_breeds.append(breed.capitalize())
-        # new_breeds = [breed.replace('_', ' ').capitalize() for breed in breeds]
+        # for breed in breeds:
+        #     if '_' in breed:
+        #         theBreed = [name.capitalize() for name in breed.split('_')]
+        #         new_breeds.append(' '.join(theBreed))
+        #     else:
+        #         new_breeds.append(breed.capitalize())
+        new_breeds = [breed.capitalize() for breed in breeds]
 
         # print(breeds)
         # print("time 2 ", time.time()-start)
