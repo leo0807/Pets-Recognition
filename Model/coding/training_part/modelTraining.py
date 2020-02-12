@@ -5,13 +5,16 @@ from coding.training_part import const
 keras = tf.keras
 
 
-def train(classify, model, version):
+def train(classify, model, version, save=True, csv=True, plot=True):
     """
     training code for pet(cat and dog) emotion
 
     :param classify: cat or dog
     :param model: the name of pre-trained model
     :param version: the current version
+    :param plot: decide if need to plot & save images of acc and loss
+    :param csv: if save the history to csv
+    :param save: if save the model
     """
     # classify = 'cat'  # by now only support 'cat' or 'dog'
     train_data, validation_data = util.get_Classify(classify)
@@ -31,17 +34,20 @@ def train(classify, model, version):
         epochs=40,
         validation_data=validation_generator)
 
-    # save model
     modelPath = classify + ' ' + modelName + version
-    model.save(const.MODEL_PATH + modelPath + '.h5')
+    # save model
+    if save:
+        model.save(const.MODEL_PATH + modelPath + '.h5')
 
     # save model history to csv for further analyse
-    history.history.to_csv(const.MODEL_PATH + modelPath + '.csv')
+    if csv:
+        history.history.to_csv(const.MODEL_PATH + modelPath + '.csv')
 
     # summarize history for accuracy & loss
-    util.plotInfo(const.MODEL_PATH, modelPath, history)
+    if plot:
+        util.plotInfo(const.MODEL_PATH, modelPath, history)
 
 
 # ------------------------------------------------------------------
 if __name__ == "__main__":
-    train('cat', 'MobileNetV2', '_v2')
+    train('cat', 'MobileNetV2', '_v2', plot=False)
