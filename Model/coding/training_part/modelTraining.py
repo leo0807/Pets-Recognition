@@ -5,7 +5,14 @@ from coding.training_part import const
 keras = tf.keras
 
 
-def train(classify, model):
+def train(classify, model, version):
+    """
+    training code for pet(cat and dog) emotion
+
+    :param classify: cat or dog
+    :param model: the name of pre-trained model
+    :param version: the current version
+    """
     # classify = 'cat'  # by now only support 'cat' or 'dog'
     train_data, validation_data = util.get_Classify(classify)
     # load training and validation data
@@ -25,7 +32,7 @@ def train(classify, model):
         validation_data=validation_generator)
 
     # save model
-    modelPath = classify + ' ' + modelName
+    modelPath = classify + ' ' + modelName + version
     model.save(const.MODEL_PATH + modelPath + '.h5')
 
     # save model history to csv for further analyse
@@ -37,4 +44,4 @@ def train(classify, model):
 
 # ------------------------------------------------------------------
 if __name__ == "__main__":
-    train('cat', 'MobileNetV2')
+    train('cat', 'MobileNetV2', '_v2')
