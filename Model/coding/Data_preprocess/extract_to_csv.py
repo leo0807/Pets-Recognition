@@ -69,31 +69,33 @@ def dog_preprocess(path, savePath):
         # resize
         height, width, channels = orig.shape  # read size
         ratio = picSize / height
-        image = cv2.resize(orig, None, fx=ratio, fy=ratio)
+        img = cv2.resize(orig, None, fx=ratio, fy=ratio)
         # image = cv2.resize(orig, (img_width*2, img_height*2))
         # color gray
         # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         # detect face(s)
         start = time.time()
-        dets = detector(image, upsample_num_times=1)
+        dets = detector(img, upsample_num_times=1)
         print('detection time:', time.time() - start)
 
         for i, d in enumerate(dets):
             # save coordinates
-            x1 = max(int(d.rect.left() / ratio), 1)
-            y1 = max(int(d.rect.top() / ratio), 1)
-            x2 = min(int(d.rect.right() / ratio), width - 1)
-            y2 = min(int(d.rect.bottom() / ratio), height - 1)
-            print(x1, y1, x2, y2)
-            try:
-                little = cv2.resize(image[y1:y2, x1:x2], (img_width, img_height))
-                # checkPath(savePath + os.sep + folderName)
-                # cv2.imwrite(savePath + os.sep + folderName + os.sep + filename + '.jpg', little)
-                cv2.imwrite(savePath + filename + '.jpg', little)
-                print('saved:', savePath + filename + '.jpg')
-                return little.flatten()
-            except:
+            x1 = max(int(d.rect.left()), 1)
+            y1 = max(int(d.rect.top()), 1)
+            x2 = min(int(d.rect.right()), width - 1)
+            y2 = min(int(d.rect.bottom()), height - 1)
+            print(i, x1, y1, x2, y2)
+            little = cv2.resize(img[y1:y2, x1:x2], (img_width, img_height))
+            if os.path.exists(savePath + folderName + os.sep + filename + '.jpg'):
                 pass
+            else:
+                try:
+                    os.mkdir(savePath + folderName + os.sep)
+                except:
+                    pass
+                cv2.imwrite(savePath + folderName + os.sep + filename + '.jpg', little)
+            print('saved:', savePath + filename + '.jpg')
+            return little.flatten()
     return None
 
 
@@ -112,7 +114,7 @@ def cat_preprocess(path, savePath):
 
         # color gray
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        print('gray shape:', gray.shape)
+        # print('gray shape:', gray.shape)
         # detect face(s)
         faces = faceCascade.detectMultiScale(
             gray,
@@ -126,29 +128,25 @@ def cat_preprocess(path, savePath):
             rmo = cv2.rectangle(gray, (x, y), (x + w, y + h), (255, 255, 255), thickness=2)
             # prepare for prediction
             little = cv2.resize(image[y:y + h, x:x + w], (img_width, img_height))
-            # checkPath(savePath + os.sep + folderName)
-            cv2.imwrite(savePath + os.sep + folderName + os.sep + filename + '.jpg', little)
-            # cv2.imshow("little", little)
-            # cv2.imshow('rmo', rmo)
-            # cv2.waitKey(0)
-            # print(little.flatten())
+            checkPath(savePath + folderName)
+            cv2.imwrite(savePath + folderName + os.sep + filename + '.jpg', little)
             return little.flatten()
     return None
 
 # --------define dog or cat to classify--------
-classify = 'cat'
+classify = 'dog'
 
 images = []
 images.append(['emotion', 'pixels'])
 folderPath = '../../../../Data for project' + os.sep + classify
-savePath = '../../../../Data for project/new/' + classify
+savePath = '../../../../Data for project/new/' + classify + os.sep
 # imagespath = '../Data for project/dog/dog_neutral'
 imagespath = '../Data for project/test/'
 # print(os.getcwd())
 # print(os.path.exists(folderPath))
 
 # testImage = '../../../../Data for project/dog/dog_neutral/dog_neutral_287.jpg'
-testImage = '../../../../Data for project/cat/cat_happy/cat_happy_1049.jpg'
+testImage = '../../../../Data for project/cat/cat_happy/cat_happy_52.JPG'
 # dirpath, filedir = os.path.split(testImage)
 # filename, extend = os.path.splitext(filedir)
 # folderName = dirpath.split(os.sep)[-1]
@@ -156,21 +154,21 @@ testImage = '../../../../Data for project/cat/cat_happy/cat_happy_1049.jpg'
 # dog_preprocess(testImage, '../../../../Data for project/')
 
 
-cat_preprocess(testImage, savePath)
+# cat_preprocess(testImage, savePath)
 
-# for folders in os.listdir(folderPath):
-#     folder = folderPath + os.sep + folders
-#     for image in os.listdir(folder):
-#         print(image)
-#         ipath = folder + os.sep + image
-#         label = find_label(ipath)
-#         pixel = None
-#         if classify == 'dog':
-#             pixels = dog_preprocess(ipath, savePath)
-#         else:
-#             pixels = cat_preprocess(ipath, savePath)
-#         if label != -1 and pixels is not None:
-#             pixel = pixels
-#             images.append([label, pixel])
-# csvPath = '../../csv/' + classify + '_old_data_RGB' + '_V1' + '.csv'
-# write2csv(csvPath, images)
+for folders in os.listdir(folderPath):
+    folder = folderPath + os.sep + folders
+    for image in os.listdir(folder):
+        print(image)
+        ipath = folder + os.sep + image
+        label = find_label(ipath)
+        pixel = None
+        if classify == 'dog':
+            pixels = dog_preprocess(ipath, savePath)
+        else:
+            pixels = cat_preprocess(ipath, savePath)
+        if label != -1 and pixels is not None:
+            pixel = pixels
+            images.append([label, pixel])
+csvPath = '../../csv/' + classify + 'all_data' + '_V1' + '.csv'
+write2csv(csvPath, images)

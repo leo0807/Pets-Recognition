@@ -150,4 +150,5 @@ def face_recognition():
             break
 
 
-face_recognition()
+if __name__ == '__main__':
+    face_recognition()
