@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pandas as pd
 
@@ -68,12 +69,4 @@ class No_Preprocessing:
         return df
 
 
-def renameFile(path):
-    print('come into path:' + path)
-    fileList = os.listdir(path)
-    for file in fileList:
-        oldfilename = path + os.sep + file
-        newfilename = path + os.sep + file[:-4] + '.jpg'
-        os.rename(oldfilename, newfilename)
-        print(oldfilename + ' -> ' + newfilename)
-    print("done")
+

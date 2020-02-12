@@ -1,5 +1,4 @@
 import glob
-
 import pandas as pd
 
 csv1Path = 'prep_images_rotated.csv'

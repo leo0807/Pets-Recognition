@@ -119,7 +119,6 @@ def cat_preprocess(path, savePath):
             scaleFactor=1.05,
             minNeighbors=3,
             minSize=(60, 60),
-            # flags=8
         )
         for (i, (x, y, w, h)) in enumerate(faces):
             print(x, y, w, h)
@@ -156,21 +155,21 @@ testImage = '../../../../Data for project/cat/cat_happy/cat_happy_1050.jpg'
 # dog_preprocess(testImage, '../../../../Data for project/')
 
 
-# cat_preprocess(testImage, savePath)
+cat_preprocess(testImage, savePath)
 
-for folders in os.listdir(folderPath):
-    folder = folderPath + os.sep + folders
-    for image in os.listdir(folder):
-        print(image)
-        ipath = folder + os.sep + image
-        label = find_label(ipath)
-        pixel = None
-        if classify == 'dog':
-            pixels = dog_preprocess(ipath, savePath)
-        else:
-            pixels = cat_preprocess(ipath, savePath)
-        if label != -1 and pixels is not None:
-            pixel = pixels
-            images.append([label, pixel])
-csvPath = '../../csv/' + classify + '_old_data_RGB' + '_V1' + '.csv'
-write2csv(csvPath, images)
+# for folders in os.listdir(folderPath):
+#     folder = folderPath + os.sep + folders
+#     for image in os.listdir(folder):
+#         print(image)
+#         ipath = folder + os.sep + image
+#         label = find_label(ipath)
+#         pixel = None
+#         if classify == 'dog':
+#             pixels = dog_preprocess(ipath, savePath)
+#         else:
+#             pixels = cat_preprocess(ipath, savePath)
+#         if label != -1 and pixels is not None:
+#             pixel = pixels
+#             images.append([label, pixel])
+# csvPath = '../../csv/' + classify + '_old_data_RGB' + '_V1' + '.csv'
+# write2csv(csvPath, images)
