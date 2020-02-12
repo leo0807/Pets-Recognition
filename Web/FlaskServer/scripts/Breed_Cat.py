@@ -48,7 +48,7 @@ def predict():
             top_k = top_k[0:3]
             result = []
             for node_id in top_k:
-                cat_string = label_lines[node_id].capitalize()
+                cat_string = label_lines[node_id].capitalize().replace(' ', '_')
                 score = predictions[0][node_id]
                 result.append([cat_string, score])
                 # print('%s (score = %.5f)' % (human_string, score))
