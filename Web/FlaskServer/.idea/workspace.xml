@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab8ba752-35ac-40fc-a1ee-2b00067476ef" name="Default Changelist" comment="" />
+    <list default="true" id="ab8ba752-35ac-40fc-a1ee-2b00067476ef" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/static/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/bootstrap.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/bootstrap.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/fileinput.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/fileinput.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/cat_smile.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/dog_smile.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/fileinput.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/fileinput.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/jQuery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/homePage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/FlaskServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FlaskServer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/predict.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/predict.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +48,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="ProjectId" id="1XETiHSLKoQSQKDBcduGdRDyOkD" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -48,6 +71,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\13964\OneDrive\project\researchProject\git\Pets-Recognition\Web\FlaskServer" />
       <recent name="G:\PythonFIle\deploy\FlaskServer\Emotion_Cat" />
       <recent name="C:\Users\13964\OneDrive\project\researchProject\FlaskServer" />
       <recent name="C:\Users\13964\OneDrive\project\researchProject\FlaskServer\templates" />
@@ -55,7 +79,7 @@
   </component>
   <component name="RunManager">
     <configuration name="FlaskServer" type="Python.FlaskServer">
-      <option name="additionalOptions" value="--host=192.168.1.248  --port=5000" />
+      <option name="additionalOptions" value="--host=10.1.1.185 --port=5000" />
       <module name="FlaskServer" />
       <option name="target" value="$PROJECT_DIR$/app.py" />
       <option name="targetType" value="PATH" />
@@ -109,6 +133,7 @@
       <workItem from="1581248803609" duration="2942000" />
       <workItem from="1581255992042" duration="657000" />
       <workItem from="1581294704677" duration="295000" />
+      <workItem from="1581499536745" duration="9643000" />
     </task>
     <servers />
   </component>
@@ -116,51 +141,51 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="198" y="129" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580729597259">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="141" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581507462112">
+      <screen x="0" y="0" width="1368" height="912" />
     </state>
-    <state x="141" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1368.912@0.0.1368.912" timestamp="1580728676539" />
+    <state x="141" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1368.912@0.0.1368.912" timestamp="1581507462111" />
     <state x="198" y="129" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729597259" />
-    <state x="503" y="561" key="FileChooserDialogImpl" timestamp="1581000426389">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="359" y="424" key="FileChooserDialogImpl" timestamp="1581499872110">
+      <screen x="0" y="0" width="1368" height="912" />
     </state>
-    <state x="359" y="424" key="FileChooserDialogImpl/0.0.1368.912@0.0.1368.912" timestamp="1580638905419" />
+    <state x="359" y="424" key="FileChooserDialogImpl/0.0.1368.912@0.0.1368.912" timestamp="1581499872110" />
     <state x="503" y="561" key="FileChooserDialogImpl/0.0.1920.1050/-1920.7.1920.1050@0.0.1920.1050" timestamp="1581000426389" />
     <state x="-1417" y="569" key="FileChooserDialogImpl/0.0.1920.1050/-1920.8.1920.1050@-1920.8.1920.1050" timestamp="1580741321224" />
     <state x="503" y="561" key="FileChooserDialogImpl/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729533450" />
     <state x="239" y="767" key="FileChooserDialogImpl/0.0.912.1368@0.0.912.1368" timestamp="1580707281459" />
-    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1580740632953">
-      <screen x="-1920" y="8" width="1920" height="1050" />
+    <state width="1326" height="163" key="GridCell.Tab.0.bottom" timestamp="1581512437410">
+      <screen x="0" y="0" width="1368" height="912" />
     </state>
-    <state width="1326" height="228" key="GridCell.Tab.0.bottom/0.0.1368.912@0.0.1368.912" timestamp="1580728708347" />
+    <state width="1326" height="163" key="GridCell.Tab.0.bottom/0.0.1368.912@0.0.1368.912" timestamp="1581512437410" />
     <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1920.8.1920.1050@-1920.8.1920.1050" timestamp="1580740632953" />
     <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729824448" />
     <state width="869" height="158" key="GridCell.Tab.0.bottom/0.0.912.1368@0.0.912.1368" timestamp="1580643727133" />
-    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1580740632953">
-      <screen x="-1920" y="8" width="1920" height="1050" />
+    <state width="1326" height="163" key="GridCell.Tab.0.center" timestamp="1581512437409">
+      <screen x="0" y="0" width="1368" height="912" />
     </state>
-    <state width="1326" height="228" key="GridCell.Tab.0.center/0.0.1368.912@0.0.1368.912" timestamp="1580728708346" />
+    <state width="1326" height="163" key="GridCell.Tab.0.center/0.0.1368.912@0.0.1368.912" timestamp="1581512437409" />
     <state width="1877" height="285" key="GridCell.Tab.0.center/0.0.1920.1050/-1920.8.1920.1050@-1920.8.1920.1050" timestamp="1580740632953" />
     <state width="1877" height="285" key="GridCell.Tab.0.center/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729824446" />
     <state width="869" height="158" key="GridCell.Tab.0.center/0.0.912.1368@0.0.912.1368" timestamp="1580643727133" />
-    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1580740632953">
-      <screen x="-1920" y="8" width="1920" height="1050" />
+    <state width="1326" height="163" key="GridCell.Tab.0.left" timestamp="1581512437408">
+      <screen x="0" y="0" width="1368" height="912" />
     </state>
-    <state width="1326" height="228" key="GridCell.Tab.0.left/0.0.1368.912@0.0.1368.912" timestamp="1580728708345" />
+    <state width="1326" height="163" key="GridCell.Tab.0.left/0.0.1368.912@0.0.1368.912" timestamp="1581512437408" />
     <state width="1877" height="285" key="GridCell.Tab.0.left/0.0.1920.1050/-1920.8.1920.1050@-1920.8.1920.1050" timestamp="1580740632953" />
     <state width="1877" height="285" key="GridCell.Tab.0.left/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729824445" />
     <state width="869" height="158" key="GridCell.Tab.0.left/0.0.912.1368@0.0.912.1368" timestamp="1580643727133" />
-    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1580740632953">
-      <screen x="-1920" y="8" width="1920" height="1050" />
+    <state width="1326" height="163" key="GridCell.Tab.0.right" timestamp="1581512437409">
+      <screen x="0" y="0" width="1368" height="912" />
     </state>
-    <state width="1326" height="228" key="GridCell.Tab.0.right/0.0.1368.912@0.0.1368.912" timestamp="1580728708346" />
+    <state width="1326" height="163" key="GridCell.Tab.0.right/0.0.1368.912@0.0.1368.912" timestamp="1581512437409" />
     <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.8.1920.1050@-1920.8.1920.1050" timestamp="1580740632953" />
     <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729824447" />
     <state width="869" height="158" key="GridCell.Tab.0.right/0.0.912.1368@0.0.912.1368" timestamp="1580643727133" />
-    <state x="0" y="228" key="SettingsEditor" timestamp="1580729548844">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="242" y="173" key="SettingsEditor" timestamp="1581499918419">
+      <screen x="0" y="0" width="1368" height="912" />
     </state>
-    <state x="0" y="198" key="SettingsEditor/0.0.1368.912@0.0.1368.912" timestamp="1580699154396" />
+    <state x="242" y="173" key="SettingsEditor/0.0.1368.912@0.0.1368.912" timestamp="1581499918419" />
     <state x="0" y="228" key="SettingsEditor/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729548844" />
     <state x="0" y="654" key="SettingsEditor/0.0.912.1368@0.0.912.1368" timestamp="1580614600959" />
     <state x="199" y="742" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration" timestamp="1580614599818">
@@ -177,6 +202,6 @@
     <state x="347" y="197" width="672" height="678" key="search.everywhere.popup/0.0.1368.912@0.0.1368.912" timestamp="1580697723198" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/FlaskServer$FlaskServer.coverage" NAME="FlaskServer Coverage Results" MODIFIED="1580740612901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/FlaskServer$FlaskServer.coverage" NAME="FlaskServer Coverage Results" MODIFIED="1581512437300" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
