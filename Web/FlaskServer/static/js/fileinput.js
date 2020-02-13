@@ -5472,7 +5472,7 @@
         showConsoleLogs: true,
         browseOnZoneClick: false,
         autoReplace: false,
-        autoOrientImage: function () { // applicable for JPEG images only and non ios safari
+        autoOrientImage: function () { // applicable for JPEG img only and non ios safari
             var ua = window.navigator.userAgent, webkit = !!ua.match(/WebKit/i),
                 iOS = !!ua.match(/iP(od|ad|hone)/i), iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
             return !iOSSafari;
