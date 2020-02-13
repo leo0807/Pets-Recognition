@@ -41,6 +41,29 @@
             color: dimgray;
             margin-left: 20px;
         }
+        .file-preview-thumbnails{
+            margin: 10%;
+            height: 80%;
+        }
+        .krajee-default.file-preview-frame{
+            margin: 2%;
+            height: 96%;
+            width: 96%;
+        }
+        .krajee-default.file-preview-frame .kv-file-content{
+            width: 100%;
+            height: 81%;
+        }
+        .krajee-default.file-preview-frame .file-thumbnail-footer{
+            height: 40px;
+        }
+        .file-preview-image{
+            width: 88% !important;
+            height: 88% !important;
+            margin: 6%;
+            object-fit: contain;
+        }
+
     </style>
 
     <script src="/static/js/jQuery.min.js"></script>
@@ -70,11 +93,11 @@
                  <input id="file-input" type="file" class="file input-lg" data-preview-file-type="text">
         </div>
 
-        <!-- images -->
+        <!-- img -->
         <div class="col-lg-5 col-md-5 col-sm-8 col-sm-8" style="left: 58%; align-self: center; position: absolute; z-index: -1" id="div_images">
-            <img src="/static/images/dog_smile.jpg" alt="dog image" class="img-thumbnail"
+            <img src="/static/img/dog_smile.jpg" alt="dog image" class="img-thumbnail"
                  style=" transform: rotate(10deg); width: 540px; height: 600px; position: absolute; z-index: -1">
-            <img src="/static/images/cat_smile.jpg" alt="cat image" class="img-thumbnail"
+            <img src="/static/img/cat_smile.jpg" alt="cat image" class="img-thumbnail"
                  style="transform: rotate(350deg); width: 340px; height: 400px; margin-top: 300px; position: absolute; left: -70px">
         </div>
 
@@ -84,7 +107,7 @@
             <!--breed prediction-->
             <div class="text_box">
                 <div class="text_box_title">
-                    <span>Dog Breed</span>
+                    <span id="title_Breeed"></span>
                     <hr>
                 </div>
                 <div class="text_box_body">
@@ -106,7 +129,7 @@
             <!--emotion prediction-->
             <div class="text_box" style="margin-top: 20%">
                 <div class="text_box_title">
-                    <span>Dog Emotion</span>
+                    <span id="title_emotion"></span>
                     <hr>
                 </div>
                 <div class="text_box_body">
@@ -124,26 +147,27 @@
                     </p>
                 </div>
             </div>
-
-
         </div>
-
 
     </div>
 </div>
 
+      <!-- loading gif-->
+      <img src="static/img/loading-sm.gif" id="loading_image" alt="loading"
+           style="position: absolute; left: 73%; top: 48%; z-index: 2; width: 25px">
 
 <script>
     // file input plugin
    $("#file-input").fileinput({'showUpload':true, 'previewFileType':'any'});
-   // hide prediction at beginning
+   // hide prediction and loading image at beginning
     $("#div_prediction").fadeOut(0);
+    $("#loading_image").fadeOut(0);
 
 
    //when click upload
         $('.fileinput-upload-button').click(function (event) {
             $('#div_images').fadeOut(1000);
-            $("#div_prediction").fadeIn(1500);
+            $('#loading_image').fadeIn(1500);
             sendMessage();
         });
 
@@ -167,11 +191,23 @@
               image: base64Image
              }
         console.log(message);
-        $.post("http://10.1.1.185:5000/predict",JSON.stringify(message), function(response){// when received response
-            $("#pet").text(response.pet);
+        $.post("http://10.12.147.147:5000/predict",JSON.stringify(message), function(response){// when received response
+            $('#loading_image').fadeOut(300);
+            $("#div_prediction").fadeIn(1500);
+
+
+            if("Cat" === response.pet){
+                $("#title_Breeed").text("Cat Breed");
+                $("#title_emotion").text("Cat emotion");
+            }else {
+                $("#title_Breeed").text("Dog Breed");
+                $("#title_emotion").text("Dog emotion");
+            }
+
+
+            //set breed information
             var breedMsg = response.breed;
             var breedDetalis = breedMsg.split("\n");
-
             $("#breed_title1").text(breedDetalis[0].trim().replace(" +", " ").split(" ")[0] + " :");
             $("#breed_title2").text(breedDetalis[1].trim().replace(" +", " ").split(" ")[0] + " :");
             $("#breed_title3").text(breedDetalis[2].trim().replace(" +", " ").split(" ")[0] + " :");
@@ -179,10 +215,9 @@
             $("#breed_body2").text(breedDetalis[1].trim().replace(" +", " ").split("  ")[1]);
             $("#breed_body3").text(breedDetalis[2].trim().replace(" +", " ").split("  ")[1]);
 
-
+            //set emotion information
             var emotionMsg =response.emotion;
             var emotionDetails = emotionMsg.split("\n");
-
             $("#emotion_title1").text(emotionDetails[0].trim().replace(" +", " ").split(" ")[0] + " :");
             $("#emotion_title2").text(emotionDetails[1].trim().replace(" +", " ").split(" ")[0] + " :");
             $("#emotion_title3").text(emotionDetails[2].trim().replace(" +", " ").split(" ")[0] + " :");
