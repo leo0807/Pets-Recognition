@@ -1,38 +1,16 @@
 import os
+import helper
 
-originPath = '../../../../Data for project/dog/'
-foldersPath = '../../../../Data for project/new/dog/'
+originPath = '../../../../Data for project/cat/'
+foldersPath = '../../../../Data for project/new/cat/'
 print(os.path.exists(foldersPath))
-def walkPath(path):
-    paths = []
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            filepath = os.path.join(root, file)
-            paths.append(filepath)
-    return paths, len(paths)
 
 
-cat_after, count = walkPath(foldersPath)
-cat_before, count_0 = walkPath(originPath)
+
+cat_after, count = helper.walkPath(foldersPath)
+cat_before, count_0 = helper.walkPath(originPath)
 print(count)
 print(count/count_0)
-
-
-
-# for folders in os.listdir(folderPath):
-#     folder = folderPath + os.sep + folders
-#     for image in os.listdir(folder):
-#         print(image)
-#         ipath = folder + os.sep + image
-#         label = find_label(ipath)
-#         pixel = None
-#         if classify == 'dog':
-#             pixels = dog_preprocess(ipath, savePath)
-#         else:
-#             pixels = cat_preprocess(ipath, savePath)
-#         if label != -1 and pixels is not None:
-#             pixel = pixels
-#             images.append([label, pixel])
 
 
 def pad_image(image, target_size):
