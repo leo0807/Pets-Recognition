@@ -178,6 +178,22 @@ def InceptionV3():
     return model
 
 
+def VGG19():
+    base_model = tf.keras.applications.VGG19(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
+                                                   include_top=False,
+                                                   weights='imagenet')
+    base_model.trainable = False
+    base_model.summary()
+    global_average_layer = keras.layers.GlobalAveragePooling2D()
+    output_layer = keras.layers.Dense(5, activation='sigmoid')
+    model = keras.Sequential([
+        base_model,
+        global_average_layer,
+        output_layer
+    ])
+    return model
+
+
 def create_model(modelName='MobileNetV2'):
     """
     create one of four models
