@@ -30,7 +30,7 @@ class No_Preprocessing:
     def extract_and_prepare_pixels(self, pixels):
         """
         Takes in a string (pixels) that has space separated integer values and returns an array which includes the
-        pixels for all images.
+        pixels for all img.
         """
         pixels_as_list = [item[0] for item in pixels.values.tolist()]
         np_image_array = []
