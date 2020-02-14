@@ -11,5 +11,5 @@ CAT_TRAIN_DATA = '../../../../Data for project/new/cat/train'
 CAT_VALID_DATA = '../../../../Data for project/new/dog/test'
 BATCH_SIZE = 32
 MODEL_LOSS = 'categorical_crossentropy'
-MODEL_OPTI = tf.keras.optimizers.Adam()
-EPOCH = 50
+MODEL_OPTIMISER = tf.keras.optimizers.Adam()
+EPOCH = 40

@@ -169,12 +169,15 @@ def InceptionV3():
     base_model.trainable = False
     base_model.summary()
     global_average_layer = keras.layers.GlobalAveragePooling2D()
+    x = keras.layers.Dense(1024, activation='relu')
     output_layer = keras.layers.Dense(5, activation='sigmoid')
     model = keras.Sequential([
         base_model,
         global_average_layer,
+        x,
         output_layer
     ])
+
     return model
 
 
@@ -190,6 +193,12 @@ def VGG19():
         global_average_layer,
         output_layer
     ])
+    # model1 = keras.layers.Flatten()(base_model.output1)
+    # model1 = keras.layers.Dense(4096, activation='relu', name='fc1')(model1)
+    # model1 = keras.layers.Dense(4096, activation='relu', name='fc2')(model1)
+    # model1 = keras.layers.Dropout(0.5)(model1)
+    # model1 = keras.layers.Dense(10, activation='softmax', name='prediction')(model1)
+    # model = keras.models.Model(base_model.input, model1, name='vgg19_pretrain')
     return model
 
 
@@ -207,6 +216,8 @@ def create_model(modelName='MobileNetV2'):
         return InceptionV3(), modelName
     elif 'InceptionResNet' in modelName:
         return InceptionResNetV2(), modelName
+    elif 'VGG19' in modelName:
+        return VGG19(), modelName
     else:
         print('error, no such a model')
         return None, None
