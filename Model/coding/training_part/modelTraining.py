@@ -61,7 +61,7 @@ if __name__ == "__main__":
     Xception = Process(target=train(Pet, 'Xception', version, plot=False))
     InceptionResNetV2 = Process(target=train(Pet, 'InceptionResNetV2', version, plot=False))
     InceptionV3 = Process(target=train(Pet, 'InceptionV3', version, plot=False))
-    VGG19 = Process(target=train(Pet, 'VGG19', version, plot=False))
+    # VGG19 = Process(target=train(Pet, 'VGG19', version, plot=False))
 
     MobileNetV2.start()
     MobileNetV2.join()
@@ -71,5 +71,5 @@ if __name__ == "__main__":
     InceptionV3.join()
     InceptionResNetV2.start()
     InceptionResNetV2.join()
-    VGG19.start()
-    VGG19.join()
+    # VGG19.start()
+    # VGG19.join()

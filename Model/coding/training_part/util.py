@@ -180,8 +180,7 @@ def InceptionV3():
 
 def VGG19():
     base_model = tf.keras.applications.VGG19(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
-                                                   include_top=False,
-                                                   weights='imagenet')
+                                                   include_top=False, weights='imagenet', classes=5)
     base_model.trainable = False
     base_model.summary()
     global_average_layer = keras.layers.GlobalAveragePooling2D()
