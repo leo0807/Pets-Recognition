@@ -215,6 +215,24 @@ def PetProcess(Pet, imagePath, savePath):
             print('error, we only support cat and dog images preprocess')
             return None
 
+        # print('gray shape:', gray.shape)
+        # detect face(s)
+        faces = faceCascade.detectMultiScale(
+            gray,
+            scaleFactor=1.05,
+            minNeighbors=3,
+            minSize=(60, 60),
+            # flags=cv2.CASCADE_DO_ROUGH_SEARCH
+        )
+        for (i, (x, y, w, h)) in enumerate(faces):
+            print(x, y, w, h)
+            rmo = cv2.rectangle(gray, (x, y), (x + w, y + h), (255, 255, 255), thickness=2)
+            # prepare for prediction
+            little = cv2.resize(image[y:y + h, x:x + w], (img_width, img_height))
+            # checkPath(savePath + folderName)
+            cv2.imwrite(savePath + folderName + os.sep + filename + '.jpg', little)
+            return little.flatten()
+    return None
 
 # --------define dog or cat to classify--------
 classify = 'dog'

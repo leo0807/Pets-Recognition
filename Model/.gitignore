@@ -1,0 +1,4 @@
+*.DS_Store
+coding/.idea/
+models/
+coding/training_part/__pycache__/
