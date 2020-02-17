@@ -1,16 +1,21 @@
 import os
 import helper
 
-originPath = '../../../../Data for project/cat/'
-foldersPath = '../../../../Data for project/new/cat/'
+originPath = '../../../../Data for project/dog/'
+classes = ['dog_angry', 'dog_happy', 'dog_fearful', 'dog_sadness', 'dog_neutral']
+foldersPath = '../../../../Data for project/new/dog/'
 print(os.path.exists(foldersPath))
 
 
-
-cat_after, count = helper.walkPath(foldersPath)
-cat_before, count_0 = helper.walkPath(originPath)
-print(count)
-print(count/count_0)
+after, count = helper.walkPath(foldersPath)
+before, count_b = helper.walkPath(originPath)
+total = 0
+# for i in range(len(classes)):
+#     _, count = helper.walkPath(originPath + classes[i] + os.sep)
+#     total += count
+#
+# print(total)
+# print(count/(count_b-total))
 
 
 def pad_image(image, target_size):

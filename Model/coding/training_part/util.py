@@ -137,7 +137,7 @@ def Xception(connected=False, dropout=False, dense=1024):
     base_model.trainable = False
     # base_model.summary()
     global_average_layer = keras.layers.GlobalAveragePooling2D()
-    x = keras.layers.Dense(dense, activation='relu')
+    x = keras.layers.Dense(dense, activation='relu', kernal_initializer='he_uniform')
     y = keras.layers.Dropout(0.5)
     output_layer = keras.layers.Dense(5, 'softmax')
     model = keras.Sequential()
