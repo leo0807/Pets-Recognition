@@ -55,10 +55,9 @@ if __name__ == "__main__":
     # version = '_v2_3layers'
     tf.keras.backend.clear_session()
     #    MobileNetV2 = Process(target=train(Pet, 'MobileNetV2', version, plot=False))
-       Xception = Process(target=train(Pet, 'Xception', '_connected4096_HEUNIFORM',
-                                         plot=False, connected=True, dropout=False, dense=4096))
-       Xception.start()
-       Xception.join()
+    Xception = Process(target=train(Pet, 'Xception', '_connected4096_HE_UNIFORM', plot=False, connected=True, dropout=False, dense=4096))
+    Xception.start()
+    Xception.join()
     #    Xception2 = Process(target=train(Pet, 'Xception', '_connected1024_dropout',
     #                                     plot=False, connected=True, dropout=True, dense=1024))
     #    Xception2.start()
@@ -86,3 +85,4 @@ if __name__ == "__main__":
     #                              plot=False, connected=True, dropout=False, dense=1024))
     # VGG19.start()
     # VGG19.join()
+

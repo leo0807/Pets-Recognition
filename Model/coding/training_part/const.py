@@ -12,6 +12,6 @@ CAT_VALID_DATA = '../../../../Data for project/new/dog/test'
 BATCH_SIZE = 64
 MODEL_LOSS = 'categorical_crossentropy'
 MODEL_OPTIMISER = tf.keras.optimizers.Adam()
-EPOCH = 25
+EPOCH = 20
 METRICS = ['mae', 'accuracy']
 DENSE = 1024
