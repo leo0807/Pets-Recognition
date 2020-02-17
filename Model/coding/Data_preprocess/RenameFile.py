@@ -1,6 +1,4 @@
 import os
-
-
 def renameFile(path):
     print('come into path:' + path)
     fileList = os.listdir(path)
@@ -33,16 +31,7 @@ def renameFile(path):
 #             renameFile(imagespath)
 # --------------------------------------------------- #
 
-# path = '../../../../Data for project/cat/'
-# for folder in os.listdir(path):
-#     if 'cat' in folder and '.DS' not in folder:
-#         for file in os.listdir(path + os.sep + folder):
-#             old_filePath = path + os.sep + folder + os.sep + file
-#             new_filePath = path + os.sep + folder + os.sep + file[:-4] + '.jpg'
-#             os.rename(old_filePath, new_filePath)
-#             print(old_filePath + ' >>>> ' + new_filePath)
-
-import re
+# remove files already existed
 path = '../../../../Data for project/new/cat'
 origin = '../../../../Data for project/cat'
 for folder in os.listdir(path):

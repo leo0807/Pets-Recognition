@@ -68,6 +68,7 @@ class No_Preprocessing:
 
         return df
 
+
 def walkPath(imgpath, td=True):
     paths = []
     for root, dirs, files in os.walk(imgpath, topdown=td):
