@@ -121,7 +121,7 @@ def MobileNetV2():
     base_model.trainable = False
     base_model.summary()
     global_average_layer = keras.layers.GlobalAveragePooling2D()
-    output_layer = keras.layers.Dense(5, activation='sigmoid')
+    output_layer = keras.layers.Dense(5, 'softmax')
     model = keras.Sequential([
         base_model,
         global_average_layer,
@@ -130,30 +130,35 @@ def MobileNetV2():
     return model
 
 
-def Xception():
+def Xception(connected=False, dropout=False, dense=1024):
     base_model = tf.keras.applications.Xception(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
                                                 include_top=False,
                                                 weights='imagenet')
     base_model.trainable = False
-    base_model.summary()
+    # base_model.summary()
     global_average_layer = keras.layers.GlobalAveragePooling2D()
-    output_layer = keras.layers.Dense(5, activation='sigmoid')
-    model = keras.Sequential([
-        base_model,
-        global_average_layer,
-        output_layer
-    ])
+    x = keras.layers.Dense(dense, activation='relu')
+    y = keras.layers.Dropout(0.5)
+    output_layer = keras.layers.Dense(5, 'softmax')
+    model = keras.Sequential()
+    model.add(base_model)
+    model.add(global_average_layer)
+    if connected:
+        model.add(x)
+    if dropout:
+        model.add(y)
+    model.add(output_layer)
     return model
 
 
-def InceptionResNetV2():
+def InceptionResNetV2(activation='softmax'):
     base_model = tf.keras.applications.InceptionResNetV2(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
                                                          include_top=False,
                                                          weights='imagenet')
     base_model.trainable = False
     base_model.summary()
     global_average_layer = keras.layers.GlobalAveragePooling2D()
-    output_layer = keras.layers.Dense(5, activation='sigmoid')
+    output_layer = keras.layers.Dense(5, activation)
     model = keras.Sequential([
         base_model,
         global_average_layer,
@@ -162,7 +167,7 @@ def InceptionResNetV2():
     return model
 
 
-def InceptionV3():
+def InceptionV3(activation='softmax'):
     base_model = tf.keras.applications.InceptionV3(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
                                                    include_top=False,
                                                    weights='imagenet')
@@ -170,7 +175,7 @@ def InceptionV3():
     base_model.summary()
     global_average_layer = keras.layers.GlobalAveragePooling2D()
     x = keras.layers.Dense(1024, activation='relu')
-    output_layer = keras.layers.Dense(5, activation='sigmoid')
+    output_layer = keras.layers.Dense(5, activation)
     model = keras.Sequential([
         base_model,
         global_average_layer,
@@ -181,28 +186,27 @@ def InceptionV3():
     return model
 
 
-def VGG19():
+def VGG19(connected=False, dropout=False, dense=1024):
     base_model = tf.keras.applications.VGG19(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
                                                    include_top=False, weights='imagenet', classes=5)
     base_model.trainable = False
     base_model.summary()
     global_average_layer = keras.layers.GlobalAveragePooling2D()
-    output_layer = keras.layers.Dense(5, activation='sigmoid')
-    model = keras.Sequential([
-        base_model,
-        global_average_layer,
-        output_layer
-    ])
-    # model1 = keras.layers.Flatten()(base_model.output1)
-    # model1 = keras.layers.Dense(4096, activation='relu', name='fc1')(model1)
-    # model1 = keras.layers.Dense(4096, activation='relu', name='fc2')(model1)
-    # model1 = keras.layers.Dropout(0.5)(model1)
-    # model1 = keras.layers.Dense(10, activation='softmax', name='prediction')(model1)
-    # model = keras.models.Model(base_model.input, model1, name='vgg19_pretrain')
+    x = keras.layers.Dense(dense, activation='relu')
+    y = keras.layers.Dropout(0.5)
+    output_layer = keras.layers.Dense(5, 'softmax')
+    model = keras.Sequential()
+    model.add(base_model)
+    model.add(global_average_layer)
+    if connected:
+        model.add(x)
+    if dropout:
+        model.add(y)
+    model.add(output_layer)
     return model
 
 
-def create_model(modelName='MobileNetV2'):
+def create_model(modelName='MobileNetV2', connected=False, dropout=False, dense=1024):
     """
     create one of four models
     :param modelName:
@@ -211,13 +215,13 @@ def create_model(modelName='MobileNetV2'):
     if 'Mobile' in modelName:
         return MobileNetV2(), modelName
     elif 'Xception' in modelName:
-        return Xception(), modelName
+        return Xception(connected, dropout, dense), modelName
     elif 'InceptionV3' in modelName:
         return InceptionV3(), modelName
     elif 'InceptionResNet' in modelName:
         return InceptionResNetV2(), modelName
     elif 'VGG19' in modelName:
-        return VGG19(), modelName
+        return VGG19(connected, dropout, dense), modelName
     else:
         print('error, no such a model')
         return None, None
@@ -232,8 +236,12 @@ def load_data(trainPath, validationPath):
     """
     train_datagen = ImageDataGenerator(
         rescale=1. / 255,
+       # rotation_range=0.2,
+       # height_shift_range=0.1,
+       # width_shift_range=0.1,
         shear_range=0.2,
         zoom_range=0.2,
+       # brightness_range=[0.7, 1.3],
         horizontal_flip=True)
 
     test_datagen = ImageDataGenerator(rescale=1. / 255)

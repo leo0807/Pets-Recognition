@@ -4,11 +4,10 @@ import const
 import pandas as pd
 from multiprocessing import Process
 
-
 keras = tf.keras
 
 
-def train(classify, model, version, save=True, csv=True, plot=True):
+def train(classify, model, version, save=True, csv=True, plot=True, connected=False, dropout=False, dense=1024):
     """
     training code for pet(cat and dog) emotion
     :param classify: cat or dog
@@ -21,12 +20,13 @@ def train(classify, model, version, save=True, csv=True, plot=True):
     # classify = 'cat'  # by now only support 'cat' or 'dog'
 
     # load pre-trained model from keras.application
+    print('now is running: ', classify, ' ', model, ' ', version)
     train_generator, validation_generator, steps_per_epoch = util.get_Classify(classify)
-    model, modelName = util.create_model(model)
+    model, modelName = util.create_model(model, connected, dropout, dense)
     # compile model
     model.compile(optimizer=const.MODEL_OPTIMISER,
                   loss=const.MODEL_LOSS,
-                  metrics=['accuracy'])
+                  metrics=const.METRICS)
     # fit the model
     history = model.fit(
         train_generator,
@@ -34,10 +34,7 @@ def train(classify, model, version, save=True, csv=True, plot=True):
         epochs=const.EPOCH,
         validation_data=validation_generator)
 
-    modelPath = classify + ' ' + modelName + version
-    # save model
-    if save:
-        model.save(const.MODEL_PATH + modelPath + '.h5')
+    modelPath = classify + '_' + modelName + version
 
     # save model history to csv for further analyse
     if csv:
@@ -47,23 +44,45 @@ def train(classify, model, version, save=True, csv=True, plot=True):
     if plot:
         util.plotInfo(const.MODEL_PATH, modelPath, history)
 
+    # save model
+    if save:
+        model.save(const.MODEL_PATH + modelPath + '.h5')
+
 
 # ------------------------------------------------------------------
 if __name__ == "__main__":
     Pet = 'cat'
-    version = '_v2'
-    MobileNetV2 = Process(target=train(Pet, 'MobileNetV2', version, plot=False))
-    Xception = Process(target=train(Pet, 'Xception', version, plot=False))
-    InceptionResNetV2 = Process(target=train(Pet, 'InceptionResNetV2', version, plot=False))
-    InceptionV3 = Process(target=train(Pet, 'InceptionV3', version, plot=False))
-    VGG19 = Process(target=train(Pet, 'VGG19', version, plot=False))
-    MobileNetV2.start()
-    MobileNetV2.join()
-    Xception.start()
-    Xception.join()
-    InceptionV3.start()
-    InceptionV3.join()
-    InceptionResNetV2.start()
-    InceptionResNetV2.join()
+    version = '_v2_3layers'
+    tf.keras.backend.clear_session()
+    #    MobileNetV2 = Process(target=train(Pet, 'MobileNetV2', version, plot=False))
+    #    Xception1 = Process(target=train(Pet, 'Xception', '_connected1024',
+    #                                      plot=False, connected=True, dropout=False, dense=1024))
+    #    Xception1.start()
+    #    Xception1.join()
+    #    Xception2 = Process(target=train(Pet, 'Xception', '_connected1024_dropout',
+    #                                     plot=False, connected=True, dropout=True, dense=1024))
+    #    Xception2.start()
+    #    Xception2.join()
+    #    Xception3 = Process(target=train(Pet, 'Xception', 'v3_connected4096_drop',
+    #                                     plot=False, connected=True, dropout=True, dense=4096))
+    #    Xception3.start()
+    #    Xception3.join()
+    #    Xception4 = Process(target=train(Pet, 'Xception', 'v3_connected4096',
+    #                                     plot=False, connected=True, dropout=False, dense=4096))
+
+    #    Xception4.start()
+    #    Xception4.join()
+    #    InceptionResNetV2 = Process(target=train(Pet, 'InceptionResNetV2', version, plot=False))
+    #    InceptionV3 = Process(target=train(Pet, 'InceptionV3', version, plot=False))
+    VGG19 = Process(target=train(Pet, 'VGG19', '_v3_connected4096',
+                                 plot=False, connected=True, dropout=False, dense=4096))
+    VGG19.start()
+    VGG19.join()
+    VGG19 = Process(target=train(Pet, 'VGG19', '_v3_connected1024_Drop',
+                                 plot=False, connected=True, dropout=True, dense=1024))
+    VGG19.start()
+    VGG19.join()
+    VGG19 = Process(target=train(Pet, 'VGG19', '_v3_connected1024',
+                                 plot=False, connected=True, dropout=False, dense=1024))
     VGG19.start()
     VGG19.join()
