@@ -13,8 +13,8 @@ CAT_VALID_DATA = '../../../../Data for project/new/cat/test'
 BATCH_SIZE = 64
 MODEL_LOSS = 'categorical_crossentropy'
 # MODEL_LOSS = 'kullback_leibler_divergence'
-MODEL_OPTIMISER = tf.keras.optimizers.Adam(lr=0.0001)
-EPOCH = 50
+MODEL_OPTIMISER = tf.keras.optimizers.Adam()
+EPOCH = 30
 METRICS = ['mae', 'accuracy']
 DENSE = 1024
 TRAINED_MODEL = '../../models/cat_VGG19_v3_connected1024.h5'

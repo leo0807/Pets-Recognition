@@ -70,47 +70,12 @@ if __name__ == "__main__":
     tf.keras.backend.clear_session()
     # train(Pet, 'Xception', '_v3_connected4096', plot=False, connected=True,
     #       dropout=False, dense=4096, load_model=False)
-    # Xception = Process(target=train(Pet, 'Xception', '_v3_connected4096', plot=False, connected=True,
-    #                                 dropout=False, dense=4096, load_model=False))
-    # Xception.start()
-    # Xception.join()
-    # Xception2 = Process(target=train(Pet, 'Xception', '_v3_connected1024_dropout',
-    #                                  plot=False, connected=True, dropout=True, dense=1024))
-    # Xception2.start()
-    # Xception2.join()
-    # Xception3 = Process(target=train(Pet, 'Xception', 'v3_connected4096_drop',
-    #                                  plot=False, connected=True, dropout=True, dense=4096))
-    # Xception3.start()
-    # Xception3.join()
-    # Xception4 = Process(target=train(Pet, 'Xception', 'v3_connected1024',
-    #                                  plot=False, connected=True, dropout=False, dense=1024))
-    #
-    # Xception4.start()
-    # Xception4.join()
-    # VGG191 = Process(target=train(Pet, 'VGG19', '_v3_connected4096',
-    #                               plot=False, connected=True, dropout=False, dense=4096))
-    # VGG191.start()
-    # VGG191.join()
-    # VGG192 = Process(target=train(Pet, 'VGG19', '_v3_connected1024_Drop',
-    #                               plot=False, connected=True, dropout=True, dense=1024))
-    # VGG192.start()
-    # VGG192.join()
-    # VGG193 = Process(target=train(Pet, 'VGG19', '_v3_connected1024',
-    #                               plot=False, connected=True, dropout=False, dense=1024))
-    # VGG193.start()
-    # VGG193.join()
-    # VGG194 = Process(target=train(Pet, 'VGG19', '_v3_connected4096_drop',
-    #                               plot=False, connected=True, dropout=True, dense=4096))
-    # VGG194.start()
-    # VGG194.join()
-    # MobileNetV2 = Process(target=train(Pet, 'MobileNetV2', '_v3_connected1024',
-    #                                    plot=False, connected=True, dropout=True, dense=1024))
-    # MobileNetV2.start()
-    # MobileNetV2.join()
-    # MobileNetV2 = Process(target=train(Pet, 'MobileNetV2', '_v3_connected1024',
-    #                                    plot=False, connected=True, dropout=True, dense=1024))
-    # InceptionResNetV2 = Process(target=train(Pet, 'InceptionResNetV2', '_v3_connected1024',
-    #                                         plot=False, connected=True, dropout=True, dense=1024))
-    # InceptionResNetV2.start()
-    # InceptionResNetV2.join()
+    VGG19 = Process(target=train(Pet, 'VGG19', '_v3_connected4096_BN',
+                                plot=False, connected=True, dropout=False, dense=4096))
+    VGG19.start()
+    VGG19.join()
+    VGG191 = Process(target=train(Pet, 'VGG19', '_v3_connected4096_MaxPooling',
+                                  plot=False, connected=True, dropout=False, dense=4096))
+    VGG191.start()
+    VGG191.join()
 
