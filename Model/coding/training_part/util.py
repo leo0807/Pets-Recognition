@@ -5,71 +5,9 @@ import tensorflow as tf
 import const
 from keras.preprocessing.image import ImageDataGenerator
 import numpy as np
+import keras.backend as K
+
 keras = tf.keras
-
-class No_Preprocessing:
-    def __init__(self, img_width, img_height):
-        self.img_width = img_width
-        self.img_height = img_height
-
-    def extract_and_prepare_pixels(self, pixels):
-        """
-        Takes in a string (pixels) that has space separated integer values and returns an array which includes the
-        pixels for all images.
-        """
-        pixels_as_list = [item[0] for item in pixels.values.tolist()]
-        np_image_array = []
-        for index, item in enumerate(pixels_as_list):
-            # split space separated ints
-            pixel_data = item.split()
-            img_size_row = img_size_col = 256
-            if len(pixel_data) % 490 == 0:
-                img_size_row = 490
-                img_size_col = 640
-            elif len(pixel_data) == 10000:
-                img_size_row = img_size_col = 100
-
-            data = np.zeros((img_size_row, img_size_col), dtype=np.uint8)
-
-            # Loop through rows
-            for i in range(0, img_size_row):
-                try:
-                    # (0 = 0), (1 = 47), (2 = 94), ...
-                    pixel_index = i * img_size_col
-                    # (0 = [0:47]), (1 = [47: 94]), (2 = [94, 141]), ...
-                    data[i] = pixel_data[pixel_index:pixel_index + img_size_col]
-                except:
-                    pass
-
-            np_image_array.append(np.array(data))
-        np_image_array = np.array(np_image_array)
-        return np_image_array
-
-    def predict_emotion(self, model, img):
-        """
-        Use a trained model to predict emotional state
-        """
-
-        emotion = 'None'
-
-        prediction = model.predict(img)
-        prediction_ = np.argmax(prediction)
-
-        if prediction_ == 0:
-            emotion = 'Angry'
-        elif prediction_ == 1:
-            emotion = 'Scared'
-        elif prediction_ == 2:
-            emotion = 'Happy'
-        elif prediction_ == 3:
-            emotion = 'Sad'
-        elif prediction_ == 4:
-            emotion = 'Neutral'
-
-        d = {'emotion': ['Angry', 'Scared', 'Happy', 'Sad', 'Neutral'], 'prob': prediction[0]}
-        df = pd.DataFrame(d, columns=['emotion', 'prob'])
-
-        return df
 
 
 def renameFile(path):
@@ -97,20 +35,23 @@ def get_Classify(classify):
     if classify == 'cat':
         train_data = const.CAT_TRAIN_DATA
         validation_data = const.CAT_VALID_DATA
+        test_data = const.CAT_VALID_DATA
     elif classify == 'dog':
         train_data = const.DOG_TRAIN_DATA
         validation_data = const.DOG_VALID_DATA
+        test_data = const.DOG_VALID_DATA
     else:
         train_data = None
         validation_data = None
+        test_data = None
         print("by now, we only support dog and cat, please try 'cat' and 'dog' ")
-    if train_data != None:
-        return load_data(train_data, validation_data)
+    if train_data is not None:
+        return load_data(train_data, validation_data, test_data)
     else:
         return None
 
 
-
+# return base_model
 def MobileNetV2():
     """
     :return: pre-trained MobileNetV2 model imported from tf.keras.application and add transfer learning layer
@@ -118,92 +59,34 @@ def MobileNetV2():
     base_model = tf.keras.applications.MobileNetV2(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
                                                    include_top=False,
                                                    weights='imagenet')
-    base_model.trainable = False
-    base_model.summary()
-    global_average_layer = keras.layers.GlobalAveragePooling2D()
-    output_layer = keras.layers.Dense(5, 'softmax')
-    model = keras.Sequential([
-        base_model,
-        global_average_layer,
-        output_layer
-    ])
-    return model
+    return base_model
 
 
-def Xception(connected=False, dropout=False, dense=1024):
+def Xception():
     base_model = tf.keras.applications.Xception(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
                                                 include_top=False,
                                                 weights='imagenet')
-    base_model.trainable = False
-    # base_model.summary()
-    global_average_layer = keras.layers.GlobalAveragePooling2D()
-    x = keras.layers.Dense(dense, activation='relu', kernel_initializer='he_uniform')
-    y = keras.layers.Dropout(0.5)
-    output_layer = keras.layers.Dense(5, 'softmax')
-    model = keras.Sequential()
-    model.add(base_model)
-    model.add(global_average_layer)
-    if connected:
-        model.add(x)
-    if dropout:
-        model.add(y)
-    model.add(output_layer)
-    return model
+    return base_model
 
 
-def InceptionResNetV2(activation='softmax'):
+def InceptionResNetV2():
     base_model = tf.keras.applications.InceptionResNetV2(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
                                                          include_top=False,
                                                          weights='imagenet')
-    base_model.trainable = False
-    base_model.summary()
-    global_average_layer = keras.layers.GlobalAveragePooling2D()
-    output_layer = keras.layers.Dense(5, activation)
-    model = keras.Sequential([
-        base_model,
-        global_average_layer,
-        output_layer
-    ])
-    return model
+    return base_model
 
 
-def InceptionV3(activation='softmax'):
+def InceptionV3():
     base_model = tf.keras.applications.InceptionV3(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
                                                    include_top=False,
                                                    weights='imagenet')
-    base_model.trainable = False
-    base_model.summary()
-    global_average_layer = keras.layers.GlobalAveragePooling2D()
-    x = keras.layers.Dense(1024, activation='relu')
-    output_layer = keras.layers.Dense(5, activation)
-    model = keras.Sequential([
-        base_model,
-        global_average_layer,
-        x,
-        output_layer
-    ])
-
-    return model
+    return base_model
 
 
-def VGG19(connected=False, dropout=False, dense=1024):
+def VGG19():
     base_model = tf.keras.applications.VGG19(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
-                                                   include_top=False, weights='imagenet', classes=5)
-    base_model.trainable = False
-    base_model.summary()
-    global_average_layer = keras.layers.GlobalAveragePooling2D()
-    x = keras.layers.Dense(dense, activation='relu')
-    y = keras.layers.Dropout(0.5)
-    output_layer = keras.layers.Dense(5, 'softmax')
-    model = keras.Sequential()
-    model.add(base_model)
-    model.add(global_average_layer)
-    if connected:
-        model.add(x)
-    if dropout:
-        model.add(y)
-    model.add(output_layer)
-    return model
+                                             include_top=False, weights='imagenet', classes=5)
+    return base_model
 
 
 def create_model(modelName='MobileNetV2', connected=False, dropout=False, dense=1024):
@@ -213,21 +96,39 @@ def create_model(modelName='MobileNetV2', connected=False, dropout=False, dense=
     :return: Model
     """
     if 'Mobile' in modelName:
-        return MobileNetV2(), modelName
+        base_model = MobileNetV2()
     elif 'Xception' in modelName:
-        return Xception(connected, dropout, dense), modelName
+        base_model = Xception()
     elif 'InceptionV3' in modelName:
-        return InceptionV3(), modelName
+        base_model = InceptionV3()
     elif 'InceptionResNet' in modelName:
-        return InceptionResNetV2(), modelName
+        base_model = InceptionResNetV2()
     elif 'VGG19' in modelName:
-        return VGG19(connected, dropout, dense), modelName
+        base_model = VGG19()
     else:
         print('error, no such a model')
+        base_model = None
+    if base_model is not None:
+        base_model.trainable = False
+        base_model.summary()
+        global_average_layer = keras.layers.GlobalAveragePooling2D()
+        x = keras.layers.Dense(dense, activation='relu')
+        y = keras.layers.Dropout(0.5)
+        output_layer = keras.layers.Dense(5, 'softmax')
+        model = keras.Sequential()
+        model.add(base_model)
+        model.add(global_average_layer)
+        if connected:
+            model.add(x)
+        if dropout:
+            model.add(y)
+        model.add(output_layer)
+        return model, modelName
+    else:
         return None, None
 
 
-def load_data(trainPath, validationPath):
+def load_data(trainPath, validationPath, testPath):
     """
     load training and validation data by ImageDataGenerator iterator
     :param trainPath: train data folders path
@@ -236,12 +137,12 @@ def load_data(trainPath, validationPath):
     """
     train_datagen = ImageDataGenerator(
         rescale=1. / 255,
-       # rotation_range=0.2,
-       # height_shift_range=0.1,
-       # width_shift_range=0.1,
+        # rotation_range=0.2,
+        # height_shift_range=0.1,
+        # width_shift_range=0.1,
         shear_range=0.2,
         zoom_range=0.2,
-       # brightness_range=[0.7, 1.3],
+        # brightness_range=[0.7, 1.3],
         horizontal_flip=True)
 
     test_datagen = ImageDataGenerator(rescale=1. / 255)
@@ -254,16 +155,23 @@ def load_data(trainPath, validationPath):
         classes=['Angry', 'Happy', 'Neutral', 'Sadness', 'Scared']
     )
 
-    validation_generator = train_datagen.flow_from_directory(
+    validation_generator = test_datagen.flow_from_directory(
         validationPath,
         target_size=const.IMG_SHAPE,
         batch_size=const.BATCH_SIZE,
         class_mode='categorical',
         classes=['Angry', 'Happy', 'Neutral', 'Sadness', 'Scared']
     )
+
+    test_generator = test_datagen.flow_from_directory(
+        validationPath,
+        target_size=const.IMG_SHAPE,
+        batch_size=128,
+        class_mode='categorical',
+        classes=['Angry', 'Happy', 'Neutral', 'Sadness', 'Scared']
+    )
     steps_per_epoch = np.ceil(train_generator.samples / train_generator.batch_size)
-    # steps_per_valid = np.ceil(validation_generator.samples / validation_generator.batch_size)
-    return train_generator, validation_generator, steps_per_epoch
+    return train_generator, validation_generator, test_generator, steps_per_epoch
 
 
 def plotInfo(model_path, modelName, history):
