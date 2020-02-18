@@ -117,4 +117,6 @@ if __name__ == "__main__":
                                        plot=False, connected=True, dropout=True, dense=1024))
     InceptionV3.start()
     InceptionV3.join()
+    VGG19 = Process(target=train(Pet, 'VGG19', '_v3_connected4096',
+                                 plot=False, connected=True, dropout=False, dense=4096, BN=True))
 
