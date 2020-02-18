@@ -103,20 +103,14 @@ if __name__ == "__main__":
     #                               plot=False, connected=True, dropout=True, dense=4096))
     # VGG194.start()
     # VGG194.join()
-    MobileNetV2 = Process(target=train(Pet, 'MobileNetV2', '_v3_connected1024',
-                                       plot=False, connected=True, dropout=True, dense=1024))
-    MobileNetV2.start()
-    MobileNetV2.join()
-    MobileNetV2 = Process(target=train(Pet, 'MobileNetV2', '_v3_connected1024',
-                                       plot=False, connected=True, dropout=True, dense=1024))
-    InceptionResNetV2 = Process(target=train(Pet, 'InceptionResNetV2', '_v3_connected1024',
-                                             plot=False, connected=True, dropout=True, dense=1024))
-    InceptionResNetV2.start()
-    InceptionResNetV2.join()
-    InceptionV3 = Process(target=train(Pet, 'InceptionV3', '_v3_connected1024',
-                                       plot=False, connected=True, dropout=True, dense=1024))
-    InceptionV3.start()
-    InceptionV3.join()
-    VGG19 = Process(target=train(Pet, 'VGG19', '_v3_connected4096',
-                                 plot=False, connected=True, dropout=False, dense=4096, BN=True))
+    # MobileNetV2 = Process(target=train(Pet, 'MobileNetV2', '_v3_connected1024',
+    #                                    plot=False, connected=True, dropout=True, dense=1024))
+    # MobileNetV2.start()
+    # MobileNetV2.join()
+    # MobileNetV2 = Process(target=train(Pet, 'MobileNetV2', '_v3_connected1024',
+    #                                    plot=False, connected=True, dropout=True, dense=1024))
+    # InceptionResNetV2 = Process(target=train(Pet, 'InceptionResNetV2', '_v3_connected1024',
+    #                                         plot=False, connected=True, dropout=True, dense=1024))
+    # InceptionResNetV2.start()
+    # InceptionResNetV2.join()
 
