@@ -89,7 +89,7 @@ def VGG19():
     return base_model
 
 
-def create_model(modelName='MobileNetV2', connected=False, dropout=False, dense=1024):
+def create_model(modelName='MobileNetV2', connected=False, dropout=False, dense=1024, BN=False):
     """
     create one of four models
     :param modelName:
@@ -112,12 +112,16 @@ def create_model(modelName='MobileNetV2', connected=False, dropout=False, dense=
         base_model.trainable = False
         base_model.summary()
         global_average_layer = keras.layers.GlobalAveragePooling2D()
+        batch_normalization = keras.layers.BatchNormalization()
+
         x = keras.layers.Dense(dense, activation='relu')
         y = keras.layers.Dropout(0.5)
         output_layer = keras.layers.Dense(5, 'softmax')
         model = keras.Sequential()
         model.add(base_model)
         model.add(global_average_layer)
+        if BN:
+            model.add(batch_normalization)
         if connected:
             model.add(x)
         if dropout:
