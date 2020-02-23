@@ -194,7 +194,7 @@
               image: base64Image
              }
         console.log(message);
-        $.post("http://10.12.147.147:5000/predict",JSON.stringify(message), function(response){// when received response
+        $.post("http://101.116.13.138/predict",JSON.stringify(message), function(response){// when received response
             $('#loading_image').fadeOut(300);
             $("#div_prediction").fadeIn(1500);
 
@@ -222,11 +222,17 @@
             var emotionMsg =response.emotion;
             var emotionDetails = emotionMsg.split("\n");
             $("#emotion_title1").text(emotionDetails[0].trim().replace(" +", " ").split(" ")[0] + " :");
+            // $("#emotion_title1").text("Happy :");
             $("#emotion_title2").text(emotionDetails[1].trim().replace(" +", " ").split(" ")[0] + " :");
+            // $("#emotion_title2").text('Angry :');
             $("#emotion_title3").text(emotionDetails[2].trim().replace(" +", " ").split(" ")[0] + " :");
+            // $("#emotion_title3").text('Neutral :');
             $("#emotion_body1").text(emotionDetails[0].trim().replace(" +", " ").split("  ")[1]);
+            // $("#emotion_body1").text("78.92%");
             $("#emotion_body2").text(emotionDetails[1].trim().replace(" +", " ").split("  ")[1]);
+            // $("#emotion_body2").text('19.26%');
             $("#emotion_body3").text(emotionDetails[2].trim().replace(" +", " ").split("  ")[1]);
+            // $("#emotion_body3").text('5.31%');
             console.log(response);
         });
         }

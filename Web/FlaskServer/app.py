@@ -32,6 +32,7 @@ def predict():
     cat_dog_classifier = Cat_Dog_Classifier.predict()
     response =""
     if cat_dog_classifier == 'Cat':
+    # if cat_dog_classifier != '':
         catBreed = Breed_Cat.predict()
         catEmotion = Emotion_Cat.predict()
         response = {
@@ -45,11 +46,14 @@ def predict():
         response = {
             'pet': 'Dog',
             'emotion': dogEmotion.to_string(index=False, header=False),
+            # 'emotion': "Happy 92.31%  Angry 5.41%  Neutral 1.91%",
             'breed': dogBreed.to_string(index=False, header=False)
         }
 
     os.remove("testImages/image.jpg")
-    return jsonify(response)
+    result = jsonify(response)
+    result.headers.add('Access-Control-Allow-Origin', '*')
+    return result
 
 
 def init():

@@ -68,6 +68,7 @@ class No_Preprocessing:
         emotion = 'None'
 
         prediction = model.predict(img)[0]
+        print("prediction is: ", prediction )
         # ->
         prediction = [round(x * 100, 2) for x in prediction]
         print(prediction)
@@ -76,15 +77,15 @@ class No_Preprocessing:
         if prediction_ == 0:
             emotion = 'Angry'
         elif prediction_ == 1:
-            emotion = 'Scared'
-        elif prediction_ == 2:
             emotion = 'Happy'
+        elif prediction_ == 2:
+            emotion = 'Neutral'
         elif prediction_ == 3:
             emotion = 'Sad'
         elif prediction_ == 4:
-            emotion = 'Neutral'
+            emotion = 'Scared'
 
-        d = {'emotion': ['Angry', 'Scared', 'Happy', 'Sad', 'Neutral'], 'prob': prediction}
+        d = {'emotion': ['Angry', 'Happy', 'Neutral', 'Sad', 'Scared'], 'prob': prediction}
         df = pd.DataFrame(d, columns=['emotion', 'prob']).sort_values(by=['prob'], ascending=False)
         df.prob = [str(x) + '%' for x in df.prob]
         return df
@@ -114,30 +115,6 @@ def dog_preprocess(path):
             y1 = max(int(d.rect.top() / ratio), 1)
             x2 = min(int(d.rect.right() / ratio), width - 1)
             y2 = min(int(d.rect.bottom() / ratio), height - 1)
-
-            # # detect landmarks
-            # shape = face_utils.shape_to_np(predictor(gray, d.rect))
-            # points = []
-            # index = 0
-            # for (x, y) in shape:
-            #     x = int(round(x / ratio))
-            #     y = int(round(y / ratio))
-            #     index = index + 1
-            #     if index == 3 or index == 4 or index == 6:
-            #         points.append([x, y])
-            # points = np.array(points)  # right eye, nose, left eye
-
-            # rotate
-            # if rotation == True:
-            #     xLine = points[0][0] - points[2][0]
-            #     if points[2][1] < points[0][1]:
-            #         yLine = points[0][1] - points[2][1]
-            #         angle = math.degrees(math.atan(yLine / xLine))
-            #     else:
-            #         yLine = points[2][1] - points[0][1]
-            #         angle = 360 - math.degrees(math.atan(yLine / xLine))
-            #     rotated = imutils.rotate(orig, angle)
-            #     # detectFace(rotated, picSize)
 
             imageList.append(orig)
             print(x1, x2, y1, y2)
@@ -175,10 +152,8 @@ def cat_preprocess(path):
             minSize=(50, 50),
             flags=cv2.CASCADE_SCALE_IMAGE
         )
-        imageList = []  # for return
         # t = datetime.datetime.now()
         for (i, (x, y, w, h)) in enumerate(faces):
-            roiImg = gray[y:y + h, x:x + w]
             # prepare for prediction
             little = cv2.resize((image[y:y + h, x:x + w]), (img_width, img_height))
             pi = cv2.cvtColor(little, cv2.COLOR_BGR2GRAY)
