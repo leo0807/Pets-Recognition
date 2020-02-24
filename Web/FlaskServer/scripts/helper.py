@@ -7,10 +7,10 @@ import imutils
 import math
 
 # image size for prediction
-img_width = 100
-img_height = 100
+img_width = 200
+img_height = 200
 # scale factor for preprocessing
-picSize = 200
+picSize = 400
 rotation = True
 
 # face detector
