@@ -1,3 +1,6 @@
+"""
+PURPOSE : Count images in dataset
+"""
 import os
 import helper
 

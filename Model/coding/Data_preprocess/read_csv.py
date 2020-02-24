@@ -1,3 +1,7 @@
+"""
+PURPOSE : Dataset preprocess
+However, it is useless now since we used DataImageGenerator and function: flow from directory
+"""
 import glob
 import pandas as pd
 
