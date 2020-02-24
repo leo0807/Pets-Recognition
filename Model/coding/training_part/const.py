@@ -20,6 +20,7 @@ DOG_VALID_DATA_FACE = '../../../../Data for project/New_Data/dog/test_face'
 CAT_TRAIN_DATA = '../../../../Data for project/New_Data/cat/train'
 CAT_VALID_DATA = '../../../../Data for project/New_Data/cat/test'
 CAT_VALID_DATA_FACE = '../../../../Data for project/New_Data/cat/test_face'
+
 # hyper parameters for models
 BATCH_SIZE = 32
 DENSE = 1024

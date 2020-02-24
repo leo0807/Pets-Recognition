@@ -113,7 +113,7 @@ def VGG19():
     return base_model
 
 
-def create_model(modelName='VGG19', connected=False, dropout=0,
+def create_model(modelName='VGG19', connected=False, dropout=0.0,
                  dense=1024, BN=False, AveragePooling=True, MutiFC = False):
     """
     create one of four models
@@ -224,6 +224,44 @@ def load_data(trainPath, validationPath, testPath):
     )
     steps_per_epoch = np.ceil(train_generator.samples / train_generator.batch_size)
     return train_generator, validation_generator, test_generator, steps_per_epoch
+
+
+def load_Cat_Dog(trainPath, validationPath):
+    """
+    load training and validation data by ImageDataGenerator iterator
+    :param trainPath: train data folders path
+    :param validationPath: validation data folders path
+    :return: two data_generators and steps_per_epoch
+    """
+    train_datagen = ImageDataGenerator(
+        rescale=1. / 255,
+        # rotation_range=0.2,
+        # height_shift_range=0.1,
+        # width_shift_range=0.1,
+        shear_range=0.2,
+        zoom_range=0.2,
+        # brightness_range=[0.7, 1.3],
+        horizontal_flip=True)
+
+    test_datagen = ImageDataGenerator(rescale=1. / 255)
+
+    train_generator = train_datagen.flow_from_directory(
+        trainPath,
+        target_size=const.IMG_SHAPE,
+        batch_size=const.BATCH_SIZE,
+        class_mode='binary',
+        classes=['cat', 'dog']
+    )
+
+    validation_generator = test_datagen.flow_from_directory(
+        validationPath,
+        target_size=const.IMG_SHAPE,
+        batch_size=const.BATCH_SIZE,
+        class_mode='binary',
+        classes=['cat', 'dog']
+    )
+    steps_per_epoch = np.ceil(train_generator.samples / train_generator.batch_size)
+    return train_generator, validation_generator, steps_per_epoch
 
 
 def y_list_to_single(y_list):
