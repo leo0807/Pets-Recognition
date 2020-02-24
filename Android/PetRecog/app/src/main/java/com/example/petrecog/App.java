@@ -96,16 +96,22 @@ public class App extends Application {
         return (int) (pxValue / getScreenDensity() + 0.5f);
     }
 
-    //获取应用的data/data/....File目录
+
+    /**
+     * Used to get the 'data/data/....File'  path
+     * @return the path string
+     */
     public String getFilesDirPath() {
         return getFilesDir().getAbsolutePath();
     }
 
-    //获取应用的data/data/....Cache目录
+
+    /**
+     * Used to get the 'data/data/....Cache'  path
+     * @return the path sting
+     */
     public String getCacheDirPath() {
         return getCacheDir().getAbsolutePath();
     }
-
-
 
 }
