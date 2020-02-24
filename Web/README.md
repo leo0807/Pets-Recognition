@@ -35,4 +35,4 @@ Docker can run the server in a container which contains alll needed enviroment. 
 
  `sudo docker run --name give_container_a_name -d -p 5000:5000 codegod/my_flask_server`
 
-Then, you can follow the above examples to run the server inside the container on Flask or Gunicorn
+Then, you can follow the above examples to run the server inside the container on Flask or Gunicorn without the install requirements.txt step.
