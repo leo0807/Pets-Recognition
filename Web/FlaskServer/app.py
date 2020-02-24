@@ -1,13 +1,12 @@
 import os
 
-
 import base64
 import io
 from PIL import Image
 from flask import request
 from flask import jsonify
 from flask import Flask, render_template
-from scripts import  Cat_Dog_Classifier
+from scripts import Cat_Dog_Classifier
 from scripts import Emotion_Dog
 from scripts import Emotion_Cat
 from scripts import Breed_Cat
@@ -21,18 +20,20 @@ app = Flask(__name__)
 def homepage():
     return render_template("homePage.html")
 
-@app.route("/predict", methods= ["POST"])
+
+# call models to predict the pet's type, breed and emotion.
+@app.route("/predict", methods=["POST"])
 def predict():
-    message = request.get_json(force = True)
+    message = request.get_json(force=True)
     encoded = message['image']
     decoded = base64.b64decode(encoded)
     image = Image.open(io.BytesIO(decoded))
 
     image.save("testImages/image.jpg")
     cat_dog_classifier = Cat_Dog_Classifier.predict()
-    response =""
+    response = ""
     if cat_dog_classifier == 'Cat':
-    # if cat_dog_classifier != '':
+        # if cat_dog_classifier != '':
         catBreed = Breed_Cat.predict()
         catEmotion = Emotion_Cat.predict()
         response = {
@@ -56,6 +57,7 @@ def predict():
     return result
 
 
+# this function use default image to predict once, in order to reduce the prediction time
 def init():
     copyfile("image.jpg", "testImages/image.jpg")
     Emotion_Dog.predict()
@@ -64,5 +66,6 @@ def init():
     Breed_Cat.predict()
     Cat_Dog_Classifier.predict()
     os.remove("testImages/image.jpg")
+
 
 init()
