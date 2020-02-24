@@ -21,7 +21,7 @@ def search_image(pet, target, savePath):
     google_crawler = GoogleImageCrawler(storage={'root_dir': imageDir})
     google_crawler.crawl(keyword=searchName, max_num=1000)
 
-
+# crawler images from Internet
 saveCatPath = image_path + 'cat' + os.sep
 saveDogPath = image_path + 'dog' + os.sep
 

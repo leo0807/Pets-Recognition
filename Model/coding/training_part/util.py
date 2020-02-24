@@ -1,11 +1,11 @@
+import numbers
 import os
 import matplotlib.pyplot as plt
-import pandas as pd
+import pycm
 import tensorflow as tf
 import const
 from keras.preprocessing.image import ImageDataGenerator
 import numpy as np
-import keras.backend as K
 
 keras = tf.keras
 
@@ -27,19 +27,27 @@ def renameFile(path):
     print("done")
 
 
-def get_Classify(classify):
+def get_Classify(classify, face=True):
     """
     :param classify: cat or dog
     :return: two data path
     """
     if classify == 'cat':
         train_data = const.CAT_TRAIN_DATA
-        validation_data = const.CAT_VALID_DATA
-        test_data = const.CAT_VALID_DATA
+        if face:
+            validation_data = const.CAT_VALID_DATA_FACE
+            test_data = const.CAT_VALID_DATA_FACE
+        else:
+            validation_data = const.CAT_VALID_DATA
+            test_data = const.CAT_VALID_DATA
     elif classify == 'dog':
         train_data = const.DOG_TRAIN_DATA
-        validation_data = const.DOG_VALID_DATA
-        test_data = const.DOG_VALID_DATA
+        if face:
+            validation_data = const.DOG_VALID_DATA_FACE
+            test_data = const.DOG_VALID_DATA_FACE
+        else:
+            validation_data = const.DOG_VALID_DATA
+            test_data = const.DOG_VALID_DATA
     else:
         train_data = None
         validation_data = None
@@ -89,7 +97,8 @@ def VGG19():
     return base_model
 
 
-def create_model(modelName='MobileNetV2', connected=False, dropout=False, dense=1024, BN=False):
+def create_model(modelName='VGG19', connected=False, dropout=0,
+                 dense=1024, BN=False, AveragePooling=True, MutiFC = False):
     """
     create one of four models
     :param modelName:
@@ -108,25 +117,46 @@ def create_model(modelName='MobileNetV2', connected=False, dropout=False, dense=
     else:
         print('error, no such a model')
         base_model = None
+    # if base_model exists, add different layers
     if base_model is not None:
         base_model.trainable = False
-        base_model.summary()
-        global_average_layer = keras.layers.GlobalAveragePooling2D()
+        # base_model.summary()
+        # averagePooling layer
+        global_layer = keras.layers.GlobalAveragePooling2D()
+
+        # BN layer
         batch_normalization = keras.layers.BatchNormalization()
 
-        x = keras.layers.Dense(dense, activation='relu')
-        y = keras.layers.Dropout(0.5)
+        # fully-connected layers
+        if AveragePooling:
+            x = keras.layers.Dense(dense, activation='relu')
+        MutiFC_1 = keras.layers.Dense(dense, activation='relu')
+        MutiFC_2 = keras.layers.Dense(dense, activation='relu')
+        MutiFC_3 = keras.layers.Dense(dense/2, activation='relu')
+
+        # dropout layers
+        y = keras.layers.Dropout(dropout)
+
+        # predict layer
         output_layer = keras.layers.Dense(5, 'softmax')
+
         model = keras.Sequential()
         model.add(base_model)
-        model.add(global_average_layer)
+
+        if AveragePooling:
+            model.add(global_layer)
         if BN:
             model.add(batch_normalization)
+        model.add(y)
+        if MutiFC:
+            model.add(MutiFC_1)
+            model.add(MutiFC_2)
+            model.add(MutiFC_3)
+            connected = False
         if connected:
             model.add(x)
-        if dropout:
-            model.add(y)
         model.add(output_layer)
+
         return model, modelName
     else:
         return None, None
@@ -156,7 +186,7 @@ def load_data(trainPath, validationPath, testPath):
         target_size=const.IMG_SHAPE,
         batch_size=const.BATCH_SIZE,
         class_mode='categorical',
-        classes=['Angry', 'Happy', 'Neutral', 'Sadness', 'Scared']
+        classes=['Angry', 'Happy', 'Neutral', 'Sad', 'Scared']
     )
 
     validation_generator = test_datagen.flow_from_directory(
@@ -164,7 +194,7 @@ def load_data(trainPath, validationPath, testPath):
         target_size=const.IMG_SHAPE,
         batch_size=const.BATCH_SIZE,
         class_mode='categorical',
-        classes=['Angry', 'Happy', 'Neutral', 'Sadness', 'Scared']
+        classes=['Angry', 'Happy', 'Neutral', 'Sad', 'Scared']
     )
 
     test_generator = test_datagen.flow_from_directory(
@@ -172,10 +202,25 @@ def load_data(trainPath, validationPath, testPath):
         target_size=const.IMG_SHAPE,
         batch_size=128,
         class_mode='categorical',
-        classes=['Angry', 'Happy', 'Neutral', 'Sadness', 'Scared']
+        classes=['Angry', 'Happy', 'Neutral', 'Sad', 'Scared']
     )
     steps_per_epoch = np.ceil(train_generator.samples / train_generator.batch_size)
     return train_generator, validation_generator, test_generator, steps_per_epoch
+
+
+def y_list_to_single(y_list):
+    return np.asarray(list(map(np.argmax, y_list)))
+
+
+def get_confusion_matrix(y_predicted, y_actual):
+    if len(y_predicted) > 0 and len(y_actual) > 0:
+        if not isinstance(y_actual[0], numbers.Number):
+            y_actual = y_list_to_single(y_actual)
+        if not isinstance(y_predicted[0], numbers.Number):
+            y_predicted = y_list_to_single(y_predicted)
+        return pycm.ConfusionMatrix(actual_vector=y_actual, predict_vector=y_predicted)
+    else:
+        return None
 
 
 def plotInfo(model_path, modelName, history):
@@ -188,7 +233,7 @@ def plotInfo(model_path, modelName, history):
     plt.ylabel('accuracy')
     plt.xlabel('epoch')
     plt.legend(['train', 'validation'], loc='upper left')
-    plt.savefig(model_path + modelName + ' loss.png', dpi=300)
+    plt.savefig(model_path + modelName + ' accuracy.png', dpi=300)
 
     plt.plot(history.history['loss'])
     plt.plot(history.history['val_loss'])
@@ -197,3 +242,16 @@ def plotInfo(model_path, modelName, history):
     plt.xlabel('epoch')
     plt.legend(['train', 'validation'], loc='upper left')
     plt.savefig(model_path + modelName + ' loss.png', dpi=300)
+
+
+def show_predict_report(DataGenerator):
+    model = keras.models.load_model(const.TRAINED_MODEL)
+    imgs, labels = DataGenerator.next()
+
+    from sklearn.metrics import classification_report
+    import numpy as np
+
+    Y_test = np.argmax(labels, axis=1)  # Convert one-hot to index
+    y_pred = model.predict_classes(imgs)
+    print(classification_report(Y_test, y_pred))
+

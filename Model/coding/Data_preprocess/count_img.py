@@ -9,3 +9,5 @@ print(os.path.exists(foldersPath))
 after, count = helper.walkPath(foldersPath)
 before, count_b = helper.walkPath(originPath)
 total = 0
+
+

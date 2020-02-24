@@ -1,3 +1,5 @@
+import os
+
 import tensorflow as tf
 import util
 import const
@@ -8,7 +10,8 @@ keras = tf.keras
 
 
 def train(classify, model, version, save=True, csv=True, plot=True,
-          connected=False, dropout=False, dense=1024, load_model=False,BN=False):
+          connected=True, dropout=0.0, dense=4096, load_model=False, BN=False, AveragePooling=True, MutiFC=False,
+          test_face=True):
     """
     training code for pet(cat and dog) emotion
     :param classify: cat or dog
@@ -19,63 +22,80 @@ def train(classify, model, version, save=True, csv=True, plot=True,
     :param save: if save the model
     """
     # classify = 'cat'  # by now only support 'cat' or 'dog'
+    tf.keras.backend.clear_session()
 
     # load pre-trained model from keras.application
-    print('now is running: ', classify, ' ', model, ' ', version)
-    train_generator, validation_generator, test_generator, steps_per_epoch = util.get_Classify(classify)
-    model, modelName = util.create_model(model, connected, dropout, dense)
-    # compile model
+    train_generator, validation_generator, test_generator, steps_per_epoch = util.get_Classify(classify, test_face)
 
+    # create model
+    model, modelName = util.create_model(model, connected, dropout, dense, BN, AveragePooling, MutiFC)
+
+    # file name for model
+    modelPath = classify + os.sep + modelName + version
+
+    # compile model
     model.compile(optimizer=const.MODEL_OPTIMISER,
                   loss=const.MODEL_LOSS,
-                  metrics=['mae', 'accuracy'])
+                  metrics=['accuracy'])
+    model.summary()
+    print('Now is running: ', classify, ' ', version)
+
+    # fit data
     if not load_model:
+        # add tensorboard log save_path
+        log_dir = const.LOG_PATH + modelPath
+        tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
+
         # fit the model
-        history = model.fit_generator(
-            train_generator,
-            steps_per_epoch=steps_per_epoch,
-            epochs=const.EPOCH,
-            validation_data=validation_generator,
-        )
+        history = model.fit(train_generator, steps_per_epoch=steps_per_epoch, epochs=const.EPOCH,
+                            validation_data=validation_generator, workers=4,
+                            # callbacks=[tensorboard_callback]
+                            )
     else:
-        model = keras.models.load_model(const.TRAINED_MODEL)
-        imgs, labels = test_generator.next()
-
-        from sklearn.metrics import classification_report
-        import numpy as np
-
-        Y_test = np.argmax(labels, axis=1)  # Convert one-hot to index
-        y_pred = model.predict_classes(imgs)
-        print(classification_report(Y_test, y_pred))
-
-    modelPath = classify + '_' + modelName + version
+        # show classification report on predicting
+        util.show_predict_report(test_generator)
 
     # save model history to csv for further analyse
     if csv:
-        pd.DataFrame(history.history).to_csv(const.MODEL_PATH + modelPath + '.csv')
+        pd.DataFrame(history.history).to_csv(const.CSV_PATH + modelPath + '.csv')
 
     # summarize history for accuracy & loss
     if plot:
-        util.plotInfo(const.MODEL_PATH, modelPath, history)
+        util.plotInfo(const.PLOT_PATH, modelPath, history)
 
     # save model
     if save:
-        model.save(const.MODEL_PATH + modelPath + '.h5')
+        try:
+            model.save(const.MODEL_PATH + modelPath + '.h5')
+        except OSError:
+            # I found a bug in saving model with tf. it shows os error but it did save model
+            print("OSError, is it saved? ")
+            pass
+
+    # show each class report
+    y_actual = validation_generator.classes
+    y_predicted = model.predict(validation_generator)
+    test_result = model.evaluate(validation_generator)
+    class_ = util.get_confusion_matrix(y_actual=y_actual, y_predicted=y_predicted)
+    print(class_)
+    print("test result- accuracy:", test_result[1])
 
 
 # ------------------------------------------------------------------
 if __name__ == "__main__":
-    Pet = 'cat'
-    # version = '_v2_3layers'
+    Dog = 'dog'
+    Cat = 'cat'
     tf.keras.backend.clear_session()
-    # train(Pet, 'Xception', '_v3_connected4096', plot=False, connected=True,
-    #       dropout=False, dense=4096, load_model=False)
-    VGG19 = Process(target=train(Pet, 'VGG19', '_v3_connected4096_BN',
-                                plot=False, connected=True, dropout=False, dense=4096))
-    VGG19.start()
-    VGG19.join()
-    VGG191 = Process(target=train(Pet, 'VGG19', '_v3_connected4096_MaxPooling',
-                                  plot=False, connected=True, dropout=False, dense=4096))
-    VGG191.start()
-    VGG191.join()
 
+    # train(Dog, 'Xception', '_FC2048_BN_Face', dense=2048, BN=True)
+    # train(Dog, 'VGG19', '_FC2048_BN_Face', dense=2048,BN=True)
+    # train(Dog, 'MobileNet', '_FC2048_BN_Face', dense=2048,BN=True)
+    # train(Dog, 'InceptionResNet', '_FC2048_BN_Face', dense=2048, BN=True)
+    # train(Dog, 'Xception', '_FC4096_BN_Face_dp000', dense=1024, BN=True,)
+    # train(Dog, 'Xception', '_FC4096_BN_Face_dp050', dense=512, BN=True,)
+    # train(Cat, 'Xception', '_FC2048_BN_Face', dense=2048, BN=True)
+    # train(Dog, 'VGG19', '_FC2048_BN_Face', dense=2048, BN=True)
+    # train(Cat, 'MobileNet', '_FC2048_BN_Face', dense=2048, BN=True)
+    # train(Cat, 'InceptionResNet', '_FC2048_BN_Face', dense=2048, BN=True)
+    train(Dog, 'Xception', 'Face_BN_FC2048', dense=2048, BN=True)
+    train(Cat, 'VGG19', 'Face_BN_FC2048', dense=2048, BN=True)
