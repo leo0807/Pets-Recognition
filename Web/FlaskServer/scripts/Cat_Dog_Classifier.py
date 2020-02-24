@@ -9,6 +9,8 @@ import numpy as np
 from keras.backend import set_session
 import tensorflow as tf
 import time
+from tensorflow.keras.applications.vgg19 import preprocess_input
+
 
 # ---------------------------------------------------------
 # load models
@@ -16,14 +18,14 @@ graph = tf.get_default_graph()
 sess = tf.Session()
 set_session(sess)
 
-model = load_model('Cat_vs_Dog/Cat_Dog_model.h5')
+model = tf.keras.models.load_model('Cat_vs_Dog/Cat_Dog_model.h5')
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 # image size for prediction
-img_width = 128
-img_height = 128
+img_width = 200
+img_height = 200
 # scale factor for preprocessing
-picSize = 256
+picSize = 400
 rotation = True
 
 # helper class
@@ -43,6 +45,7 @@ def predict():
         # convert input image in input format that model accepts
         test_img = image.img_to_array(test_img)
         test_img = np.expand_dims(test_img, axis=0)
+        test_img = preprocess_input(test_img)
 
         start = time.time()
         prediction = model.predict(test_img)
