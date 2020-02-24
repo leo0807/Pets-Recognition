@@ -5,7 +5,7 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="3.6 @ Ubuntu 18.04 (3)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="3.6 @ Ubuntu 18.04 (4)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jquery-3.3.1" level="application" />
   </component>
