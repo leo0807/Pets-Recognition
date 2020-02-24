@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':ImageViewTouch'
 rootProject.name='PetRecog'

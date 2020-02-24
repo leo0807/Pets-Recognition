@@ -3,11 +3,67 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/brand_pet_area"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_centerVertical="true"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:id="@+id/brandSelectGrp">
+
+
+            <RadioButton
+                android:id="@+id/brand_catSelectBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/radio_underline"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:text="Cat"
+                android:textColor="@color/color_selector"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+
+            <RadioButton
+                android:id="@+id/brand_dogSelectBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/radio_underline"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:text="Dog"
+                android:textColor="@color/color_selector"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/brandContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="30dp"
-        android:text="This is Brand"/>
+        android:layout_height="match_parent">
+
+
+    </FrameLayout>
 
 </LinearLayout>
