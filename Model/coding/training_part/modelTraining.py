@@ -1,5 +1,7 @@
+"""
+PURPOSE :Train models
+"""
 import os
-
 import tensorflow as tf
 import util
 import const
@@ -11,9 +13,18 @@ keras = tf.keras
 
 def train(classify, model, version, save=True, csv=True, plot=True,
           connected=True, dropout=0.0, dense=4096, load_model=False, BN=False, AveragePooling=True, MutiFC=False,
-          test_face=True):
+          test_face=True, report=True):
     """
-    training code for pet(cat and dog) emotion
+    training code for pet(cat and dog) emotion. by now only support 'cat' or 'dog'
+    :param report: if show classification report
+    :param test_face: will use pure face test data
+    :param MutiFC: add multiple fully connected layers
+    :param AveragePooling: add global average pooling layer
+    :param BN: if add batch normalization before fully-connected layer
+    :param load_model: if load existed model
+    :param dense: set number of cells in fully-connected layer
+    :param dropout: set dropout ratio (float)
+    :param connected: if add a fully connected layer
     :param classify: cat or dog
     :param model: the name of pre-trained model
     :param version: the current version
@@ -21,8 +32,6 @@ def train(classify, model, version, save=True, csv=True, plot=True,
     :param csv: if save the history to csv
     :param save: if save the model
     """
-    # classify = 'cat'  # by now only support 'cat' or 'dog'
-    tf.keras.backend.clear_session()
 
     # load pre-trained model from keras.application
     train_generator, validation_generator, test_generator, steps_per_epoch = util.get_Classify(classify, test_face)
@@ -73,12 +82,11 @@ def train(classify, model, version, save=True, csv=True, plot=True,
             pass
 
     # show each class report
-    y_actual = validation_generator.classes
-    y_predicted = model.predict(validation_generator)
-    test_result = model.evaluate(validation_generator)
-    class_ = util.get_confusion_matrix(y_actual=y_actual, y_predicted=y_predicted)
-    print(class_)
-    print("test result- accuracy:", test_result[1])
+    if report:
+        y_actual = validation_generator.classes
+        y_predicted = model.predict(validation_generator)
+        class_ = util.get_confusion_matrix(y_actual=y_actual, y_predicted=y_predicted)
+        print(class_)
 
 
 # ------------------------------------------------------------------

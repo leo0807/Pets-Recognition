@@ -71,6 +71,10 @@ def MobileNetV2():
 
 
 def Xception():
+    """
+
+    :return:  Xception model
+    """
     base_model = tf.keras.applications.Xception(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
                                                 include_top=False,
                                                 weights='imagenet')
@@ -78,6 +82,10 @@ def Xception():
 
 
 def InceptionResNetV2():
+    """
+
+    :return: InceptionResNetV2 model
+    """
     base_model = tf.keras.applications.InceptionResNetV2(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
                                                          include_top=False,
                                                          weights='imagenet')
@@ -85,6 +93,10 @@ def InceptionResNetV2():
 
 
 def InceptionV3():
+    """
+
+    :return: InceptionV3 model
+    """
     base_model = tf.keras.applications.InceptionV3(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
                                                    include_top=False,
                                                    weights='imagenet')
@@ -92,6 +104,10 @@ def InceptionV3():
 
 
 def VGG19():
+    """
+
+    :return: VGG19 model
+    """
     base_model = tf.keras.applications.VGG19(input_shape=(const.IMG_HEIGHT, const.IMG_WIDTH, 3),
                                              include_top=False, weights='imagenet', classes=5)
     return base_model
@@ -121,6 +137,7 @@ def create_model(modelName='VGG19', connected=False, dropout=0,
     if base_model is not None:
         base_model.trainable = False
         # base_model.summary()
+
         # averagePooling layer
         global_layer = keras.layers.GlobalAveragePooling2D()
 
@@ -128,8 +145,9 @@ def create_model(modelName='VGG19', connected=False, dropout=0,
         batch_normalization = keras.layers.BatchNormalization()
 
         # fully-connected layers
-        if AveragePooling:
-            x = keras.layers.Dense(dense, activation='relu')
+        x = keras.layers.Dense(dense, activation='relu')
+
+        # multiple fuly-connected layer
         MutiFC_1 = keras.layers.Dense(dense, activation='relu')
         MutiFC_2 = keras.layers.Dense(dense, activation='relu')
         MutiFC_3 = keras.layers.Dense(dense/2, activation='relu')
