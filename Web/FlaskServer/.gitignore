@@ -3,5 +3,4 @@ __pycache__/
 app.pyc
 .idea/
 Breed_Dog/__pycache__/
-Emotion_Cat
-Emotion_Dog
+*.h5
