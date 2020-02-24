@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab8ba752-35ac-40fc-a1ee-2b00067476ef" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,10 +209,10 @@
     <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.8.1920.1050@-1920.8.1920.1050" timestamp="1580740632953" />
     <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729824447" />
     <state width="869" height="158" key="GridCell.Tab.0.right/0.0.912.1368@0.0.912.1368" timestamp="1580643727133" />
-    <state x="242" y="173" key="SettingsEditor" timestamp="1582461986871">
+    <state x="242" y="173" key="SettingsEditor" timestamp="1582586014198">
       <screen x="0" y="0" width="1368" height="912" />
     </state>
-    <state x="242" y="173" key="SettingsEditor/0.0.1368.912@0.0.1368.912" timestamp="1582461986871" />
+    <state x="242" y="173" key="SettingsEditor/0.0.1368.912@0.0.1368.912" timestamp="1582586014198" />
     <state x="0" y="228" key="SettingsEditor/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729548844" />
     <state x="0" y="654" key="SettingsEditor/0.0.912.1368@0.0.912.1368" timestamp="1580614600959" />
     <state x="299" y="374" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration" timestamp="1582461751584">
