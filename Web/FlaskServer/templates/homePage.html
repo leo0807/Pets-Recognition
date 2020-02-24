@@ -132,7 +132,7 @@
               image: base64Image
              }
         console.log(message);
-        $.post("http://192.168.56.1:5000/predict",JSON.stringify(message), function(response){// when received response
+        $.post("/predict",JSON.stringify(message), function(response){// when received response
             $('#loading_image').fadeOut(300);
             $("#div_prediction").fadeIn(1500);
 
