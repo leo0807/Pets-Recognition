@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab8ba752-35ac-40fc-a1ee-2b00067476ef" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/css/homePage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/FlaskServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FlaskServer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Emotion_Cat/Cat_classifier_v2.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Emotion_Cat/Cat_classifier_v3.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Emotion_Dog/Dog_classifier.h5" beforeDir="false" afterPath="$PROJECT_DIR$/Emotion_Dog/Dog_classifier.h5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/homePage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/homePage.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/homePage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/predict.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testImages/image.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +125,7 @@
       <workItem from="1581935140112" duration="1209000" />
       <workItem from="1582459919445" duration="1723000" />
       <workItem from="1582461840648" duration="2239000" />
-      <workItem from="1582506668951" duration="3878000" />
+      <workItem from="1582506668951" duration="4591000" />
     </task>
     <task id="LOCAL-00001" summary="modified web front end">
       <created>1581512763085</created>
