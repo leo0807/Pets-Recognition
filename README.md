@@ -14,6 +14,7 @@ The web directory contains the website's front-end and back-end. For runing the 
   `export FLASK_APP=app.py`
 
   `flask run --host=0.0.0.0:5000`
+
 Then you can visit the website on your localhost and the port is 5000.
 
 ## Andorid
