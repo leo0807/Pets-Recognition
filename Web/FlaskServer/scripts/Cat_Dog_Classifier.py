@@ -1,4 +1,6 @@
 import os
+
+import keras
 from keras.models import load_model
 from scripts.helper import No_Preprocessing
 from keras.preprocessing import image
@@ -19,7 +21,7 @@ sess = tf.Session()
 set_session(sess)
 
 model = tf.keras.models.load_model('Cat_vs_Dog/Cat_Dog_model.h5')
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 # image size for prediction
 img_width = 200
@@ -54,10 +56,11 @@ def predict():
         if prediction_ == 0:
             print('Cat!!!')
             return "Cat"
-        else:
+        elif prediction_ == 1:
             print('Dog!!!')
             return "Dog"
-
+        else:
+            print("No cat or dog or Error here! ")
 
 
 

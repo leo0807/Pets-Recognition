@@ -7,7 +7,7 @@ IMG_WIDTH = 200
 IMG_HEIGHT = 200
 IMG_SHAPE = (IMG_HEIGHT, IMG_WIDTH)
 # load saved model
-TRAINED_MODEL = '../../models/models/cat_VGG19_v3_connected1024.h5'
+TRAINED_MODEL = '../../../Web/FlaskServer/Cat_vs_Dog/Cat_Dog_model.h5'
 # path for results
 MODEL_PATH = "../../models/models/"
 CSV_PATH = "../../models/csv/"

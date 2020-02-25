@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab8ba752-35ac-40fc-a1ee-2b00067476ef" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../Model/.idea/Model.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/Web.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Model/coding/training_part/Cat_Dog_Classification.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Model/coding/training_part/Cat_Dog_Classification.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Model/coding/training_part/const.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Model/coding/training_part/const.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Model/coding/training_part/modelTraining.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Model/coding/training_part/modelTraining.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Model/coding/training_part/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Model/coding/training_part/util.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Emotion_Cat/Cat_all_v2.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/Cat_Dog_Classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Cat_Dog_Classifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/Emotion_Cat.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Emotion_Cat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/helper.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +47,7 @@
   </component>
   <component name="JupyterTrust" id="eee8ebbe-a29b-4e5f-8653-ac7ebced2998" />
   <component name="ProjectId" id="1XETiHSLKoQSQKDBcduGdRDyOkD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -44,8 +55,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Emotion_Cat" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -66,7 +78,7 @@
   </component>
   <component name="RunManager">
     <configuration name="FlaskServer" type="Python.FlaskServer">
-      <option name="additionalOptions" value="--host=192.168.56.1 --port=5000" />
+      <option name="additionalOptions" value="--host=192.168.1.248 --port=5000" />
       <module name="FlaskServer" />
       <option name="target" value="$PROJECT_DIR$/app.py" />
       <option name="targetType" value="PATH" />
@@ -127,6 +139,7 @@
       <workItem from="1582461840648" duration="2239000" />
       <workItem from="1582506668951" duration="6913000" />
       <workItem from="1582532002322" duration="6019000" />
+      <workItem from="1582582778083" duration="6020000" />
     </task>
     <task id="LOCAL-00001" summary="modified web front end">
       <created>1581512763085</created>
@@ -162,55 +175,61 @@
     <option name="LAST_COMMIT_MESSAGE" value="fix jpeg bug" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="141" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582544522699">
-      <screen x="0" y="0" width="1368" height="912" />
+    <state x="-1722" y="136" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582587621495">
+      <screen x="-1920" y="7" width="1920" height="1050" />
     </state>
-    <state x="141" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1368.912@0.0.1368.912" timestamp="1582544522699" />
+    <state x="141" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1368.912@0.0.1368.912" timestamp="1582506817365" />
+    <state x="-1722" y="136" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1920.7.1920.1050@-1920.7.1920.1050" timestamp="1582587621495" />
     <state x="198" y="129" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729597259" />
     <state x="190" y="50" key="CommitChangelistDialog2" timestamp="1581574635716">
       <screen x="0" y="0" width="1368" height="912" />
     </state>
     <state x="190" y="50" key="CommitChangelistDialog2/0.0.1368.912@0.0.1368.912" timestamp="1581574635716" />
-    <state x="359" y="424" key="FileChooserDialogImpl" timestamp="1582461782762">
-      <screen x="0" y="0" width="1368" height="912" />
+    <state x="503" y="561" key="FileChooserDialogImpl" timestamp="1582582794219">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="359" y="424" key="FileChooserDialogImpl/0.0.1368.912@0.0.1368.912" timestamp="1582461782762" />
-    <state x="503" y="561" key="FileChooserDialogImpl/0.0.1920.1050/-1920.7.1920.1050@0.0.1920.1050" timestamp="1581000426389" />
+    <state x="503" y="561" key="FileChooserDialogImpl/0.0.1920.1050/-1920.7.1920.1050@0.0.1920.1050" timestamp="1582582794219" />
     <state x="-1417" y="569" key="FileChooserDialogImpl/0.0.1920.1050/-1920.8.1920.1050@-1920.8.1920.1050" timestamp="1580741321224" />
     <state x="503" y="561" key="FileChooserDialogImpl/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729533450" />
     <state x="239" y="767" key="FileChooserDialogImpl/0.0.912.1368@0.0.912.1368" timestamp="1580707281459" />
-    <state width="1326" height="272" key="GridCell.Tab.0.bottom" timestamp="1582544625407">
-      <screen x="0" y="0" width="1368" height="912" />
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1582589195067">
+      <screen x="-1920" y="7" width="1920" height="1050" />
     </state>
-    <state width="1326" height="272" key="GridCell.Tab.0.bottom/0.0.1368.912@0.0.1368.912" timestamp="1582544625407" />
+    <state width="1326" height="272" key="GridCell.Tab.0.bottom/0.0.1368.912@0.0.1368.912" timestamp="1582537184500" />
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1920.7.1920.1050@-1920.7.1920.1050" timestamp="1582589195067" />
     <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1920.8.1920.1050@-1920.8.1920.1050" timestamp="1580740632953" />
     <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729824448" />
     <state width="869" height="158" key="GridCell.Tab.0.bottom/0.0.912.1368@0.0.912.1368" timestamp="1580643727133" />
-    <state width="1326" height="272" key="GridCell.Tab.0.center" timestamp="1582544625407">
-      <screen x="0" y="0" width="1368" height="912" />
+    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1582589195067">
+      <screen x="-1920" y="7" width="1920" height="1050" />
     </state>
-    <state width="1326" height="272" key="GridCell.Tab.0.center/0.0.1368.912@0.0.1368.912" timestamp="1582544625407" />
+    <state width="1326" height="272" key="GridCell.Tab.0.center/0.0.1368.912@0.0.1368.912" timestamp="1582537184500" />
+    <state width="1877" height="285" key="GridCell.Tab.0.center/0.0.1920.1050/-1920.7.1920.1050@-1920.7.1920.1050" timestamp="1582589195067" />
     <state width="1877" height="285" key="GridCell.Tab.0.center/0.0.1920.1050/-1920.8.1920.1050@-1920.8.1920.1050" timestamp="1580740632953" />
     <state width="1877" height="285" key="GridCell.Tab.0.center/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729824446" />
     <state width="869" height="158" key="GridCell.Tab.0.center/0.0.912.1368@0.0.912.1368" timestamp="1580643727133" />
-    <state width="1326" height="272" key="GridCell.Tab.0.left" timestamp="1582544625406">
-      <screen x="0" y="0" width="1368" height="912" />
+    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1582589195067">
+      <screen x="-1920" y="7" width="1920" height="1050" />
     </state>
-    <state width="1326" height="272" key="GridCell.Tab.0.left/0.0.1368.912@0.0.1368.912" timestamp="1582544625406" />
+    <state width="1326" height="272" key="GridCell.Tab.0.left/0.0.1368.912@0.0.1368.912" timestamp="1582537184500" />
+    <state width="1877" height="285" key="GridCell.Tab.0.left/0.0.1920.1050/-1920.7.1920.1050@-1920.7.1920.1050" timestamp="1582589195067" />
     <state width="1877" height="285" key="GridCell.Tab.0.left/0.0.1920.1050/-1920.8.1920.1050@-1920.8.1920.1050" timestamp="1580740632953" />
     <state width="1877" height="285" key="GridCell.Tab.0.left/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729824445" />
     <state width="869" height="158" key="GridCell.Tab.0.left/0.0.912.1368@0.0.912.1368" timestamp="1580643727133" />
-    <state width="1326" height="272" key="GridCell.Tab.0.right" timestamp="1582544625407">
-      <screen x="0" y="0" width="1368" height="912" />
+    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1582589195067">
+      <screen x="-1920" y="7" width="1920" height="1050" />
     </state>
-    <state width="1326" height="272" key="GridCell.Tab.0.right/0.0.1368.912@0.0.1368.912" timestamp="1582544625407" />
+    <state width="1326" height="272" key="GridCell.Tab.0.right/0.0.1368.912@0.0.1368.912" timestamp="1582537184500" />
+    <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.7.1920.1050@-1920.7.1920.1050" timestamp="1582589195067" />
     <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.8.1920.1050@-1920.8.1920.1050" timestamp="1580740632953" />
     <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729824447" />
     <state width="869" height="158" key="GridCell.Tab.0.right/0.0.912.1368@0.0.912.1368" timestamp="1580643727133" />
-    <state x="242" y="173" key="SettingsEditor" timestamp="1582461986871">
-      <screen x="0" y="0" width="1368" height="912" />
+    <state x="-1580" y="206" key="SettingsEditor" timestamp="1582587069222">
+      <screen x="-1920" y="7" width="1920" height="1050" />
     </state>
     <state x="242" y="173" key="SettingsEditor/0.0.1368.912@0.0.1368.912" timestamp="1582461986871" />
+    <state x="-1580" y="206" key="SettingsEditor/0.0.1920.1050/-1920.7.1920.1050@-1920.7.1920.1050" timestamp="1582587069222" />
     <state x="0" y="228" key="SettingsEditor/0.0.1920.1050/-1920.8.1920.1050@0.0.1920.1050" timestamp="1580729548844" />
     <state x="0" y="654" key="SettingsEditor/0.0.912.1368@0.0.912.1368" timestamp="1580614600959" />
     <state x="299" y="374" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration" timestamp="1582461751584">
@@ -228,6 +247,6 @@
     <state x="347" y="197" width="672" height="678" key="search.everywhere.popup/0.0.1368.912@0.0.1368.912" timestamp="1580697723198" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/FlaskServer$FlaskServer.coverage" NAME="FlaskServer Coverage Results" MODIFIED="1582544625291" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/FlaskServer$FlaskServer.coverage" NAME="FlaskServer Coverage Results" MODIFIED="1582589195056" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

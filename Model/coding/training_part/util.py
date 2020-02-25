@@ -249,16 +249,14 @@ def load_Cat_Dog(trainPath, validationPath):
         trainPath,
         target_size=const.IMG_SHAPE,
         batch_size=const.BATCH_SIZE,
-        class_mode='binary',
-        classes=['cat', 'dog']
+
     )
 
     validation_generator = test_datagen.flow_from_directory(
         validationPath,
         target_size=const.IMG_SHAPE,
         batch_size=const.BATCH_SIZE,
-        class_mode='binary',
-        classes=['cat', 'dog']
+
     )
     steps_per_epoch = np.ceil(train_generator.samples / train_generator.batch_size)
     return train_generator, validation_generator, steps_per_epoch

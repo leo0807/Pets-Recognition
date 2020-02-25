@@ -84,7 +84,7 @@ class No_Preprocessing:
             emotion = 'Sad'
         elif prediction_ == 4:
             emotion = 'Scared'
-
+        print("the most likely emotion is :", emotion)
         d = {'emotion': ['Angry', 'Happy', 'Neutral', 'Sad', 'Scared'], 'prob': prediction}
         df = pd.DataFrame(d, columns=['emotion', 'prob']).sort_values(by=['prob'], ascending=False)
         df.prob = [str(x) + '%' for x in df.prob]

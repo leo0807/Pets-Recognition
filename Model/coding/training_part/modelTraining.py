@@ -57,7 +57,7 @@ def train(classify, model, version, save=True, csv=True, plot=True,
 
         # fit the model
         history = model.fit(train_generator, steps_per_epoch=steps_per_epoch, epochs=const.EPOCH,
-                            validation_data=validation_generator, workers=4,
+                            validation_data=validation_generator, workers=6,
                             # callbacks=[tensorboard_callback]
                             )
     else:
@@ -105,5 +105,6 @@ if __name__ == "__main__":
     # train(Dog, 'VGG19', '_FC2048_BN_Face', dense=2048, BN=True)
     # train(Cat, 'MobileNet', '_FC2048_BN_Face', dense=2048, BN=True)
     # train(Cat, 'InceptionResNet', '_FC2048_BN_Face', dense=2048, BN=True)
-    train(Dog, 'Xception', 'Face_BN_FC2048', dense=2048, BN=True)
-    train(Cat, 'VGG19', 'Face_BN_FC2048', dense=2048, BN=True)
+    # train(Dog, 'Xception', 'Face_BN_FC2048', dense=2048, BN=True)
+    print(os.path.exists(const.TRAINED_MODEL))
+    train(Cat, 'VGG19', 'Final_model', dense=2048, BN=True, save=True, plot=False, csv=False)
