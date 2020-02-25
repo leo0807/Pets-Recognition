@@ -36,4 +36,4 @@ Docker can run the server in a container which contains alll needed enviroment. 
 Then, you can follow the above examples to run the server inside the container on Flask or Gunicorn without the install requirements.txt step.
 
 ## Research Cloud 
-We deployed our server on the University of Melbourne research cloud. If connected The University of Melbourne's network, you can visit our website at [this link](45.113.232.117:5000)
+We deployed our server on the University of Melbourne research cloud. If connected The University of Melbourne's network, you can visit our website at `45.113.232.117:5000`
