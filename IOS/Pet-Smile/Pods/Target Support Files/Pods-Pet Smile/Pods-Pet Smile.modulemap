@@ -1,0 +1,6 @@
+module Pods_Pet_Smile {
+  umbrella header "Pods-Pet Smile-umbrella.h"
+
+  export *
+  module * { export * }
+}

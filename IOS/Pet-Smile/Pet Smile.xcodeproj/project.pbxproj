@@ -1,0 +1,575 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		47955E6C23EAF40B004641BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47955E5923EAF40B004641BB /* Assets.xcassets */; };
+		47955E6D23EAF40B004641BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47955E5A23EAF40B004641BB /* LaunchScreen.storyboard */; };
+		47955E6E23EAF40B004641BB /* AudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47955E5D23EAF40B004641BB /* AudioViewController.swift */; };
+		47955E7023EAF40B004641BB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47955E5F23EAF40B004641BB /* CameraViewController.swift */; };
+		47955E7123EAF40B004641BB /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47955E6023EAF40B004641BB /* PhotoViewController.swift */; };
+		47955E7623EAF40B004641BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47955E6723EAF40B004641BB /* Main.storyboard */; };
+		47955E7723EAF40B004641BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47955E6923EAF40B004641BB /* AppDelegate.swift */; };
+		47955E7923EAF40B004641BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47955E6B23EAF40B004641BB /* SceneDelegate.swift */; };
+		47955E7B23EAF50F004641BB /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 47955E7A23EAF50F004641BB /* Resnet50.mlmodel */; };
+		47A0CFF223ED7449000C9601 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A0CFF123ED7449000C9601 /* CustomCell.swift */; };
+		47A0CFF423ED8C1E000C9601 /* DogDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A0CFF323ED8C1E000C9601 /* DogDetailViewController.swift */; };
+		47BEDA4E23EC354800D5F271 /* Untitled design.png in Resources */ = {isa = PBXBuildFile; fileRef = 47BEDA4D23EC354800D5F271 /* Untitled design.png */; };
+		47BEDA5423EC3F1700D5F271 /* Decoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BEDA5323EC3F1700D5F271 /* Decoration.swift */; };
+		47BEDA5623EC473B00D5F271 /* DogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BEDA5523EC473B00D5F271 /* DogTableViewController.swift */; };
+		D22DE51223FBDADC00FC146E /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22DE51123FBDADC00FC146E /* HistoryTableViewController.swift */; };
+		D22DE51423FBDB4000FC146E /* HistoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22DE51323FBDB4000FC146E /* HistoryDetailViewController.swift */; };
+		D23CBDD223F404E600CC490A /* SubTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CBDD123F404E600CC490A /* SubTabBarViewController.swift */; };
+		D23CBDD423F411FA00CC490A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CBDD323F411FA00CC490A /* MainTabBarController.swift */; };
+		D23CBDD723F4162000CC490A /* CatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CBDD623F4162000CC490A /* CatTableViewController.swift */; };
+		D23CBDD923F41C1B00CC490A /* CatDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23CBDD823F41C1B00CC490A /* CatDetailViewController.swift */; };
+		D296428023F55AB30010EECB /* CatEmotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D296427F23F55AB30010EECB /* CatEmotionViewController.swift */; };
+		D296428223F55AC60010EECB /* DogEmotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D296428123F55AC60010EECB /* DogEmotionViewController.swift */; };
+		D296428623F55B330010EECB /* DogEmotionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D296428523F55B330010EECB /* DogEmotionTableViewController.swift */; };
+		D296428823F55C040010EECB /* EmotionTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D296428723F55C040010EECB /* EmotionTabBarViewController.swift */; };
+		D296428A23F55D4A0010EECB /* CatEmotionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D296428923F55D4A0010EECB /* CatEmotionTableViewController.swift */; };
+		D296428C23F56A030010EECB /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D296428B23F56A020010EECB /* libsqlite3.0.tbd */; };
+		D296428E23F56A0B0010EECB /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D296428D23F56A0B0010EECB /* libsqlite3.tbd */; };
+		D296428F23F56F3D0010EECB /* myDatabase.db in Resources */ = {isa = PBXBuildFile; fileRef = D296427D23F555E00010EECB /* myDatabase.db */; };
+		D2B75F1C23EFD6AF00478334 /* CSVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B75F1B23EFD6AF00478334 /* CSVParser.swift */; };
+		D2B75FA023F0080000478334 /* Scraper in Resources */ = {isa = PBXBuildFile; fileRef = D2B75F9F23F0080000478334 /* Scraper */; };
+		D4E33662AD148B41E92DD781 /* libPods-Pet Smile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BC6E78A3ED120CB3E3B2029 /* libPods-Pet Smile.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0395F79CEEEFAF7194FB3B33 /* Pods-Pet Smile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pet Smile.debug.xcconfig"; path = "Target Support Files/Pods-Pet Smile/Pods-Pet Smile.debug.xcconfig"; sourceTree = "<group>"; };
+		34E273DDC4BFB79124A17EC3 /* Pods-Pet Smile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pet Smile.release.xcconfig"; path = "Target Support Files/Pods-Pet Smile/Pods-Pet Smile.release.xcconfig"; sourceTree = "<group>"; };
+		47955E3323EAE739004641BB /* Pet Smile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pet Smile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47955E5923EAF40B004641BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		47955E5B23EAF40B004641BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		47955E5D23EAF40B004641BB /* AudioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioViewController.swift; sourceTree = "<group>"; };
+		47955E5F23EAF40B004641BB /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		47955E6023EAF40B004641BB /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		47955E6823EAF40B004641BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		47955E6923EAF40B004641BB /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		47955E6A23EAF40B004641BB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47955E6B23EAF40B004641BB /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		47955E7A23EAF50F004641BB /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Resnet50.mlmodel; sourceTree = "<group>"; };
+		47A0CFF123ED7449000C9601 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		47A0CFF323ED8C1E000C9601 /* DogDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailViewController.swift; sourceTree = "<group>"; };
+		47BEDA4D23EC354800D5F271 /* Untitled design.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Untitled design.png"; sourceTree = "<group>"; };
+		47BEDA5323EC3F1700D5F271 /* Decoration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoration.swift; sourceTree = "<group>"; };
+		47BEDA5523EC473B00D5F271 /* DogTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogTableViewController.swift; sourceTree = "<group>"; };
+		6BC6E78A3ED120CB3E3B2029 /* libPods-Pet Smile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pet Smile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D22DE51123FBDADC00FC146E /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		D22DE51323FBDB4000FC146E /* HistoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailViewController.swift; sourceTree = "<group>"; };
+		D23CBDD123F404E600CC490A /* SubTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTabBarViewController.swift; sourceTree = "<group>"; };
+		D23CBDD323F411FA00CC490A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		D23CBDD623F4162000CC490A /* CatTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatTableViewController.swift; sourceTree = "<group>"; };
+		D23CBDD823F41C1B00CC490A /* CatDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatDetailViewController.swift; sourceTree = "<group>"; };
+		D296427D23F555E00010EECB /* myDatabase.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = myDatabase.db; sourceTree = "<group>"; };
+		D296427F23F55AB30010EECB /* CatEmotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatEmotionViewController.swift; sourceTree = "<group>"; };
+		D296428123F55AC60010EECB /* DogEmotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogEmotionViewController.swift; sourceTree = "<group>"; };
+		D296428523F55B330010EECB /* DogEmotionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogEmotionTableViewController.swift; sourceTree = "<group>"; };
+		D296428723F55C040010EECB /* EmotionTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionTabBarViewController.swift; sourceTree = "<group>"; };
+		D296428923F55D4A0010EECB /* CatEmotionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatEmotionTableViewController.swift; sourceTree = "<group>"; };
+		D296428B23F56A020010EECB /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		D296428D23F56A0B0010EECB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		D296429023F571B00010EECB /* myDatabase.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = myDatabase.sql; sourceTree = "<group>"; };
+		D2B75F1B23EFD6AF00478334 /* CSVParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVParser.swift; sourceTree = "<group>"; };
+		D2B75F9F23F0080000478334 /* Scraper */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Scraper; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		47955E3023EAE739004641BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D296428E23F56A0B0010EECB /* libsqlite3.tbd in Frameworks */,
+				D296428C23F56A030010EECB /* libsqlite3.0.tbd in Frameworks */,
+				D4E33662AD148B41E92DD781 /* libPods-Pet Smile.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		47955E2A23EAE739004641BB = {
+			isa = PBXGroup;
+			children = (
+				D296429023F571B00010EECB /* myDatabase.sql */,
+				47955E5823EAF40B004641BB /* Pet Smile */,
+				47955E3423EAE739004641BB /* Products */,
+				FE82FACC805DFA73097572CB /* Pods */,
+				9B87E55303B4D58DD2970A03 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		47955E3423EAE739004641BB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				47955E3323EAE739004641BB /* Pet Smile.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		47955E5823EAF40B004641BB /* Pet Smile */ = {
+			isa = PBXGroup;
+			children = (
+				D296427D23F555E00010EECB /* myDatabase.db */,
+				D2B75F9F23F0080000478334 /* Scraper */,
+				47BEDA4A23EC34D000D5F271 /* Image */,
+				47955E7A23EAF50F004641BB /* Resnet50.mlmodel */,
+				47955E5923EAF40B004641BB /* Assets.xcassets */,
+				47955E5A23EAF40B004641BB /* LaunchScreen.storyboard */,
+				47955E5C23EAF40B004641BB /* Controller */,
+				47955E6123EAF40B004641BB /* Model */,
+				47955E6623EAF40B004641BB /* View */,
+				47955E6923EAF40B004641BB /* AppDelegate.swift */,
+				47955E6A23EAF40B004641BB /* Info.plist */,
+				47955E6B23EAF40B004641BB /* SceneDelegate.swift */,
+			);
+			path = "Pet Smile";
+			sourceTree = "<group>";
+		};
+		47955E5C23EAF40B004641BB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D283877F24021F3E005642A1 /* History */,
+				D296429123F59FEF0010EECB /* Breed */,
+				D296427E23F55A8C0010EECB /* Emotion */,
+				D23CBDD523F4147500CC490A /* TabBarController */,
+				47955E5D23EAF40B004641BB /* AudioViewController.swift */,
+				47955E5F23EAF40B004641BB /* CameraViewController.swift */,
+				47955E6023EAF40B004641BB /* PhotoViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		47955E6123EAF40B004641BB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				47BEDA5323EC3F1700D5F271 /* Decoration.swift */,
+				47A0CFF123ED7449000C9601 /* CustomCell.swift */,
+				D2B75F1B23EFD6AF00478334 /* CSVParser.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		47955E6623EAF40B004641BB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				47955E6723EAF40B004641BB /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		47BEDA4A23EC34D000D5F271 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				47BEDA4D23EC354800D5F271 /* Untitled design.png */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		9B87E55303B4D58DD2970A03 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D296428D23F56A0B0010EECB /* libsqlite3.tbd */,
+				D296428B23F56A020010EECB /* libsqlite3.0.tbd */,
+				6BC6E78A3ED120CB3E3B2029 /* libPods-Pet Smile.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D23CBDD523F4147500CC490A /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				D23CBDD323F411FA00CC490A /* MainTabBarController.swift */,
+				D23CBDD123F404E600CC490A /* SubTabBarViewController.swift */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		D283877F24021F3E005642A1 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				D22DE51323FBDB4000FC146E /* HistoryDetailViewController.swift */,
+				D22DE51123FBDADC00FC146E /* HistoryTableViewController.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		D296427E23F55A8C0010EECB /* Emotion */ = {
+			isa = PBXGroup;
+			children = (
+				D296427F23F55AB30010EECB /* CatEmotionViewController.swift */,
+				D296428123F55AC60010EECB /* DogEmotionViewController.swift */,
+				D296428523F55B330010EECB /* DogEmotionTableViewController.swift */,
+				D296428723F55C040010EECB /* EmotionTabBarViewController.swift */,
+				D296428923F55D4A0010EECB /* CatEmotionTableViewController.swift */,
+			);
+			path = Emotion;
+			sourceTree = "<group>";
+		};
+		D296429123F59FEF0010EECB /* Breed */ = {
+			isa = PBXGroup;
+			children = (
+				47BEDA5523EC473B00D5F271 /* DogTableViewController.swift */,
+				D23CBDD623F4162000CC490A /* CatTableViewController.swift */,
+				47A0CFF323ED8C1E000C9601 /* DogDetailViewController.swift */,
+				D23CBDD823F41C1B00CC490A /* CatDetailViewController.swift */,
+			);
+			path = Breed;
+			sourceTree = "<group>";
+		};
+		FE82FACC805DFA73097572CB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0395F79CEEEFAF7194FB3B33 /* Pods-Pet Smile.debug.xcconfig */,
+				34E273DDC4BFB79124A17EC3 /* Pods-Pet Smile.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		47955E3223EAE739004641BB /* Pet Smile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47955E4723EAE751004641BB /* Build configuration list for PBXNativeTarget "Pet Smile" */;
+			buildPhases = (
+				D4F91AB7709B26C20BEA2F41 /* [CP] Check Pods Manifest.lock */,
+				47955E2F23EAE739004641BB /* Sources */,
+				47955E3023EAE739004641BB /* Frameworks */,
+				47955E3123EAE739004641BB /* Resources */,
+				D23CBDD023F3DDAA00CC490A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pet Smile";
+			productName = "Pet Smile";
+			productReference = 47955E3323EAE739004641BB /* Pet Smile.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		47955E2B23EAE739004641BB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Junxu ZHANG";
+				TargetAttributes = {
+					47955E3223EAE739004641BB = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 47955E2E23EAE739004641BB /* Build configuration list for PBXProject "Pet Smile" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 47955E2A23EAE739004641BB;
+			productRefGroup = 47955E3423EAE739004641BB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				47955E3223EAE739004641BB /* Pet Smile */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		47955E3123EAE739004641BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47955E7623EAF40B004641BB /* Main.storyboard in Resources */,
+				47BEDA4E23EC354800D5F271 /* Untitled design.png in Resources */,
+				D296428F23F56F3D0010EECB /* myDatabase.db in Resources */,
+				47955E6C23EAF40B004641BB /* Assets.xcassets in Resources */,
+				47955E6D23EAF40B004641BB /* LaunchScreen.storyboard in Resources */,
+				D2B75FA023F0080000478334 /* Scraper in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D23CBDD023F3DDAA00CC490A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+		D4F91AB7709B26C20BEA2F41 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pet Smile-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		47955E2F23EAE739004641BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47955E6E23EAF40B004641BB /* AudioViewController.swift in Sources */,
+				D296428823F55C040010EECB /* EmotionTabBarViewController.swift in Sources */,
+				47955E7B23EAF50F004641BB /* Resnet50.mlmodel in Sources */,
+				D296428A23F55D4A0010EECB /* CatEmotionTableViewController.swift in Sources */,
+				D296428623F55B330010EECB /* DogEmotionTableViewController.swift in Sources */,
+				D23CBDD923F41C1B00CC490A /* CatDetailViewController.swift in Sources */,
+				D23CBDD423F411FA00CC490A /* MainTabBarController.swift in Sources */,
+				D23CBDD723F4162000CC490A /* CatTableViewController.swift in Sources */,
+				47BEDA5623EC473B00D5F271 /* DogTableViewController.swift in Sources */,
+				D2B75F1C23EFD6AF00478334 /* CSVParser.swift in Sources */,
+				D296428223F55AC60010EECB /* DogEmotionViewController.swift in Sources */,
+				D22DE51223FBDADC00FC146E /* HistoryTableViewController.swift in Sources */,
+				47BEDA5423EC3F1700D5F271 /* Decoration.swift in Sources */,
+				D22DE51423FBDB4000FC146E /* HistoryDetailViewController.swift in Sources */,
+				47955E7723EAF40B004641BB /* AppDelegate.swift in Sources */,
+				D23CBDD223F404E600CC490A /* SubTabBarViewController.swift in Sources */,
+				47955E7123EAF40B004641BB /* PhotoViewController.swift in Sources */,
+				47955E7923EAF40B004641BB /* SceneDelegate.swift in Sources */,
+				D296428023F55AB30010EECB /* CatEmotionViewController.swift in Sources */,
+				47A0CFF423ED8C1E000C9601 /* DogDetailViewController.swift in Sources */,
+				47A0CFF223ED7449000C9601 /* CustomCell.swift in Sources */,
+				47955E7023EAF40B004641BB /* CameraViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		47955E5A23EAF40B004641BB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47955E5B23EAF40B004641BB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		47955E6723EAF40B004641BB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47955E6823EAF40B004641BB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		47955E4523EAE751004641BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		47955E4623EAE751004641BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		47955E4823EAE751004641BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0395F79CEEEFAF7194FB3B33 /* Pods-Pet Smile.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NLJCQ2FZ6S;
+				INFOPLIST_FILE = "Pet Smile/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "junxuz.Pet-Smile";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		47955E4923EAE751004641BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34E273DDC4BFB79124A17EC3 /* Pods-Pet Smile.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NLJCQ2FZ6S;
+				INFOPLIST_FILE = "Pet Smile/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "junxuz.Pet-Smile";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		47955E2E23EAE739004641BB /* Build configuration list for PBXProject "Pet Smile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47955E4523EAE751004641BB /* Debug */,
+				47955E4623EAE751004641BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47955E4723EAE751004641BB /* Build configuration list for PBXNativeTarget "Pet Smile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47955E4823EAE751004641BB /* Debug */,
+				47955E4923EAE751004641BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 47955E2B23EAE739004641BB /* Project object */;
+}
